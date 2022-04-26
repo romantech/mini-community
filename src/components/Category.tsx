@@ -14,7 +14,7 @@ export default function Category() {
   const dispatch = useDispatch();
 
   return (
-    <div>
+    <div className="mb-4">
       <header className="text-xl font-bold ml-6 pt-9">{KR_COMMUNITY}</header>
       <section className="flex gap-1 flex-nowrap overflow-x-scroll p-5 font-medium text-sm">
         {list.map(({ categoryPk: cpk, categoryName }) => (
