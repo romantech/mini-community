@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom';
 import List from 'components/List';
 import Post from 'components/Post';
 import Community from 'pages/Community';
-import Compose from 'components/Compose';
+import NewPost from 'components/NewPost';
 import siteUrl from './url';
 
 const routes = [
@@ -17,7 +17,7 @@ const routes = [
     children: [
       { path: siteUrl.community.list, element: <List /> },
       { path: siteUrl.community.post.post_pk, element: <Post /> },
-      { path: siteUrl.community.post.new, element: <Compose /> },
+      { path: siteUrl.community.post.new, element: <NewPost /> },
     ],
   },
   {

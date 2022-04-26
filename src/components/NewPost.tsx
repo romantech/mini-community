@@ -1,5 +1,5 @@
 import React from 'react';
 
-export default function Compose() {
+export default function NewPost() {
   return <div>쓰기</div>;
 }

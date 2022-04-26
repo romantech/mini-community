@@ -2,25 +2,21 @@ import { createSlice } from '@reduxjs/toolkit';
 import { getPosts } from './communityThunk';
 
 interface CommunityState {
-  list: Post[];
+  posts: Post[];
   loading: boolean;
   error: Error | null;
-  compose: NewPost | null;
-  lastSeen: {
-    category: CategoryCode;
-    location: number | null;
-  };
+  newPost: NewPost | null;
+  category: Category['categoryPk'];
+  lastSeen: number | null;
 }
 
 const initialState: CommunityState = {
-  list: [],
+  posts: [],
   loading: false,
   error: null,
-  compose: null,
-  lastSeen: {
-    category: 'ALL',
-    location: null,
-  },
+  newPost: null,
+  category: 0, // 전체
+  lastSeen: null,
 };
 
 const communitySlice = createSlice({
@@ -36,7 +32,7 @@ const communitySlice = createSlice({
     [getPosts.fulfilled.type]: (state, { payload }) => {
       state.loading = false;
       state.error = null;
-      state.list = payload;
+      state.posts = payload;
     },
     [getPosts.rejected.type]: (state, { error }) => {
       state.error = error;

@@ -1,7 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectPostsByCategory } from '../modules/community/communitySelector';
 
 export default function List() {
+  const posts = useSelector(selectPostsByCategory);
+  console.log(posts);
+
   return (
     <div>
       <ul>
