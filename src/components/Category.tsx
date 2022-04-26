@@ -1,25 +1,34 @@
 import classnames from 'classnames';
 import React from 'react';
+import { KR_COMMUNITY } from 'lib/constants';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  selectCategories,
+  selectCurrentCategory,
+} from 'modules/community/communitySelector';
+import { changeCategory } from 'modules/community/communitySlice';
 
-interface CategoryProps {
-  categories: Category[];
-  clickHandler: VoidHandler<CategoryPk>;
-}
+export default function Category() {
+  const list = useSelector(selectCategories);
+  const current = useSelector(selectCurrentCategory);
+  const dispatch = useDispatch();
 
-export default function Category({ categories, clickHandler }: CategoryProps) {
   return (
     <div>
-      <h1 className="text-xl font-bold ml-6 pt-9">커뮤니티</h1>
-      <section className="flex gap-1 flex-nowrap overflow-x-scroll p-5">
-        {categories.map(({ categoryPk, categoryName }) => (
+      <header className="text-xl font-bold ml-6 pt-9">{KR_COMMUNITY}</header>
+      <section className="flex gap-1 flex-nowrap overflow-x-scroll p-5 font-medium text-sm">
+        {list.map(({ categoryPk: cpk, categoryName }) => (
           <button
-            key={categoryPk}
+            key={cpk}
             className={classnames(
-              'h-9 min-w-fit border border-gray02 rounded-2xl py-3 px-4 font-medium text-sm text-gray05 grid place-content-center',
-              { 'bg-primary01 text-white border-none': categoryPk === 0 }, // 전체
+              'h-9 min-w-fit border border-gray02 rounded-2xl py-3 px-4 text-gray05 grid place-content-center transition',
+              {
+                'hover:bg-gray-100': cpk !== current,
+                'bg-primary01 text-white border-transparent': cpk === current,
+              },
             )}
             type="button"
-            onClick={() => clickHandler(categoryPk)}
+            onClick={() => dispatch(changeCategory(cpk))}
           >
             <span>{categoryName}</span>
           </button>
