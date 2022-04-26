@@ -1,3 +1,31 @@
+@import url('//fonts.googleapis.com/earlyaccess/notosanskr.css');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-sans;
+  }
+
+  @media screen and (any-pointer: fine) {
+    /* width */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    /* Track */
+    ::-webkit-scrollbar-track {
+      background: rgba(232, 232, 232, 0.76);
+    }
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: #d3d3d3;
+    }
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: #bdbdbd;
+    }
+  }
+}

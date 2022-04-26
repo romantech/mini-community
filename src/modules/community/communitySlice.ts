@@ -16,7 +16,7 @@ const initialState: CommunityState = {
   categories: [
     // 카테고리 초기값
     { categoryPk: 0, categoryCode: 'ALL', categoryName: '전체' },
-    { categoryPk: 999, categoryCode: 'POPULAR', categoryName: '⭐인기글' },
+    { categoryPk: 999, categoryCode: 'POPULAR', categoryName: '⭐ 인기글' },
   ],
   newPost: null,
   currentCategory: 0, // 전체 (초기값)

@@ -17,7 +17,7 @@ export default function Community() {
   }, []);
 
   return (
-    <div>
+    <div className="w-[390px] min-h-full my-0 mx-auto">
       <Outlet />
     </div>
   );

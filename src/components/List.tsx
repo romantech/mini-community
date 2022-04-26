@@ -5,6 +5,7 @@ import {
   selectPostsByCategory,
 } from 'modules/community/communitySelector';
 import { changeCategory } from 'modules/community/communitySlice';
+import Category from './Category';
 
 export default function List() {
   const posts = useSelector(selectPostsByCategory);
@@ -13,23 +14,12 @@ export default function List() {
 
   return (
     <div>
-      <ul>
-        {categories.map(({ categoryPk, categoryName }) => (
-          <button
-            className="mr-2"
-            key={categoryPk}
-            type="button"
-            onClick={() => dispatch(changeCategory(categoryPk))}
-          >
-            {categoryName}
-          </button>
-        ))}
-      </ul>
-      <ul>
-        {posts.map(({ pk, viewCount }) => (
-          <li key={pk}>{`${pk} | ${viewCount}`}</li>
-        ))}
-      </ul>
+      <Category
+        categories={categories}
+        clickHandler={(categoryPk: CategoryPk) =>
+          dispatch(changeCategory(categoryPk))
+        }
+      />
     </div>
   );
 }

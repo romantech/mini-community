@@ -8,7 +8,7 @@ type CategoryCode =
   | 'TIP';
 type CategoryName =
   | '전체'
-  | '⭐인기글'
+  | '⭐ 인기글'
   | '대선청원'
   | '자유글'
   | '질문/답변'
