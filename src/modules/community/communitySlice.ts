@@ -2,11 +2,12 @@ import { createSlice } from '@reduxjs/toolkit';
 import { getPosts } from './communityThunk';
 
 interface CommunityState {
-  list: [];
+  list: Post[];
   loading: boolean;
   error: Error | null;
+  compose: NewPost | null;
   lastSeen: {
-    category: string;
+    category: CategoryCode;
     location: number | null;
   };
 }
@@ -15,8 +16,9 @@ const initialState: CommunityState = {
   list: [],
   loading: false,
   error: null,
+  compose: null,
   lastSeen: {
-    category: 'all',
+    category: 'ALL',
     location: null,
   },
 };
