@@ -1,14 +1,23 @@
-type CategoryCode = 'ALL' | 'PETITION' | 'FREE' | 'QNA' | 'NEWS' | 'TIP';
+type CategoryCode =
+  | 'ALL'
+  | 'POPULAR'
+  | 'PETITION'
+  | 'FREE'
+  | 'QNA'
+  | 'NEWS'
+  | 'TIP';
 type CategoryName =
   | '전체'
+  | '⭐인기글'
   | '대선청원'
   | '자유글'
   | '질문/답변'
   | '뉴스'
   | '노하우';
+type CategoryPk = 0 | 1 | 2 | 3 | 4 | 5 | 999; // 0 전체, 999 인기글
 
 interface Category {
-  categoryPk: number;
+  categoryPk: CategoryPk;
   categoryCode: CategoryCode;
   categoryName: CategoryName;
 }

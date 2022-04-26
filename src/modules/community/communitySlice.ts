@@ -5,7 +5,7 @@ interface CommunityState {
   posts: Post[];
   categories: Category[];
   newPost: NewPost | null;
-  currentCategory: Category['categoryPk'];
+  currentCategory: CategoryPk;
   lastSeen: number | null;
   loading: boolean;
   error: Error | null;
@@ -13,9 +13,13 @@ interface CommunityState {
 
 const initialState: CommunityState = {
   posts: [],
-  categories: [],
+  categories: [
+    // 카테고리 초기값
+    { categoryPk: 0, categoryCode: 'ALL', categoryName: '전체' },
+    { categoryPk: 999, categoryCode: 'POPULAR', categoryName: '⭐인기글' },
+  ],
   newPost: null,
-  currentCategory: 0, // 전체
+  currentCategory: 0, // 전체 (초기값)
   lastSeen: null,
   loading: false,
   error: null,
@@ -25,7 +29,7 @@ const communitySlice = createSlice({
   name: 'community',
   initialState,
   reducers: {
-    changeCategory: (state, action: PayloadAction<number>) => {
+    changeCategory: (state, action: PayloadAction<CategoryPk>) => {
       state.currentCategory = action.payload;
     },
   },
@@ -52,10 +56,7 @@ const communitySlice = createSlice({
     [getCategories.fulfilled.type]: (state, { payload }) => {
       state.loading = false;
       state.error = null;
-      state.categories = [
-        { categoryPk: 0, categoryCode: 'ALL', categoryName: '전체' },
-        ...payload,
-      ];
+      state.categories.push(...payload);
     },
     [getCategories.rejected.type]: (state, { error }) => {
       state.error = error;
