@@ -8,4 +8,12 @@ export const getPosts = createAsyncThunk('community/getPosts', async () => {
   return data;
 });
 
+export const getCategories = createAsyncThunk(
+  'community/getCategories',
+  async () => {
+    const { data } = await axios.get('/categories');
+    return data;
+  },
+);
+
 export const newPost = createAsyncThunk('community/newPost', async () => {});

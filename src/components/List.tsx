@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectPostsByCategory } from '../modules/community/communitySelector';
+import { changeCategory } from '../modules/community/communitySlice';
 
 export default function List() {
   const posts = useSelector(selectPostsByCategory);
+  const dispatch = useDispatch();
   console.log(posts);
 
   return (
@@ -16,6 +18,9 @@ export default function List() {
           </Link>
         </li>
       </ul>
+      <button type="button" onClick={() => dispatch(changeCategory(1))}>
+        카테고리 변경
+      </button>
     </div>
   );
 }
