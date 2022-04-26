@@ -1,6 +1,10 @@
 import React from 'react';
+import { useRoutes } from 'react-router-dom';
 import './App.css';
+import routes from 'routes/routes';
 
 export default function App() {
-  return <h1 className="text-3xl font-bold underline">Hello world!</h1>;
+  const elements = useRoutes(routes);
+
+  return <main className="w-screen h-screen">{elements}</main>;
 }
