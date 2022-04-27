@@ -2,10 +2,12 @@ import { RootState } from 'modules/store';
 import { createSelector } from '@reduxjs/toolkit';
 
 export const selectPosts = (state: RootState) => state.community.posts;
+export const selectPost = (state: RootState) => state.community.selectedPost;
 export const selectCategories = (state: RootState) =>
   state.community.categories;
 export const selectCurrentCategory = (state: RootState) =>
   state.community.currentCategory;
+export const selectLoading = (state: RootState) => state.community.loading;
 
 export const selectPostsByCategory = createSelector(
   [selectPosts, selectCurrentCategory],
@@ -19,4 +21,14 @@ export const selectPostsByCategory = createSelector(
         return posts.filter(({ categoryPk }) => categoryPk === category);
     }
   },
+);
+
+export const selectHasPostList = createSelector(
+  [selectPosts],
+  posts => posts.length > 1,
+);
+
+export const selectHasCategories = createSelector(
+  [selectCategories],
+  categories => categories.length > 2, // 전체 / 인기글은 기본값이므로 3이상만 true
 );

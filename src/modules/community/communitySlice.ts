@@ -1,26 +1,28 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { getCategories, getPosts } from './communityThunk';
+import { getCategories, getPostByPk, getPosts } from './communityThunk';
 
 interface CommunityState {
   posts: Post[];
-  categories: Category[];
+  selectedPost: Post | null;
   newPost: NewPost | null;
+  categories: Category[];
   currentCategory: CategoryPk;
-  lastSeen: number | null;
+  lastPosition: number | null; // 리스트에서 포스트를 클릭했을 때의 스크롤
   loading: boolean;
   error: Error | null;
 }
 
 const initialState: CommunityState = {
   posts: [],
+  selectedPost: null,
+  newPost: null,
   categories: [
     // 카테고리 초기값
     { categoryPk: 0, categoryCode: 'ALL', categoryName: '전체' },
     { categoryPk: 999, categoryCode: 'POPULAR', categoryName: '⭐ 인기글' },
   ],
-  newPost: null,
   currentCategory: 0, // 전체 (초기값)
-  lastSeen: null,
+  lastPosition: null,
   loading: false,
   error: null,
 };
@@ -31,6 +33,9 @@ const communitySlice = createSlice({
   reducers: {
     changeCategory: (state, action: PayloadAction<CategoryPk>) => {
       state.currentCategory = action.payload;
+    },
+    setLastPosition: (state, action: PayloadAction<number>) => {
+      state.lastPosition = action.payload;
     },
   },
   // extraReducer 는 액션을 자동으로 생성하지 않음
@@ -46,6 +51,20 @@ const communitySlice = createSlice({
       state.posts = payload;
     },
     [getPosts.rejected.type]: (state, { error }) => {
+      state.error = error;
+      state.loading = false;
+    },
+    // 1개 포스트
+    [getPostByPk.pending.type]: state => {
+      state.loading = true;
+    },
+    [getPostByPk.fulfilled.type]: (state, { payload }) => {
+      state.loading = false;
+      state.error = null;
+      const [post] = payload;
+      state.selectedPost = post;
+    },
+    [getPostByPk.rejected.type]: (state, { error }) => {
       state.error = error;
       state.loading = false;
     },
@@ -65,5 +84,5 @@ const communitySlice = createSlice({
   },
 });
 
-export const { changeCategory } = communitySlice.actions;
+export const { changeCategory, setLastPosition } = communitySlice.actions;
 export default communitySlice.reducer;

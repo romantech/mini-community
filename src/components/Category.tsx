@@ -1,17 +1,18 @@
 import classnames from 'classnames';
 import React from 'react';
 import { KR_COMMUNITY } from 'lib/constants';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {
   selectCategories,
   selectCurrentCategory,
 } from 'modules/community/communitySelector';
 import { changeCategory } from 'modules/community/communitySlice';
+import { useAppDispatch } from 'modules/store';
 
 export default function Category() {
   const list = useSelector(selectCategories);
   const current = useSelector(selectCurrentCategory);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return (
     <div className="mb-4">
