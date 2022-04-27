@@ -20,7 +20,7 @@ export default function UserInfo({ post }: PostInfoProps) {
         <img className="w-6" src={writerProfileUrl} alt="user profile" />
       </section>
       <section className="text-xs">
-        <div className="font-bold mb-0.5">{writerNickName}</div>
+        <div className="font-bold mb-0.5 text-black">{writerNickName}</div>
         <div className="text-gray04 font-medium">
           <span>{categoryName}</span>
           <span className="font-black mx-1">{MIDDLE_DOT}</span>

@@ -1,4 +1,4 @@
-// eslint-disable-next-line import/no-extraneous-dependencies,@typescript-eslint/no-var-requires
+/* eslint-disable import/no-extraneous-dependencies,global-require,@typescript-eslint/no-var-requires */
 const { fontFamily } = require('tailwindcss/defaultTheme');
 
 module.exports = {
@@ -10,6 +10,7 @@ module.exports = {
         gray02: '#E8E8E8',
         gray04: '#B4B4B4',
         gray05: '#7A7A7A',
+        black: '#222222',
         primary01: '#2C7FFF',
       },
       fontFamily: {
@@ -20,5 +21,6 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  // https://github.com/tailwindlabs/tailwindcss-line-clamp
+  plugins: [require('@tailwindcss/line-clamp')],
 };

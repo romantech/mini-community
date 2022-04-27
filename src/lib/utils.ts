@@ -1,3 +1,13 @@
+export const statIconSrc = {
+  view: '/assets/eye.svg',
+  like: '/assets/thumb.svg',
+  comment: '/assets/talk.svg',
+};
+
+export const getStatIconSrc = (type: 'view' | 'like' | 'comment') => {
+  return statIconSrc[type];
+};
+
 export const getRandomColor = () => {
   const colors = ['#FFD784', '#FFC7CC', '#B2E9E3'] as const;
   const randomNum = Math.floor(Math.random() * 3);
