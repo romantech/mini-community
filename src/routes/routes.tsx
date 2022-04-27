@@ -2,7 +2,7 @@ import React from 'react';
 import { Navigate } from 'react-router-dom';
 import List from 'components/List';
 import Community from 'pages/Community';
-import NewPost from 'components/NewPost';
+import Compose from 'components/Compose';
 import PostDetail from 'components/PostDetail';
 import siteUrl from './url';
 
@@ -17,7 +17,7 @@ const routes = [
     children: [
       { path: siteUrl.community.list, element: <List /> },
       { path: siteUrl.community.post.post_pk, element: <PostDetail /> },
-      { path: siteUrl.community.post.new, element: <NewPost /> },
+      { path: siteUrl.community.post.new, element: <Compose /> },
     ],
   },
   {

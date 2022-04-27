@@ -4,38 +4,57 @@ import { Link } from 'react-router-dom';
 import { useAppDispatch } from 'modules/store';
 import { setLastPosition } from 'modules/community/communitySlice';
 import UserInfo from './UserInfo';
-import PostStat from './PostStat';
+import Stat from './Stat';
 
-export default function Post({ post }: { post: Post }) {
+interface PostProps {
+  post: Post;
+  isLast: boolean;
+}
+
+export default function Post({ post, isLast }: PostProps) {
   const dispatch = useAppDispatch();
   const clickHandler = () => dispatch(setLastPosition(window.scrollY));
   const linkProps = { to: `../post/${post.pk}`, onClick: clickHandler };
 
   return (
-    <div className="border p-6 flex flex-col gap-4">
-      <UserInfo post={post} />
-      <Link {...linkProps}>
-        <h2 className="font-bold truncate text-black hover:text-gray-500">
-          {post.title}
-        </h2>
-      </Link>
-      <p className="text-gray05 text-sm line-clamp-2 -mt-3">{post.content}</p>
-      {post.imageUrl && (
+    <>
+      <div className="p-6 flex flex-col gap-4">
+        {/* 유저 정보 */}
+        <UserInfo post={post} />
+
+        {/* 제목 */}
         <Link {...linkProps}>
-          <div className="h-[160px] rounded overflow-hidden bg-gray-200">
-            <img
-              className="w-full max-h-full object-cover"
-              src={post.imageUrl}
-              alt="thumbnail"
-            />
-          </div>
+          <h2 className="font-bold truncate text-black hover:text-gray-500">
+            {post.title}
+          </h2>
         </Link>
-      )}
-      <PostStat
-        viewCount={post.viewCount}
-        likeCount={post.likeCount}
-        commentCount={post.commentCount}
-      />
-    </div>
+
+        {/* 본문 */}
+        <p className="text-gray05 text-sm line-clamp-2 -mt-3">{post.content}</p>
+
+        {/* 이미지 */}
+        {post.imageUrl && (
+          <Link {...linkProps}>
+            <div className="h-[160px] rounded overflow-hidden bg-gray-200">
+              <img
+                className="w-full max-h-full object-cover"
+                src={post.imageUrl}
+                alt="thumbnail"
+              />
+            </div>
+          </Link>
+        )}
+
+        {/* 읽기전용 소셜 데이터 */}
+        <Stat
+          viewCount={post.viewCount}
+          likeCount={post.likeCount}
+          commentCount={post.commentCount}
+        />
+      </div>
+
+      {/* 구분선 */}
+      {!isLast && <div className="w-full h-1.5 bg-gray02" />}
+    </>
   );
 }

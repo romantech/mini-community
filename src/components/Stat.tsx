@@ -1,17 +1,17 @@
 import React from 'react';
-import { getStatIconSrc } from '../lib/utils';
+import { getStatIconSrc } from 'lib/utils';
 
-interface PostStatProps {
+interface StatProps {
   viewCount: number;
   likeCount: number;
   commentCount: number;
 }
 
-export default function PostStat({
+export default function Stat({
   viewCount,
   likeCount,
   commentCount,
-}: PostStatProps) {
+}: StatProps) {
   const renderList = [
     { src: getStatIconSrc('view'), count: viewCount },
     {

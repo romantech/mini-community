@@ -8,6 +8,8 @@ export const selectCategories = (state: RootState) =>
 export const selectCurrentCategory = (state: RootState) =>
   state.community.currentCategory;
 export const selectLoading = (state: RootState) => state.community.loading;
+export const selectLastPosition = (state: RootState) =>
+  state.community.lastPosition;
 
 export const selectPostsByCategory = createSelector(
   [selectPosts, selectCurrentCategory],
