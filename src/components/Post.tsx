@@ -7,6 +7,7 @@ import UserInfo from './UserInfo';
 import Stat from './Stat';
 import Image from './Image';
 import Title from './Title';
+import Content from './Content';
 
 interface PostProps {
   post: Post;
@@ -25,9 +26,9 @@ export default function Post({ post, isLast }: PostProps) {
         <UserInfo post={post} />
         <section>
           <Link {...linkProps}>
-            <Title text={post.title} hover classNames="mb-1.5" />
+            <Title text={post.title} hover classProps="mb-1.5" />
           </Link>
-          <p className="text-gray05 text-sm line-clamp-2">{post.content}</p>
+          <Content text={post.content} line={2} />
         </section>
         {/* 이미지 */}
         {post.imageUrl && (
