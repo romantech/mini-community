@@ -58,7 +58,7 @@ export default function InteractiveStat({
           onClick={() => type === 'like' && handleLike()}
           key={type}
           className={classnames(
-            'flex items-center justify-center gap-1 fill-gray05 text-gray05 w-14 h-8 bg-gray00 rounded-md hover:bg-gray-100 transition',
+            'flex-center gap-1 fill-gray05 text-gray05 w-14 h-8 bg-gray00 rounded-md hover:bg-gray-100 transition',
             { 'fill-primary01 text-primary01': isLike && type === 'like' },
           )}
         >

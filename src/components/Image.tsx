@@ -4,17 +4,15 @@ import classnames from 'classnames';
 interface ContentImageProps {
   url: string;
   className?: string;
-  ratio?: AspectRatio;
   rounded?: boolean;
 }
 
 export default function Image({
   url,
   className,
-  ratio = 'thumb',
   rounded = false,
 }: ContentImageProps) {
-  const classes = classnames(`w-full bg-gray-200 aspect-${ratio}`, className, {
+  const classes = classnames(`w-full bg-gray-200`, className, {
     'rounded overflow-hidden': rounded,
   });
 

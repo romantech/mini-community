@@ -18,7 +18,7 @@ export default function Category({
         <button
           key={id}
           className={classnames(
-            'h-9 min-w-fit border border-gray02 rounded-[20px] py-3 px-4 grid content-center transition',
+            'flex-center h-9 min-w-fit border border-gray02 rounded-[20px] py-3 px-4 transition',
             {
               'hover:bg-gray-100': id !== currentId,
               'bg-primary01 text-white border-transparent': id === currentId,

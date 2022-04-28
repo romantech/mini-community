@@ -9,8 +9,8 @@ import {
 import Category from 'components/Category';
 import { useAppDispatch } from 'modules/store';
 import { changeCategory } from 'modules/community/communitySlice';
+import { KR_COMMUNITY } from 'lib/constants';
 import Post from './Post';
-import { KR_COMMUNITY } from '../lib/constants';
 
 export default function List() {
   const posts = useSelector(selectPostsByCategory);

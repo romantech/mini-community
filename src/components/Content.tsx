@@ -4,7 +4,6 @@ import LinkifyText from './LinkifyText';
 
 interface ContentProps {
   text: string;
-  line?: number;
   className?: string;
   size?: string;
   linkify?: boolean;
@@ -12,14 +11,11 @@ interface ContentProps {
 
 export default function Content({
   text,
-  line,
   className,
   size = '14px',
   linkify = false,
 }: ContentProps) {
-  const classes = classnames(`text-gray05`, className, {
-    [`line-clamp-${line}`]: !!line,
-  });
+  const classes = classnames(`text-gray05`, className);
 
   return (
     <p className={classes} style={{ fontSize: size }}>

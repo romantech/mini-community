@@ -27,11 +27,11 @@ export default function Post({ post, isLast }: PostProps) {
           <Link {...linkProps}>
             <Title text={post.title} hover className="mb-1.5" />
           </Link>
-          <Content text={post.content} line={2} />
+          <Content text={post.content} className="line-clamp-2" />
         </section>
         {post.imageUrl && (
           <Link {...linkProps}>
-            <Image url={post.imageUrl} rounded />
+            <Image url={post.imageUrl} rounded className="aspect-thumb" />
           </Link>
         )}
         <Stat post={post} />

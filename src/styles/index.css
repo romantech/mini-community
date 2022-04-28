@@ -37,4 +37,7 @@
   .flex-col-gap2 {
     @apply flex flex-col gap-2;
   }
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
 }

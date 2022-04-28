@@ -44,7 +44,11 @@ export default function PostDetail() {
           {Array.isArray(post.imageUrl) && (
             <section className="flex-col-gap2">
               {post.imageUrl.map(url => (
-                <Image key={getRandomKey()} url={url} ratio="content" />
+                <Image
+                  key={getRandomKey()}
+                  url={url}
+                  className="aspect-content"
+                />
               ))}
             </section>
           )}
