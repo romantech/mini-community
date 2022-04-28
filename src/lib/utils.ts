@@ -4,6 +4,10 @@ export const statIconSrc = {
   comment: '/assets/talk.svg',
 };
 
+export const getRandomKey = () => {
+  return Math.random().toString(36).slice(2, 12);
+};
+
 export const getStatIconSrc = (type: 'view' | 'like' | 'comment') => {
   return statIconSrc[type];
 };

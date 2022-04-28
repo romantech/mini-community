@@ -3,7 +3,7 @@ import { getCategories, getPostByPk, getPosts } from './communityThunk';
 
 interface CommunityState {
   posts: Post[];
-  selectedPost: Post | null;
+  selectedPost: PostDetail | null;
   newPost: NewPost | null;
   categories: Category[];
   currentCategory: CategoryPk;

@@ -35,6 +35,10 @@ interface Post extends Omit<Category, 'categoryCode'> {
   writerProfileUrl: string;
 }
 
+interface PostDetail extends Post {
+  imageUrl: Array<string>;
+}
+
 interface NewPost {
   category: Category;
   title: string;

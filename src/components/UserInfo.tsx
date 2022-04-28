@@ -3,7 +3,7 @@ import { getRandomColor, getRenderDate } from 'lib/utils';
 import { MIDDLE_DOT } from 'lib/constants';
 
 interface PostInfoProps {
-  post: Post;
+  post: Post | PostDetail;
 }
 
 export default function UserInfo({ post }: PostInfoProps) {
