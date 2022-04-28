@@ -4,21 +4,21 @@ import classnames from 'classnames';
 interface ContentImageProps {
   url: string;
   classNames?: string;
-  ratio?: 'content' | 'thumb';
+  aspectRatio?: AspectRatio;
   rounded?: boolean;
 }
 
 export default function Image({
   url,
   classNames,
-  ratio = 'thumb',
+  aspectRatio = 'thumb',
   rounded = false,
 }: ContentImageProps) {
   return (
     <div
-      className={classnames(`w-full bg-gray-200 ${classNames}`, {
+      className={classnames('w-full bg-gray-200', classNames, {
         'rounded overflow-hidden': rounded,
-        [`aspect-${ratio}`]: true,
+        [`aspect-${aspectRatio}`]: true,
       })}
     >
       <img className="w-full h-full object-cover" src={url} alt="post" />

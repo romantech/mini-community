@@ -8,6 +8,7 @@ import UserInfo from './UserInfo';
 import BackButton from './BackButton';
 import LinkifyText from './LinkifyText';
 import Image from './Image';
+import Title from './Title';
 
 export default function PostDetail() {
   const post = useSelector(selectPost);
@@ -22,7 +23,7 @@ export default function PostDetail() {
         <div className="flex flex-col gap-2">
           <section className="flex flex-col gap-3 px-6 py-2">
             <UserInfo post={post} />
-            <h2 className="font-bold text-black mt-1">{post.title}</h2>
+            <Title text={post.title} truncate={false} />
             <p className="text-gray05 text-sm whitespace-pre-line">
               <LinkifyText text={post.content} />
             </p>
@@ -30,7 +31,7 @@ export default function PostDetail() {
           {Array.isArray(post.imageUrl) && (
             <section className="flex flex-col gap-2">
               {post.imageUrl.map(url => (
-                <Image key={getRandomKey()} url={url} ratio="content" />
+                <Image key={getRandomKey()} url={url} aspectRatio="content" />
               ))}
             </section>
           )}

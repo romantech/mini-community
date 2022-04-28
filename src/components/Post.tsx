@@ -6,6 +6,7 @@ import { setLastPosition } from 'modules/community/communitySlice';
 import UserInfo from './UserInfo';
 import Stat from './Stat';
 import Image from './Image';
+import Title from './Title';
 
 interface PostProps {
   post: Post;
@@ -22,24 +23,18 @@ export default function Post({ post, isLast }: PostProps) {
       <div className="p-6 flex flex-col gap-4">
         {/* 유저 정보 */}
         <UserInfo post={post} />
-
-        {/* 제목 */}
-        <Link {...linkProps}>
-          <h2 className="font-bold truncate text-black hover:text-gray-500">
-            {post.title}
-          </h2>
-        </Link>
-
-        {/* 본문 */}
-        <p className="text-gray05 text-sm line-clamp-2 -mt-3">{post.content}</p>
-
+        <section>
+          <Link {...linkProps}>
+            <Title text={post.title} hover classNames="mb-1.5" />
+          </Link>
+          <p className="text-gray05 text-sm line-clamp-2">{post.content}</p>
+        </section>
         {/* 이미지 */}
         {post.imageUrl && (
           <Link {...linkProps}>
             <Image url={post.imageUrl} rounded />
           </Link>
         )}
-
         {/* 읽기전용 소셜 데이터 */}
         <Stat
           viewCount={post.viewCount}
