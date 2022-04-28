@@ -21,7 +21,7 @@ export default function Post({ post, isLast }: PostProps) {
 
   return (
     <>
-      <div className="p-6 flex flex-col gap-4">
+      <article className="p-6 flex flex-col gap-4">
         {/* 유저 정보 */}
         <UserInfo post={post} />
         <section>
@@ -42,8 +42,7 @@ export default function Post({ post, isLast }: PostProps) {
           likeCount={post.likeCount}
           commentCount={post.commentCount}
         />
-      </div>
-
+      </article>
       {/* 구분선 */}
       {!isLast && <div className="w-full h-1.5 bg-gray02" />}
     </>

@@ -18,7 +18,7 @@ export default function Title({
 }: TitleProps) {
   const classes = classnames('font-bold text-black', classProps, {
     truncate,
-    'hover:text-gray-500': hover,
+    'hover:text-gray-500 transition duration-300': hover,
   });
 
   return (

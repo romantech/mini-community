@@ -15,13 +15,13 @@ export default function PostDetail() {
   const loading = useSelector(selectLoading);
 
   return (
-    <div>
-      <header className="h-14 flex items-center p-6">
+    <>
+      <header className="h-14 flex items-center py-6 px-5">
         <BackButton text={KR_BACK_TO_LIST} to={siteUrl.community.list} />
       </header>
       {post && (
-        <div className="flex flex-col gap-2">
-          <section className="flex flex-col gap-3 px-6 py-2">
+        <article className="flex flex-col gap-2">
+          <section className="flex flex-col gap-3 px-7 py-2">
             <UserInfo post={post} />
             <Title text={post.title} truncate={false} size="17px" />
             <Content text={post.content} linkify size="15px" />
@@ -33,8 +33,8 @@ export default function PostDetail() {
               ))}
             </section>
           )}
-        </div>
+        </article>
       )}
-    </div>
+    </>
   );
 }

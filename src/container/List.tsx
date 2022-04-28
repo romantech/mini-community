@@ -10,6 +10,7 @@ import Category from 'components/Category';
 import { useAppDispatch } from 'modules/store';
 import { changeCategory } from 'modules/community/communitySlice';
 import Post from './Post';
+import { KR_COMMUNITY } from '../lib/constants';
 
 export default function List() {
   const posts = useSelector(selectPostsByCategory);
@@ -25,15 +26,20 @@ export default function List() {
   }, [lastPosition]);
 
   return (
-    <div>
+    <>
+      <header className="text-xl font-bold ml-6 pt-9 text-black">
+        {KR_COMMUNITY}
+      </header>
       <Category
         list={list}
         current={current}
         clickHandler={cpk => dispatch(changeCategory(cpk))}
       />
-      {posts.map((post, i) => (
-        <Post key={post.pk} post={post} isLast={posts.length - 1 === i} />
-      ))}
-    </div>
+      <section>
+        {posts.map((post, i) => (
+          <Post key={post.pk} post={post} isLast={posts.length - 1 === i} />
+        ))}
+      </section>
+    </>
   );
 }
