@@ -5,18 +5,18 @@ interface TitleProps {
   text: string;
   size?: string;
   hover?: boolean;
-  classProps?: string;
+  className?: string;
   truncate?: boolean; // 1줄만 표시되도록
 }
 
 export default function Title({
   text,
-  classProps,
+  className,
   size = '1rem',
   hover = false,
   truncate = true,
 }: TitleProps) {
-  const classes = classnames('font-bold text-black', classProps, {
+  const classes = classnames('font-bold text-black', className, {
     truncate,
     'hover:text-gray-500 transition duration-300': hover,
   });

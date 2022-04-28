@@ -36,7 +36,10 @@
       "viewCount": 120,
       "likeCount": 10,
       "commentCount": 5,
-      "imageUrl": null,
+      "imageUrl": [
+        "https://images.unsplash.com/photo-1651024954889-a7cd49e771a7",
+        "https://images.unsplash.com/photo-1651024954889-a7cd49e771a7"
+      ],
       "writtenAt": "2022-04-18T17:29:19",
       "writerNickName": "칸디천사",
       "writerProfileUrl": "https://static.zaritalk.com/profiles/profile-57-img-fox-39-39%403x.png"

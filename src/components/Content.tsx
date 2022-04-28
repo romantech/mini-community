@@ -5,7 +5,7 @@ import LinkifyText from './LinkifyText';
 interface ContentProps {
   text: string;
   line?: number;
-  classProps?: string;
+  className?: string;
   size?: string;
   linkify?: boolean;
 }
@@ -13,11 +13,11 @@ interface ContentProps {
 export default function Content({
   text,
   line,
-  classProps,
+  className,
   size = '14px',
   linkify = false,
 }: ContentProps) {
-  const classes = classnames('text-gray05', classProps, {
+  const classes = classnames('text-gray05', className, {
     [`line-clamp-${line}`]: line,
   });
   return (

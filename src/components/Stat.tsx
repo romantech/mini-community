@@ -1,5 +1,7 @@
 import React from 'react';
-import { getStatIconSrc } from 'lib/utils';
+import { ReactComponent as EyeIcon } from 'assets/eye.svg';
+import { ReactComponent as ThumbIcon } from 'assets/thumb.svg';
+import { ReactComponent as TalkIcon } from 'assets/talk.svg';
 
 interface StatProps {
   viewCount: number;
@@ -13,23 +15,17 @@ export default function Stat({
   commentCount,
 }: StatProps) {
   const renderList = [
-    { src: getStatIconSrc('view'), count: viewCount },
-    {
-      src: getStatIconSrc('like'),
-      count: likeCount,
-    },
-    {
-      src: getStatIconSrc('comment'),
-      count: commentCount,
-    },
+    { icon: <EyeIcon />, count: viewCount, type: 'view' },
+    { icon: <ThumbIcon />, count: likeCount, type: 'like' },
+    { icon: <TalkIcon />, count: commentCount, type: 'comment' },
   ];
 
   return (
-    <section className="flex gap-3.5 text-gray05 text-xs font-medium">
-      {renderList.map(({ src, count }) => (
-        <div key={src} className="flex gap-1">
-          <img className="w-4 inline-block" src={src} alt="post count" />
-          <span>{count}</span>
+    <section className="flex gap-3.5">
+      {renderList.map(({ type, count, icon }) => (
+        <div key={type} className="flex items-center gap-1 fill-gray04">
+          {icon}
+          <span className="text-gray05 text-xs font-medium">{count}</span>
         </div>
       ))}
     </section>

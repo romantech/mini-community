@@ -26,7 +26,7 @@ export default function Post({ post, isLast }: PostProps) {
         <UserInfo post={post} />
         <section>
           <Link {...linkProps}>
-            <Title text={post.title} hover classProps="mb-1.5" />
+            <Title text={post.title} hover className="mb-1.5" />
           </Link>
           <Content text={post.content} line={2} />
         </section>

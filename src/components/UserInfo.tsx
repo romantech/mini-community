@@ -1,18 +1,20 @@
 import React from 'react';
 import { getRandomColor, getRenderDate } from 'lib/utils';
 import { MIDDLE_DOT } from 'lib/constants';
+import classnames from 'classnames';
 
 interface PostInfoProps {
   post: Post | PostDetail;
+  className?: string;
 }
 
-export default function UserInfo({ post }: PostInfoProps) {
+export default function UserInfo({ post, className }: PostInfoProps) {
   const { writerNickName, writerProfileUrl, writtenAt, categoryName } = post;
   const formatDate = getRenderDate(writtenAt);
   const profileBgColor = getRandomColor();
 
   return (
-    <section className="flex gap-2">
+    <section className={classnames('flex gap-2', className)}>
       <div
         className="w-8 h-8 rounded-full grid place-content-center"
         style={{ backgroundColor: profileBgColor }}

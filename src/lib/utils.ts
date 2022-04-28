@@ -1,15 +1,5 @@
-export const statIconSrc = {
-  view: '/assets/eye.svg',
-  like: '/assets/thumb.svg',
-  comment: '/assets/talk.svg',
-};
-
 export const getRandomKey = () => {
   return Math.random().toString(36).slice(2, 12);
-};
-
-export const getStatIconSrc = (type: 'view' | 'like' | 'comment') => {
-  return statIconSrc[type];
 };
 
 export const getRandomColor = () => {
@@ -50,10 +40,10 @@ export const getRenderDate = (date: string) => {
     return '방금 전';
   }
   if (elapsedMin <= 59) {
-    return `${Math.floor(elapsedMin)}분전 게시`;
+    return `${Math.floor(elapsedMin)}분 전`;
   }
   if (elapsedHour <= 23) {
-    return `${Math.floor(elapsedHour)}시간전 게시`;
+    return `${Math.floor(elapsedHour)}시간 전`;
   }
 
   return getFormatDate(date);
