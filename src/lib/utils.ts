@@ -1,3 +1,5 @@
+import { ColorEntries, colorsByFileName } from './constants';
+
 export const getRandomKey = () => {
   return Math.random().toString(36).slice(2, 12);
 };
@@ -8,21 +10,10 @@ export const getRandomColor = () => {
   return colors[randomNum];
 };
 
-type ColorKey = keyof typeof colorsByFileName;
-type ColorValue = ValueOf<typeof colorsByFileName>;
-type ColorEntries = Array<[ColorKey, ColorValue]>;
-// noinspection SpellCheckingInspection
-export const colorsByFileName = {
-  fox: '#FFC7CC',
-  chick: '#FFD784',
-  ailien: '#B2E9E3',
-  purple: '#E1BCEA',
-} as const;
-
 export const getProfileColor = (url: string) => {
   const colorKeys = Object.entries(colorsByFileName) as ColorEntries;
   const matched = colorKeys.reduce((result, [name, color]) => {
-    if (result === '' && url.includes(name)) return color;
+    if (!result && url.includes(name)) return color;
     return result;
   }, '');
   return matched || getRandomColor();
