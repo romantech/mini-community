@@ -37,7 +37,7 @@ export default function List() {
       />
       <section>
         {posts.map((post, i) => (
-          <Post key={post.pk} post={post} isLast={posts.length - 1 === i} />
+          <Post key={post.id} post={post} isLast={posts.length - 1 === i} />
         ))}
       </section>
     </>

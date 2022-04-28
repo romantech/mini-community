@@ -14,16 +14,16 @@ type CategoryName =
   | '질문/답변'
   | '뉴스'
   | '노하우';
-type CategoryPk = 0 | 1 | 2 | 3 | 4 | 5 | 999; // 0 전체, 999 인기글
+type CategoryId = 0 | 1 | 2 | 3 | 4 | 5 | 999; // 0 전체, 999 인기글
 
 interface Category {
-  categoryPk: CategoryPk;
+  categoryId: CategoryId;
   categoryCode: CategoryCode;
   categoryName: CategoryName;
 }
 
 interface Post extends Omit<Category, 'categoryCode'> {
-  pk: number;
+  id: number; // JSON Server 에서 post/1 형태로 검색할 때 id 필드가 있어야 하므로 pk -> id 로 변경
   title: string;
   content: string;
   viewCount: number;

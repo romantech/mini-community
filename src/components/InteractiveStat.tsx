@@ -9,7 +9,8 @@ import {
 import { ReactComponent as ThumbIcon } from 'assets/thumb.svg';
 import { ReactComponent as ThumbFilledIcon } from 'assets/thumb-filled.svg';
 import { ReactComponent as TalkIcon } from 'assets/talk.svg';
-import { selectCurrentPostWasLiked } from 'modules/community/communitySelector';
+import { selectCurrentPostIsLike } from 'modules/community/communitySelector';
+import { patchPostData } from 'modules/community/communityThunk';
 
 interface InteractiveStatProps {
   post: PostDetail;
@@ -21,7 +22,7 @@ export default function InteractiveStat({
   className,
 }: InteractiveStatProps) {
   const dispatch = useAppDispatch();
-  const isLike = useSelector(selectCurrentPostWasLiked);
+  const isLike = useSelector(selectCurrentPostIsLike);
 
   const renderList = [
     {
@@ -37,11 +38,14 @@ export default function InteractiveStat({
   ] as const;
 
   const btnHandler = (type: 'like' | 'comment') => {
+    const likeCount = isLike ? post.likeCount - 1 : post.likeCount + 1;
+    const { id } = post;
     // eslint-disable-next-line default-case
     switch (type) {
       case 'like':
-        if (!isLike) dispatch(addLikedPost(post.pk));
-        else dispatch(removeLikedPost(post.pk));
+        if (!isLike) dispatch(addLikedPost(id));
+        else dispatch(removeLikedPost(id));
+        dispatch(patchPostData({ id, likeCount }));
         break;
     }
   };

@@ -3,8 +3,8 @@ import React from 'react';
 
 interface CategoryProps {
   list: Category[];
-  current: CategoryPk;
-  clickHandler: VoidHandler<CategoryPk>;
+  current: CategoryId;
+  clickHandler: VoidHandler<CategoryId>;
 }
 
 export default function Category({
@@ -14,7 +14,7 @@ export default function Category({
 }: CategoryProps) {
   return (
     <section className="flex gap-1 flex-nowrap overflow-x-scroll px-5 py-4 font-medium text-sm">
-      {list.map(({ categoryPk: cpk, categoryName }) => (
+      {list.map(({ categoryId: cpk, categoryName }) => (
         <button
           key={cpk}
           className={classnames(

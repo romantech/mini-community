@@ -14,22 +14,22 @@ export const selectLikedPosts = (state: RootState) => state.community.likedPost;
 
 export const selectPostsByCategory = createSelector(
   [selectPosts, selectCurrentCategory],
-  (posts, category) => {
-    switch (category) {
+  (posts, currentCatId) => {
+    switch (currentCatId) {
       case 0: // 전체
         return posts;
       case 999: // 인기글
         return posts.filter(({ viewCount }) => viewCount >= 100);
       default:
-        return posts.filter(({ categoryPk }) => categoryPk === category);
+        return posts.filter(({ categoryId }) => categoryId === currentCatId);
     }
   },
 );
 
-export const selectCurrentPostWasLiked = createSelector(
+export const selectCurrentPostIsLike = createSelector(
   [selectPost, selectLikedPosts],
   (post, likedPosts) => {
-    return post === null ? false : likedPosts.includes(post.pk);
+    return post === null ? false : likedPosts.includes(post.id);
   },
 );
 

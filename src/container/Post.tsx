@@ -17,7 +17,7 @@ interface PostProps {
 export default function Post({ post, isLast }: PostProps) {
   const dispatch = useAppDispatch();
   const clickHandler = () => dispatch(setLastPosition(window.scrollY));
-  const linkProps = { to: `../post/${post.pk}`, onClick: clickHandler };
+  const linkProps = { to: `../post/${post.id}`, onClick: clickHandler };
 
   return (
     <>

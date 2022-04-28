@@ -4,14 +4,9 @@ import { Outlet, useMatch, useNavigate, useParams } from 'react-router-dom';
 import siteUrl from 'routes/url';
 import {
   getCategories,
-  getPostByPk,
   getPosts,
+  getPostsById,
 } from 'modules/community/communityThunk';
-import { useSelector } from 'react-redux';
-import {
-  selectHasCategories,
-  selectHasPostList,
-} from 'modules/community/communitySelector';
 import { useAppDispatch } from 'modules/store';
 
 export default function Community() {
@@ -19,19 +14,16 @@ export default function Community() {
   const navigate = useNavigate();
 
   const rootMatch = useMatch(siteUrl.community.root);
-  const { post_pk } = useParams(); // 포스트 상세보기로 진입했을 때
-
-  const hasCategories = useSelector(selectHasCategories);
-  const hasPostList = useSelector(selectHasPostList);
+  const { post_id } = useParams(); // 포스트 상세보기로 진입했을 때
 
   useEffect(() => {
-    if (!post_pk) {
-      if (!hasPostList) dispatch(getPosts()); // 리스트
-      if (!hasCategories) dispatch(getCategories()); // 카테고리
+    if (!post_id) {
+      dispatch(getPosts()); // 리스트
+      dispatch(getCategories()); // 카테고리
     } else {
-      dispatch(getPostByPk(Number(post_pk))); // 포스트 상세
+      dispatch(getPostsById({ id: Number(post_id) })); // 포스트 상세
     }
-  }, [post_pk]);
+  }, [post_id]);
 
   useEffect(() => {
     if (rootMatch) navigate(siteUrl.community.list);

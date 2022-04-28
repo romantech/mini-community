@@ -16,7 +16,7 @@ const routes = [
     element: <Community />,
     children: [
       { path: siteUrl.community.list, element: <List /> },
-      { path: siteUrl.community.post.post_pk, element: <PostDetail /> },
+      { path: siteUrl.community.post.post_id, element: <PostDetail /> },
       { path: siteUrl.community.post.new, element: <Compose /> },
     ],
   },

@@ -8,10 +8,10 @@ export const getPosts = createAsyncThunk('community/getPosts', async () => {
   return data;
 });
 
-export const getPostByPk = createAsyncThunk(
-  'community/getPostByPk',
-  async (pk: number) => {
-    const { data } = await axios.get(`/posts?pk=${pk}`);
+export const getPostsById = createAsyncThunk(
+  'community/getPostById',
+  async ({ id }: { id: Post['id'] }) => {
+    const { data } = await axios.get(`/posts?id=${id}`);
     return data;
   },
 );
@@ -20,6 +20,20 @@ export const getCategories = createAsyncThunk(
   'community/getCategories',
   async () => {
     const { data } = await axios.get('/categories');
+    return data;
+  },
+);
+
+export const patchPostData = createAsyncThunk(
+  'community/patchPostData',
+  async ({
+    id,
+    likeCount,
+  }: {
+    id: Post['id'];
+    likeCount: Post['likeCount'];
+  }) => {
+    const { data } = await axios.patch(`/posts/${id}`, { likeCount });
     return data;
   },
 );

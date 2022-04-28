@@ -4,7 +4,7 @@ const siteUrl = {
     root: '/community',
     list: '/community/list',
     post: {
-      post_pk: '/community/post/:post_pk',
+      post_id: '/community/post/:post_id',
       new: '/community/post/new',
     },
   },
