@@ -3,11 +3,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAppDispatch } from 'modules/store';
 import { setLastPosition } from 'modules/community/communitySlice';
-import UserInfo from './UserInfo';
-import Stat from './Stat';
-import Image from './Image';
-import Title from './Title';
-import Content from './Content';
+import Stat from 'components/Stat';
+import Image from 'components/Image';
+import Title from 'components/Title';
+import Content from 'components/Content';
+import UserInfo from 'components/UserInfo';
 
 interface PostProps {
   post: Post;

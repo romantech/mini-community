@@ -1,9 +1,9 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import List from 'components/List';
+import List from 'container/List';
 import Community from 'pages/Community';
-import Compose from 'components/Compose';
-import PostDetail from 'components/PostDetail';
+import Compose from 'container/Compose';
+import PostDetail from 'container/PostDetail';
 import siteUrl from './url';
 
 const routes = [

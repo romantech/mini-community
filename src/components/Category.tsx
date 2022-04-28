@@ -1,19 +1,18 @@
 import classnames from 'classnames';
 import React from 'react';
 import { KR_COMMUNITY } from 'lib/constants';
-import { useSelector } from 'react-redux';
-import {
-  selectCategories,
-  selectCurrentCategory,
-} from 'modules/community/communitySelector';
-import { changeCategory } from 'modules/community/communitySlice';
-import { useAppDispatch } from 'modules/store';
 
-export default function Category() {
-  const list = useSelector(selectCategories);
-  const current = useSelector(selectCurrentCategory);
-  const dispatch = useAppDispatch();
+interface CategoryProps {
+  list: Category[];
+  current: CategoryPk;
+  clickHandler: VoidHandler<CategoryPk>;
+}
 
+export default function Category({
+  list,
+  current,
+  clickHandler,
+}: CategoryProps) {
   return (
     <div className="mb-4">
       <header className="text-xl font-bold ml-6 pt-9 text-black">
@@ -31,7 +30,7 @@ export default function Category() {
               },
             )}
             type="button"
-            onClick={() => dispatch(changeCategory(cpk))}
+            onClick={() => clickHandler(cpk)}
           >
             <span>{categoryName}</span>
           </button>
