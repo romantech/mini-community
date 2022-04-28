@@ -1,11 +1,13 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { selectLoading, selectPost } from 'modules/community/communitySelector';
+import siteUrl from 'routes/url';
 import { getRandomKey } from 'lib/utils';
+import { KR_BACK_TO_LIST } from 'lib/constants';
 import UserInfo from './UserInfo';
 import BackButton from './BackButton';
-import siteUrl from '../routes/url';
 import LinkifyText from './LinkifyText';
+import Image from './Image';
 
 export default function PostDetail() {
   const post = useSelector(selectPost);
@@ -14,7 +16,7 @@ export default function PostDetail() {
   return (
     <div>
       <header className="h-14 flex items-center p-6">
-        <BackButton text="글 목록으로" to={siteUrl.community.list} />
+        <BackButton text={KR_BACK_TO_LIST} to={siteUrl.community.list} />
       </header>
       {post && (
         <div className="flex flex-col gap-2">
@@ -28,16 +30,7 @@ export default function PostDetail() {
           {Array.isArray(post.imageUrl) && (
             <section className="flex flex-col gap-2">
               {post.imageUrl.map(url => (
-                <div
-                  className="w-full aspect-[5/4] bg-gray-200"
-                  key={getRandomKey()}
-                >
-                  <img
-                    className="w-full h-full object-cover"
-                    src={url}
-                    alt="thumbnail"
-                  />
-                </div>
+                <Image key={getRandomKey()} url={url} ratio="content" />
               ))}
             </section>
           )}

@@ -5,6 +5,7 @@ import { useAppDispatch } from 'modules/store';
 import { setLastPosition } from 'modules/community/communitySlice';
 import UserInfo from './UserInfo';
 import Stat from './Stat';
+import Image from './Image';
 
 interface PostProps {
   post: Post;
@@ -35,13 +36,7 @@ export default function Post({ post, isLast }: PostProps) {
         {/* 이미지 */}
         {post.imageUrl && (
           <Link {...linkProps}>
-            <div className="h-[160px] rounded overflow-hidden bg-gray-200">
-              <img
-                className="w-full max-h-full object-cover"
-                src={post.imageUrl}
-                alt="thumbnail"
-              />
-            </div>
+            <Image url={post.imageUrl} rounded />
           </Link>
         )}
 

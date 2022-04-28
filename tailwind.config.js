@@ -19,6 +19,10 @@ module.exports = {
         // fontFamily.heading 속성 추가(bold 굵기). font-heading 클래스로 사용
         heading: ['Noto Sans KR', ...fontFamily.sans],
       },
+      aspectRatio: {
+        thumb: '77/40',
+        content: '5/4',
+      },
     },
   },
   // https://github.com/tailwindlabs/tailwindcss-line-clamp
