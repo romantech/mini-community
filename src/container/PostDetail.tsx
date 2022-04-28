@@ -33,22 +33,26 @@ export default function PostDetail() {
         <BackButton text={KR_BACK_TO_LIST} to={siteUrl.community.list} />
       </header>
       {post && (
-        <article className="flex flex-col gap-4">
-          <section className="flex flex-col gap-4 px-7 pt-3 leading-6">
+        <article className="flex-col-gap4">
+          <section className="flex-col-gap4 px-7 pt-3 leading-6">
             <UserInfo post={post} />
-            <div className="flex flex-col gap-2">
+            <div className="flex-col-gap2">
               <Title text={post.title} truncate={false} size="17px" />
               <Content text={post.content} linkify size="15px" />
             </div>
           </section>
           {Array.isArray(post.imageUrl) && (
-            <section className="flex flex-col gap-2">
+            <section className="flex-col-gap2">
               {post.imageUrl.map(url => (
-                <Image key={getRandomKey()} url={url} aspectRatio="content" />
+                <Image key={getRandomKey()} url={url} ratio="content" />
               ))}
             </section>
           )}
-          <InteractiveStat className="px-7 mb-3" post={post} />
+          <InteractiveStat
+            className="px-7 mb-3"
+            post={post}
+            loading={loading}
+          />
         </article>
       )}
     </>

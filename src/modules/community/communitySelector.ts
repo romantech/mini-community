@@ -33,12 +33,12 @@ export const selectCurrentPostIsLike = createSelector(
   },
 );
 
-export const selectPostsLength = createSelector(
+export const selectHasPosts = createSelector(
   [selectPosts],
   posts => posts.length > 1,
 );
 
-export const selectCategoriesLength = createSelector(
+export const selectHasCategories = createSelector(
   [selectCategories],
   categories => categories.length > 2, // 전체 / 인기글은 기본값이므로 3이상만 true
 );

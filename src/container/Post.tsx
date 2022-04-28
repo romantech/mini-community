@@ -21,8 +21,7 @@ export default function Post({ post, isLast }: PostProps) {
 
   return (
     <>
-      <article className="p-6 flex flex-col gap-4">
-        {/* 유저 정보 */}
+      <article className="p-6 flex-col-gap4">
         <UserInfo post={post} />
         <section>
           <Link {...linkProps}>
@@ -30,13 +29,11 @@ export default function Post({ post, isLast }: PostProps) {
           </Link>
           <Content text={post.content} line={2} />
         </section>
-        {/* 이미지 */}
         {post.imageUrl && (
           <Link {...linkProps}>
             <Image url={post.imageUrl} rounded />
           </Link>
         )}
-        {/* 읽기전용 소셜 데이터 */}
         <Stat post={post} />
       </article>
       {/* 구분선 */}

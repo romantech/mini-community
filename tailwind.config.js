@@ -20,8 +20,8 @@ module.exports = {
         heading: ['Noto Sans KR', ...fontFamily.sans],
       },
       aspectRatio: {
-        thumb: '77/40',
-        content: '5/4',
+        thumb: '77 / 40',
+        content: '5 / 4',
       },
     },
   },

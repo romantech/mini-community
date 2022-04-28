@@ -17,9 +17,10 @@ export default function Content({
   size = '14px',
   linkify = false,
 }: ContentProps) {
-  const classes = classnames('text-gray05', className, {
-    [`line-clamp-${line}`]: line,
+  const classes = classnames(`text-gray05`, className, {
+    [`line-clamp-${line}`]: !!line,
   });
+
   return (
     <p className={classes} style={{ fontSize: size }}>
       {linkify ? <LinkifyText text={text} /> : text}

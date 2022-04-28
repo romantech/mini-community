@@ -29,3 +29,12 @@
     }
   }
 }
+
+@layer components {
+  .flex-col-gap4 {
+    @apply flex flex-col gap-4;
+  }
+  .flex-col-gap2 {
+    @apply flex flex-col gap-2;
+  }
+}

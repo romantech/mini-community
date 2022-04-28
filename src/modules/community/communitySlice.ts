@@ -18,16 +18,17 @@ interface CommunityState {
   error: Error | null;
 }
 
+const initialCategories: Category[] = [
+  { categoryId: 0, categoryCode: 'ALL', categoryName: '전체' },
+  { categoryId: 999, categoryCode: 'POPULAR', categoryName: '⭐ 인기글' },
+];
+
 const initialState: CommunityState = {
   posts: [],
   likedPost: [],
   selectedPost: null,
   newPost: null,
-  categories: [
-    // 카테고리 초기값
-    { categoryId: 0, categoryCode: 'ALL', categoryName: '전체' },
-    { categoryId: 999, categoryCode: 'POPULAR', categoryName: '⭐ 인기글' },
-  ],
+  categories: [],
   currentCategory: 0, // 전체 (초기값)
   lastPosition: null,
   loading: false,
@@ -46,11 +47,13 @@ const communitySlice = createSlice({
     },
     addLikedPost: (state, action: PayloadAction<Post['id']>) => {
       state.likedPost.push(action.payload);
+      if (state.selectedPost) state.selectedPost.likeCount += 1;
     },
     removeLikedPost: (state, action: PayloadAction<Post['id']>) => {
       state.likedPost = state.likedPost.filter(
         likedPk => likedPk !== action.payload,
       );
+      if (state.selectedPost) state.selectedPost.likeCount -= 1;
     },
     clearSelectedPost: state => {
       state.selectedPost = null;
@@ -95,7 +98,7 @@ const communitySlice = createSlice({
     [getCategories.fulfilled.type]: (state, { payload }) => {
       state.loading = false;
       state.error = null;
-      state.categories.push(...payload);
+      state.categories = [...initialCategories, ...payload];
     },
     [getCategories.rejected.type]: (state, { error }) => {
       state.error = error;

@@ -16,8 +16,8 @@ export default function List() {
   const posts = useSelector(selectPostsByCategory);
   const lastPosition = useSelector(selectLastPosition);
 
-  const categoryList = useSelector(selectCategories);
-  const currentCategory = useSelector(selectCurrentCategory);
+  const categories = useSelector(selectCategories);
+  const currentId = useSelector(selectCurrentCategory);
 
   const dispatch = useAppDispatch();
 
@@ -31,9 +31,9 @@ export default function List() {
         {KR_COMMUNITY}
       </header>
       <Category
-        categoryList={categoryList}
-        currentCategory={currentCategory}
-        clickHandler={cpk => dispatch(changeCategory(cpk))}
+        categories={categories}
+        currentId={currentId}
+        onClick={id => dispatch(changeCategory(id))}
       />
       <section>
         {posts.map((post, i) => (

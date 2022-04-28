@@ -14,11 +14,13 @@ import { patchPostData } from 'modules/community/communityThunk';
 
 interface InteractiveStatProps {
   post: PostDetail;
+  loading: boolean;
   className?: string;
 }
 
 export default function InteractiveStat({
   post,
+  loading,
   className,
 }: InteractiveStatProps) {
   const dispatch = useAppDispatch();
@@ -37,17 +39,14 @@ export default function InteractiveStat({
     },
   ] as const;
 
-  const btnHandler = (type: 'like' | 'comment') => {
+  const handleLike = () => {
     const likeCount = isLike ? post.likeCount - 1 : post.likeCount + 1;
     const { id } = post;
-    // eslint-disable-next-line default-case
-    switch (type) {
-      case 'like':
-        if (!isLike) dispatch(addLikedPost(id));
-        else dispatch(removeLikedPost(id));
-        dispatch(patchPostData({ id, likeCount }));
-        break;
-    }
+
+    if (!isLike) dispatch(addLikedPost(id));
+    else dispatch(removeLikedPost(id));
+
+    dispatch(patchPostData({ id, likeCount }));
   };
 
   return (
@@ -55,13 +54,12 @@ export default function InteractiveStat({
       {renderList.map(({ type, icon, count }) => (
         <button
           type="button"
-          onClick={() => btnHandler(type)}
+          disabled={loading || type === 'comment'}
+          onClick={() => type === 'like' && handleLike()}
           key={type}
           className={classnames(
             'flex items-center justify-center gap-1 fill-gray05 text-gray05 w-14 h-8 bg-gray00 rounded-md hover:bg-gray-100 transition',
-            {
-              'fill-primary01 text-primary01': isLike && type === 'like',
-            },
+            { 'fill-primary01 text-primary01': isLike && type === 'like' },
           )}
         >
           <div>{icon}</div>

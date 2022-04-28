@@ -2,31 +2,30 @@ import classnames from 'classnames';
 import React from 'react';
 
 interface CategoryProps {
-  categoryList: Category[];
-  currentCategory: CategoryId;
-  clickHandler: VoidHandler<CategoryId>;
+  categories: Category[];
+  currentId: CategoryId;
+  onClick: VoidHandler<CategoryId>;
 }
 
 export default function Category({
-  categoryList,
-  currentCategory,
-  clickHandler,
+  categories,
+  currentId,
+  onClick,
 }: CategoryProps) {
   return (
-    <section className="flex gap-1 flex-nowrap overflow-x-scroll px-5 py-4 font-medium text-sm">
-      {categoryList.map(({ categoryId: cpk, categoryName }) => (
+    <section className="flex gap-1 flex-nowrap overflow-x-scroll px-5 py-4 font-medium text-sm text-gray05">
+      {categories.map(({ categoryId: id, categoryName }) => (
         <button
-          key={cpk}
+          key={id}
           className={classnames(
-            'h-9 min-w-fit border border-gray02 rounded-[20px] py-3 px-4 text-gray05 grid place-content-center transition',
+            'h-9 min-w-fit border border-gray02 rounded-[20px] py-3 px-4 grid content-center transition',
             {
-              'hover:bg-gray-100': cpk !== currentCategory,
-              'bg-primary01 text-white border-transparent':
-                cpk === currentCategory,
+              'hover:bg-gray-100': id !== currentId,
+              'bg-primary01 text-white border-transparent': id === currentId,
             },
           )}
           type="button"
-          onClick={() => clickHandler(cpk)}
+          onClick={() => onClick(id)}
         >
           <span>{categoryName}</span>
         </button>

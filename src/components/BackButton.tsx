@@ -4,6 +4,7 @@ import { ReactComponent as BackIcon } from 'assets/back.svg';
 
 interface BackButtonProps {
   text?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   to?: any;
 }
 
