@@ -37,11 +37,7 @@ export default function Post({ post, isLast }: PostProps) {
           </Link>
         )}
         {/* 읽기전용 소셜 데이터 */}
-        <Stat
-          viewCount={post.viewCount}
-          likeCount={post.likeCount}
-          commentCount={post.commentCount}
-        />
+        <Stat post={post} />
       </article>
       {/* 구분선 */}
       {!isLast && <div className="w-full h-1.5 bg-gray02" />}

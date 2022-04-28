@@ -4,6 +4,7 @@ import { getCategories, getPostByPk, getPosts } from './communityThunk';
 interface CommunityState {
   posts: Post[];
   selectedPost: PostDetail | null;
+  likedPost: Array<Post['pk']>;
   newPost: NewPost | null;
   categories: Category[];
   currentCategory: CategoryPk;
@@ -14,6 +15,7 @@ interface CommunityState {
 
 const initialState: CommunityState = {
   posts: [],
+  likedPost: [],
   selectedPost: null,
   newPost: null,
   categories: [
@@ -36,6 +38,14 @@ const communitySlice = createSlice({
     },
     setLastPosition: (state, action: PayloadAction<number>) => {
       state.lastPosition = action.payload;
+    },
+    addLikedPost: (state, action: PayloadAction<Post['pk']>) => {
+      state.likedPost.push(action.payload);
+    },
+    removeLikedPost: (state, action: PayloadAction<Post['pk']>) => {
+      state.likedPost = state.likedPost.filter(
+        likedPk => likedPk !== action.payload,
+      );
     },
   },
   // extraReducer 는 액션을 자동으로 생성하지 않음
@@ -84,5 +94,10 @@ const communitySlice = createSlice({
   },
 });
 
-export const { changeCategory, setLastPosition } = communitySlice.actions;
+export const {
+  changeCategory,
+  setLastPosition,
+  addLikedPost,
+  removeLikedPost,
+} = communitySlice.actions;
 export default communitySlice.reducer;

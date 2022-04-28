@@ -10,6 +10,7 @@ export const selectCurrentCategory = (state: RootState) =>
 export const selectLoading = (state: RootState) => state.community.loading;
 export const selectLastPosition = (state: RootState) =>
   state.community.lastPosition;
+export const selectLikedPosts = (state: RootState) => state.community.likedPost;
 
 export const selectPostsByCategory = createSelector(
   [selectPosts, selectCurrentCategory],
@@ -22,6 +23,13 @@ export const selectPostsByCategory = createSelector(
       default:
         return posts.filter(({ categoryPk }) => categoryPk === category);
     }
+  },
+);
+
+export const selectCurrentPostWasLiked = createSelector(
+  [selectPost, selectLikedPosts],
+  (post, likedPosts) => {
+    return post === null ? false : likedPosts.includes(post.pk);
   },
 );
 
