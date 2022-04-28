@@ -3,3 +3,5 @@
 type VoidHandler<T = void> = (...args: T[]) => void;
 
 type AspectRatio = 'auto' | 'square' | 'video' | 'thumb' | 'content';
+
+type ValueOf<T> = T[keyof T];

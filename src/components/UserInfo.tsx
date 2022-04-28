@@ -1,5 +1,5 @@
 import React from 'react';
-import { getRandomColor, getRenderDate } from 'lib/utils';
+import { getProfileColor, getRenderDate } from 'lib/utils';
 import { MIDDLE_DOT } from 'lib/constants';
 import classnames from 'classnames';
 
@@ -11,7 +11,7 @@ interface PostInfoProps {
 export default function UserInfo({ post, className }: PostInfoProps) {
   const { writerNickName, writerProfileUrl, writtenAt, categoryName } = post;
   const formatDate = getRenderDate(writtenAt);
-  const profileBgColor = getRandomColor();
+  const profileBgColor = getProfileColor(post.writerProfileUrl);
 
   return (
     <section className={classnames('flex gap-2', className)}>
