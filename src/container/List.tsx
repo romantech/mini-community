@@ -16,8 +16,8 @@ export default function List() {
   const posts = useSelector(selectPostsByCategory);
   const lastPosition = useSelector(selectLastPosition);
 
-  const list = useSelector(selectCategories);
-  const current = useSelector(selectCurrentCategory);
+  const categoryList = useSelector(selectCategories);
+  const currentCategory = useSelector(selectCurrentCategory);
 
   const dispatch = useAppDispatch();
 
@@ -31,8 +31,8 @@ export default function List() {
         {KR_COMMUNITY}
       </header>
       <Category
-        list={list}
-        current={current}
+        categoryList={categoryList}
+        currentCategory={currentCategory}
         clickHandler={cpk => dispatch(changeCategory(cpk))}
       />
       <section>

@@ -17,13 +17,13 @@ type CategoryName =
 type CategoryId = 0 | 1 | 2 | 3 | 4 | 5 | 999; // 0 전체, 999 인기글
 
 interface Category {
-  categoryId: CategoryId;
+  categoryId: CategoryId; // categoryPk -> categoryId 로 변경
   categoryCode: CategoryCode;
   categoryName: CategoryName;
 }
 
 interface Post extends Omit<Category, 'categoryCode'> {
-  id: number; // JSON Server 에서 post/1 형태로 검색할 때 id 필드가 있어야 하므로 pk -> id 로 변경
+  id: number; // JSON Server 에서 post/1 형태로 조회할 때 id 필드 필요해서 pk -> id 로 변경
   title: string;
   content: string;
   viewCount: number;

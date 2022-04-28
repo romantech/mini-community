@@ -18,10 +18,10 @@ export default function Community() {
 
   useEffect(() => {
     if (!post_id) {
-      dispatch(getPosts()); // 리스트
-      dispatch(getCategories()); // 카테고리
+      dispatch(getPosts()); // 전체 포스트 목록 GET
+      dispatch(getCategories()); // 카테고리 목록 GET
     } else {
-      dispatch(getPostsById({ id: Number(post_id) })); // 포스트 상세
+      dispatch(getPostsById({ id: Number(post_id) })); // 선택한 포스트 정보 GET
     }
   }, [post_id]);
 

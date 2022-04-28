@@ -52,11 +52,14 @@ const communitySlice = createSlice({
         likedPk => likedPk !== action.payload,
       );
     },
+    clearSelectedPost: state => {
+      state.selectedPost = null;
+    },
   },
   // extraReducer 는 액션을 자동으로 생성하지 않음
   // createAsyncThunk 같은 별도 액션이 존재하는 함수의 reducer 를 정의할 때 유용
   extraReducers: {
-    // 포스트 목록
+    // 전체 포스트 목록 GET
     [getPosts.pending.type]: state => {
       state.loading = true;
     },
@@ -69,7 +72,8 @@ const communitySlice = createSlice({
       state.error = error;
       state.loading = false;
     },
-    // 1개 포스트
+
+    // 1개 포스트 정보 GET
     [getPostsById.pending.type]: state => {
       state.loading = true;
     },
@@ -83,7 +87,8 @@ const communitySlice = createSlice({
       state.error = error;
       state.loading = false;
     },
-    // 카테고리 목록
+
+    // 카테고리 목록 GET
     [getCategories.pending.type]: state => {
       state.loading = true;
     },
@@ -96,7 +101,8 @@ const communitySlice = createSlice({
       state.error = error;
       state.loading = false;
     },
-    // 좋아요 상태 업데이트
+
+    // 포스트 인터렉션 데이터 업데이트 PATCH
     [patchPostData.pending.type]: state => {
       state.loading = true;
     },
@@ -117,5 +123,6 @@ export const {
   setLastPosition,
   addLikedPost,
   removeLikedPost,
+  clearSelectedPost,
 } = communitySlice.actions;
 export default communitySlice.reducer;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { selectLoading, selectPost } from 'modules/community/communitySelector';
 import siteUrl from 'routes/url';
@@ -10,10 +10,22 @@ import Image from 'components/Image';
 import Title from 'components/Title';
 import Content from 'components/Content';
 import InteractiveStat from 'components/InteractiveStat';
+import { clearSelectedPost } from 'modules/community/communitySlice';
+import { useAppDispatch } from 'modules/store';
 
 export default function PostDetail() {
+  const dispatch = useAppDispatch();
+
   const post = useSelector(selectPost);
   const loading = useSelector(selectLoading);
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearSelectedPost());
+      // 1번 포스트 열람 -> 리스트 -> 2번 포스트를 열람할 때
+      // 2번 포스트 정보를 불러오기 전 1번 포스트가 잠깐 보이므로 selectedPost 상태 비우기
+    };
+  }, [dispatch]);
 
   return (
     <>
