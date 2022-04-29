@@ -5,15 +5,15 @@ export const getRandomKey = () => {
 };
 
 export const getRandomColor = () => {
-  const colors = ['#FFD784', '#FFC7CC', '#B2E9E3'] as const;
-  const randomNum = Math.floor(Math.random() * 3);
+  const colors = Object.values(colorsByFileName);
+  const randomNum = Math.floor(Math.random() * colors.length); // length "미만" 랜덤 숫자
   return colors[randomNum];
 };
 
 export const getProfileColor = (url: string) => {
   const colorKeys = Object.entries(colorsByFileName) as ColorEntries;
   const matched = colorKeys.reduce((result, [name, color]) => {
-    if (!result && url.includes(name)) return color;
+    if (!result && url.includes(name.toLowerCase())) return color;
     return result;
   }, '');
   return matched || getRandomColor();
