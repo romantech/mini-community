@@ -12,7 +12,7 @@ import {
   changeCategory,
   setLastPosition,
 } from 'modules/community/communitySlice';
-import { KR_COMMUNITY, KR_NEWPOST } from 'lib/constants';
+import { KR_COMMUNITY, KR_NEWPOST_EMJ } from 'lib/constants';
 import Button from 'components/Button';
 import { useNavigate } from 'react-router-dom';
 import siteUrl from 'routes/url';
@@ -53,7 +53,7 @@ export default function List() {
         ))}
       </section>
       <Button
-        text={KR_NEWPOST}
+        text={KR_NEWPOST_EMJ}
         rounded
         onClick={composeBtnHandler}
         className="fixed bottom-4 right-4"
