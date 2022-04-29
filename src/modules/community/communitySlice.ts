@@ -9,7 +9,7 @@ import {
 interface CommunityState {
   posts: Post[];
   selectedPost: PostDetail | null;
-  likedPost: Array<Post['id']>;
+  likedPostId: Array<Post['id']>;
   newPost: Partial<NewPost> | null;
   categories: Category[];
   currentCategoryId: CategoryId;
@@ -19,17 +19,17 @@ interface CommunityState {
 }
 
 const initialCategories: Category[] = [
-  { categoryId: 0, categoryCode: 'ALL', categoryName: '전체' },
+  { categoryId: 888, categoryCode: 'ALL', categoryName: '전체' },
   { categoryId: 999, categoryCode: 'POPULAR', categoryName: '⭐ 인기글' },
 ];
 
 const initialState: CommunityState = {
   posts: [],
-  likedPost: [],
+  likedPostId: [],
   selectedPost: null,
   newPost: null,
   categories: [],
-  currentCategoryId: 0, // 전체 (초기값)
+  currentCategoryId: 888, // 전체글 (초기값)
   lastPosition: null,
   loading: false,
   error: null,
@@ -46,11 +46,11 @@ const communitySlice = createSlice({
       state.lastPosition = payload;
     },
     addLikedPost: (state, { payload }: PayloadAction<Post['id']>) => {
-      state.likedPost.push(payload);
+      state.likedPostId.push(payload);
       if (state.selectedPost) state.selectedPost.likeCount += 1;
     },
     removeLikedPost: (state, { payload }: PayloadAction<Post['id']>) => {
-      state.likedPost = state.likedPost.filter(likedPk => likedPk !== payload);
+      state.likedPostId = state.likedPostId.filter(id => id !== payload);
       if (state.selectedPost) state.selectedPost.likeCount -= 1;
     },
     setNewPost: (state, { payload }: PayloadAction<Partial<NewPost>>) => {

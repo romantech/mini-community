@@ -14,7 +14,7 @@ type CategoryName =
   | '질문/답변'
   | '뉴스'
   | '노하우';
-type CategoryId = 0 | 1 | 2 | 3 | 4 | 5 | 999; // 0 전체, 999 인기글
+type CategoryId = 1 | 2 | 3 | 4 | 5 | 888 | 999; // 888 전체, 999 인기글
 
 interface Category {
   categoryId: CategoryId; // categoryPk -> categoryId 로 변경

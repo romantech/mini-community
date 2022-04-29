@@ -3,6 +3,7 @@ export const KR_NEWPOST_EMJ = '글쓰기 ✍️';
 export const KR_NEWPOST = '글쓰기';
 export const KR_COMPLETE = '완료';
 export const KR_BACK_TO_LIST = '글 목록으로';
+export const KR_TITLE_HOLDER = '제목을 작성해주세요';
 export const MIDDLE_DOT = '·';
 
 export type ColorKey = keyof typeof colorsByFileName;

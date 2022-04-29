@@ -3,7 +3,8 @@ import { createSelector } from '@reduxjs/toolkit';
 
 export const selectPosts = (state: RootState) => state.community.posts;
 export const selectPost = (state: RootState) => state.community.selectedPost;
-export const selectLikedPosts = (state: RootState) => state.community.likedPost;
+export const selectLikedPosts = (state: RootState) =>
+  state.community.likedPostId;
 export const selectCategories = (state: RootState) =>
   state.community.categories;
 export const selectCurrentCategoryId = (state: RootState) =>
@@ -16,7 +17,7 @@ export const selectPostsByCategory = createSelector(
   [selectPosts, selectCurrentCategoryId],
   (posts, currentCatId) => {
     switch (currentCatId) {
-      case 0: // 전체
+      case 888: // 전체글
         return posts;
       case 999: // 인기글
         return posts.filter(({ viewCount }) => viewCount >= 100);
