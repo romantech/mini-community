@@ -6,16 +6,16 @@ import classnames from 'classnames';
 interface BackButtonProps {
   text?: string;
   className?: string;
+  confirmMsg?: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   to?: any;
-  confirmMsg?: string;
 }
 
 export default function BackButton({
   text,
   className,
-  to = -1,
   confirmMsg,
+  to = -1,
 }: BackButtonProps) {
   const navigate = useNavigate();
   const classes = classnames(

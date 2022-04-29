@@ -13,6 +13,7 @@ import { setNewPost } from 'modules/community/communitySlice';
 import { useAppDispatch } from 'modules/store';
 import TextInput from 'components/TextInput';
 import TextArea from 'components/TextArea';
+import Uploader from 'components/Uploader';
 
 export default function Compose() {
   const dispatch = useAppDispatch();
@@ -64,6 +65,9 @@ export default function Compose() {
       </div>
       <div className="flex items-center h-52">
         <TextArea className="p-5" onChange={contentHandler} />
+      </div>
+      <div className="p-5 overflow-x-auto border-t-white">
+        <Uploader acceptType="image/*" maxFile={6} />
       </div>
     </div>
   );

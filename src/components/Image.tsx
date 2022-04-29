@@ -2,14 +2,16 @@ import React from 'react';
 import classnames from 'classnames';
 
 interface ContentImageProps {
-  url: string;
+  src: string;
   className?: string;
+  alt?: string;
   rounded?: boolean;
 }
 
 export default function Image({
-  url,
+  src,
   className,
+  alt = 'post',
   rounded = false,
 }: ContentImageProps) {
   const classes = classnames(`w-full bg-gray-200`, className, {
@@ -18,7 +20,7 @@ export default function Image({
 
   return (
     <div className={classes}>
-      <img className="w-full h-full object-cover" src={url} alt="post" />
+      <img className="w-full h-full object-cover" src={src} alt={alt} />
     </div>
   );
 }

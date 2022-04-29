@@ -46,8 +46,8 @@ export default function PostDetail() {
               {post.imageUrl.map(url => (
                 <Image
                   key={getRandomKey()}
-                  url={url}
-                  className="aspect-content"
+                  src={url}
+                  className="aspect-content" // 커스텀 클래스
                 />
               ))}
             </section>

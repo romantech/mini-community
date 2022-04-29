@@ -31,7 +31,7 @@ export default function Post({ post, isLast }: PostProps) {
         </section>
         {post.imageUrl && (
           <Link {...linkProps}>
-            <Image url={post.imageUrl} rounded className="aspect-thumb" />
+            <Image src={post.imageUrl} rounded className="aspect-thumb" />
           </Link>
         )}
         <Stat post={post} />

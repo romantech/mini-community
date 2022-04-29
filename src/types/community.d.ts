@@ -43,5 +43,5 @@ interface NewPost extends Category {
   title: string;
   content: string;
   writtenAt: string; // 작성 완료 버튼을 누르는 시점
-  images?: File[];
+  images?: FormData[];
 }

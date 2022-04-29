@@ -50,7 +50,7 @@ export const selectNewPostCanSubmit = createSelector(
       'content',
     ];
     if (newPost && checkItems.every(key => key in newPost)) {
-      return checkItems.slice(1).every(key => !!newPost[key]);
+      return checkItems.slice(1).every(key => newPost[key]);
     }
     return false;
   },

@@ -5,8 +5,7 @@ export const KR_COMPLETE = '완료';
 export const KR_BACK_TO_LIST = '글 목록으로';
 export const KR_TITLE_HOLDER = '제목을 작성해주세요';
 export const MIDDLE_DOT = '·';
-export const KR_COMPOSE_LEAVE_MSG =
-  '⚠️ 페이지를 벗어나면 작성한 내용이 모두 사라집니다';
+export const KR_COMPOSE_LEAVE_MSG = '⚠️ 글쓰기를 취소하시겠습니까?';
 export const KR_CONTENT_HOLDER =
   '내용을 작성해주세요.\n\n◎ 사진 및 외부 콘텐츠 첨부시 영향력 상승!\n◎ 뉴스, 블로그 등 외부 콘텐츠는 https:// 링크를 붙여 넣으세요. 본문에 썸네일로 표시됩니다.\n◎ 광고글 금지. 서비스 이용이 제한됩니다.';
 
