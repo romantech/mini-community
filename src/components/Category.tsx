@@ -25,7 +25,7 @@ export default function Category({
             },
           )}
           type="button"
-          onClick={() => onClick(id)}
+          onClick={() => id !== currentId && onClick(id)}
         >
           <span>{categoryName}</span>
         </button>

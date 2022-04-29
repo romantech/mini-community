@@ -12,6 +12,7 @@ module.exports = {
         gray05: '#7A7A7A',
         black: '#222222',
         primary01: '#2C7FFF',
+        'primary01-hover': '#418bff',
       },
       fontFamily: {
         // 기본 테마의 fontFamily.sans 속성 변경(regular 굵기). font-sans 클래스로 사용
