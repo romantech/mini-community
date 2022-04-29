@@ -6,14 +6,14 @@ export const selectPost = (state: RootState) => state.community.selectedPost;
 export const selectLikedPosts = (state: RootState) => state.community.likedPost;
 export const selectCategories = (state: RootState) =>
   state.community.categories;
-export const selectCurrentCategory = (state: RootState) =>
-  state.community.currentCategory;
+export const selectCurrentCategoryId = (state: RootState) =>
+  state.community.currentCategoryId;
 export const selectLoading = (state: RootState) => state.community.loading;
 export const selectLastPosition = (state: RootState) =>
   state.community.lastPosition;
 
 export const selectPostsByCategory = createSelector(
-  [selectPosts, selectCurrentCategory],
+  [selectPosts, selectCurrentCategoryId],
   (posts, currentCatId) => {
     switch (currentCatId) {
       case 0: // 전체
@@ -24,6 +24,11 @@ export const selectPostsByCategory = createSelector(
         return posts.filter(({ categoryId }) => categoryId === currentCatId);
     }
   },
+);
+
+export const selectNonFixedCategory = createSelector(
+  [selectCategories],
+  categories => categories.slice(2),
 );
 
 export const selectCurrentPostIsLike = createSelector(

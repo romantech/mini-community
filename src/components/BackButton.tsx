@@ -16,15 +16,16 @@ export default function BackButton({
   to = -1,
 }: BackButtonProps) {
   const navigate = useNavigate();
-  const classes = classnames('flex hover:text-primary01', className);
+  const classes = classnames(
+    'flex text-gray-400 hover:text-primary01 hover:fill-primary01 transition',
+    className,
+  );
 
   return (
     <button className={classes} type="button" onClick={() => navigate(to)}>
-      <BackIcon className="hover:fill-primary01 transition" />
+      <BackIcon />
       {text && (
-        <span className="font-medium font-sm text-gray-400 ml-2 leading-[22px]">
-          {text}
-        </span>
+        <span className="font-medium font-sm ml-2 leading-[22px]">{text}</span>
       )}
     </button>
   );

@@ -39,10 +39,9 @@ interface PostDetail extends Post {
   imageUrl: Array<string>;
 }
 
-interface NewPost {
-  category: Category;
+interface NewPost extends Category {
   title: string;
   content: string;
-  images?: File[];
   writtenAt: string;
+  images?: File[];
 }

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import {
   selectCategories,
-  selectCurrentCategory,
+  selectCurrentCategoryId,
   selectLastPosition,
   selectPostsByCategory,
 } from 'modules/community/communitySelector';
@@ -26,7 +26,7 @@ export default function List() {
   const lastPosition = useSelector(selectLastPosition);
 
   const categories = useSelector(selectCategories);
-  const currentId = useSelector(selectCurrentCategory);
+  const currentId = useSelector(selectCurrentCategoryId);
 
   useEffect(() => {
     if (lastPosition) window.scrollTo(0, lastPosition);

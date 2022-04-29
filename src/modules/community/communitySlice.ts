@@ -10,9 +10,9 @@ interface CommunityState {
   posts: Post[];
   selectedPost: PostDetail | null;
   likedPost: Array<Post['id']>;
-  newPost: NewPost | null;
+  newPost: Partial<NewPost> | null;
   categories: Category[];
-  currentCategory: CategoryId;
+  currentCategoryId: CategoryId;
   lastPosition: number | null; // 리스트에서 포스트를 클릭했을 때의 스크롤
   loading: boolean;
   error: Error | null;
@@ -29,7 +29,7 @@ const initialState: CommunityState = {
   selectedPost: null,
   newPost: null,
   categories: [],
-  currentCategory: 0, // 전체 (초기값)
+  currentCategoryId: 0, // 전체 (초기값)
   lastPosition: null,
   loading: false,
   error: null,
@@ -39,21 +39,22 @@ const communitySlice = createSlice({
   name: 'community',
   initialState,
   reducers: {
-    changeCategory: (state, action: PayloadAction<CategoryId>) => {
-      state.currentCategory = action.payload;
+    changeCategory: (state, { payload }: PayloadAction<CategoryId>) => {
+      state.currentCategoryId = payload;
     },
-    setLastPosition: (state, action: PayloadAction<number>) => {
-      state.lastPosition = action.payload;
+    setLastPosition: (state, { payload }: PayloadAction<number>) => {
+      state.lastPosition = payload;
     },
-    addLikedPost: (state, action: PayloadAction<Post['id']>) => {
-      state.likedPost.push(action.payload);
+    addLikedPost: (state, { payload }: PayloadAction<Post['id']>) => {
+      state.likedPost.push(payload);
       if (state.selectedPost) state.selectedPost.likeCount += 1;
     },
-    removeLikedPost: (state, action: PayloadAction<Post['id']>) => {
-      state.likedPost = state.likedPost.filter(
-        likedPk => likedPk !== action.payload,
-      );
+    removeLikedPost: (state, { payload }: PayloadAction<Post['id']>) => {
+      state.likedPost = state.likedPost.filter(likedPk => likedPk !== payload);
       if (state.selectedPost) state.selectedPost.likeCount -= 1;
+    },
+    setNewPost: (state, { payload }: PayloadAction<Partial<NewPost>>) => {
+      state.newPost = { ...state.newPost, ...payload };
     },
     clearSelectedPost: state => {
       state.selectedPost = null;
@@ -112,7 +113,7 @@ const communitySlice = createSlice({
     [patchPostData.fulfilled.type]: (state, { payload }) => {
       state.loading = false;
       state.error = null;
-      state.selectedPost = payload;
+      state.selectedPost = payload; // 로컬&원격이랑 데이터가 다를 수도 있으므로 한 번 더 덮어쓰기
     },
     [patchPostData.rejected.type]: (state, { error }) => {
       state.error = error;
@@ -126,6 +127,7 @@ export const {
   setLastPosition,
   addLikedPost,
   removeLikedPost,
+  setNewPost,
   clearSelectedPost,
 } = communitySlice.actions;
 export default communitySlice.reducer;
