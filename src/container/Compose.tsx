@@ -5,18 +5,22 @@ import Button from 'components/Button';
 import { useSelector } from 'react-redux';
 import {
   selectCurrentCategoryId,
+  selectNewPostCanSubmit,
   selectNonFixedCategory,
 } from 'modules/community/communitySelector';
 import Select from 'components/Select';
 import { setNewPost } from 'modules/community/communitySlice';
 import { useAppDispatch } from 'modules/store';
-import TextInput from '../components/TextInput';
+import TextInput from 'components/TextInput';
 
 export default function Compose() {
   const dispatch = useAppDispatch();
 
   const categories = useSelector(selectNonFixedCategory); // 전체글&인기글 제외
   const currentCategoryId = useSelector(selectCurrentCategoryId);
+  const canSubmit = useSelector(selectNewPostCanSubmit);
+
+  console.log(canSubmit);
 
   const completeHandler = () => {};
   const categoryHandler = (category: Category) => {
@@ -38,6 +42,7 @@ export default function Compose() {
           text={KR_COMPLETE}
           width="64px"
           height="36px"
+          disable={!canSubmit}
           onClick={completeHandler}
         />
       </header>

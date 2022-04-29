@@ -5,6 +5,8 @@ export const selectPosts = (state: RootState) => state.community.posts;
 export const selectPost = (state: RootState) => state.community.selectedPost;
 export const selectLikedPosts = (state: RootState) =>
   state.community.likedPostId;
+export const selectNewPost = (state: RootState) => state.community.newPost;
+
 export const selectCategories = (state: RootState) =>
   state.community.categories;
 export const selectCurrentCategoryId = (state: RootState) =>
@@ -36,6 +38,21 @@ export const selectCurrentPostIsLike = createSelector(
   [selectPost, selectLikedPosts],
   (post, likedPosts) => {
     return !post ? false : likedPosts.includes(post.id);
+  },
+);
+
+export const selectNewPostCanSubmit = createSelector(
+  [selectNewPost],
+  newPost => {
+    const checkItems: Partial<keyof NewPost>[] = [
+      'title',
+      'content',
+      'categoryId', // categoryId 있으면 categoryName categoryCode 있는셈
+    ];
+
+    if (!newPost) return false;
+    if (checkItems.every(key => key in newPost)) return false;
+    return checkItems.slice(1).every(key => !!newPost[key]);
   },
 );
 
