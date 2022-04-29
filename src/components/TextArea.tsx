@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { KR_TITLE_HOLDER } from 'lib/constants';
-import useDebounce from 'hooks/useDebounce';
+import { KR_CONTENT_HOLDER } from 'lib/constants';
 import classnames from 'classnames';
+import useDebounce from '../hooks/useDebounce';
 
-interface TextInputProps {
+interface TextAreaProps {
   onChange: VoidHandler<string>;
   className?: string;
   placeholder?: string;
   maxLength?: number;
 }
 
-export default function TextInput({
+export default function TextArea({
   onChange,
   className,
-  maxLength = 50, // 제목은 국문 기준 50자를 넘기지 않는게 좋음
-  placeholder = KR_TITLE_HOLDER,
-}: TextInputProps) {
+  maxLength,
+  placeholder = KR_CONTENT_HOLDER,
+}: TextAreaProps) {
   const [term, setTerm] = useState('');
   const [debouncedTerm] = useDebounce({ term, delay: 300 });
 
@@ -24,17 +24,15 @@ export default function TextInput({
   }, [debouncedTerm, onChange]);
 
   const classes = classnames(
-    'w-full h-full outline-none font-medium placeholder-gray04',
+    'w-full h-full whitespace-pre-line outline-none resize-none placeholder-gray04 font-medium',
     className,
   );
 
   return (
-    <input
+    <textarea
+      className={classes}
       placeholder={placeholder}
       maxLength={maxLength}
-      type="text"
-      className={classes}
-      value={term}
       onChange={e => setTerm(e.target.value)}
     />
   );

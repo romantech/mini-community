@@ -8,12 +8,14 @@ interface BackButtonProps {
   className?: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   to?: any;
+  confirmMsg?: string;
 }
 
 export default function BackButton({
   text,
   className,
   to = -1,
+  confirmMsg,
 }: BackButtonProps) {
   const navigate = useNavigate();
   const classes = classnames(
@@ -21,8 +23,15 @@ export default function BackButton({
     className,
   );
 
+  const clickHandler = () => {
+    let res = true;
+    // eslint-disable-next-line no-alert
+    if (confirmMsg) res = window.confirm(confirmMsg);
+    if (res) navigate(to);
+  };
+
   return (
-    <button className={classes} type="button" onClick={() => navigate(to)}>
+    <button className={classes} type="button" onClick={clickHandler}>
       <BackIcon />
       {text && (
         <span className="font-medium font-sm ml-2 leading-[22px]">{text}</span>

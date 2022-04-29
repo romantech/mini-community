@@ -5,7 +5,7 @@ interface ButtonProps {
   text: string;
   className?: string;
   onClick?: VoidHandler;
-  disable?: boolean;
+  disabled?: boolean;
   width?: string;
   height?: string;
   shadow?: boolean;
@@ -16,7 +16,7 @@ export default function Button({
   text = '확인',
   className,
   onClick = () => {},
-  disable = false,
+  disabled = false,
   width = '100px',
   height = '52px',
   shadow = true,
@@ -27,14 +27,14 @@ export default function Button({
     className,
     { 'rounded-lg': rounded },
     { 'shadow-2xl': shadow },
-    { 'bg-gray-300': disable },
-    { 'hover:bg-primary01-hover': !disable },
+    { 'bg-gray-300': disabled },
+    { 'hover:bg-primary01-hover': !disabled },
   );
   return (
     <button
-      onClick={() => onClick()}
       type="button"
-      disabled={disable}
+      disabled={disabled}
+      onClick={() => onClick()}
       className={classes}
       style={{ width, height }}
     >

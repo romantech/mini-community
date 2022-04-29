@@ -45,14 +45,14 @@ export const selectNewPostCanSubmit = createSelector(
   [selectNewPost],
   newPost => {
     const checkItems: Partial<keyof NewPost>[] = [
+      'categoryId', // categoryId 있으면 categoryName categoryCode 있는셈
       'title',
       'content',
-      'categoryId', // categoryId 있으면 categoryName categoryCode 있는셈
     ];
-
-    if (!newPost) return false;
-    if (checkItems.every(key => key in newPost)) return false;
-    return checkItems.slice(1).every(key => !!newPost[key]);
+    if (newPost && checkItems.every(key => key in newPost)) {
+      return checkItems.slice(1).every(key => !!newPost[key]);
+    }
+    return false;
   },
 );
 

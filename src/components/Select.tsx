@@ -25,7 +25,7 @@ export default function Select<T extends Category>({
   }, [defaultValues, onChange, options]);
 
   const classes = classnames(
-    'appearance-none outline-none cursor-pointer bg-arrow-down pr-4',
+    'appearance-none outline-none bg-arrow-down pr-4',
     className,
   );
 
