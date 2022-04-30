@@ -4,6 +4,7 @@ import List from 'container/List';
 import Community from 'pages/Community';
 import Compose from 'container/Compose';
 import PostDetail from 'container/PostDetail';
+import NotFound from 'components/common/NotFound';
 import siteUrl from './url';
 
 const routes = [
@@ -22,7 +23,7 @@ const routes = [
   },
   {
     path: '*',
-    element: <Navigate to="." />,
+    element: <NotFound />,
   },
 ];
 

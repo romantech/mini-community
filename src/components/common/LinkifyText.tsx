@@ -11,7 +11,7 @@ export default function LinkifyText({ text }: { text: string }) {
           part
         ) : (
           <a
-            key={getRandomKey()}
+            key={getRandomKey(index)}
             href={part}
             target="_blank"
             rel="noopener noreferrer"

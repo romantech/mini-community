@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NotFoundImg from 'assets/404.png';
-import siteUrl from 'routes/url';
 import { KR_MOVE_PAGE_AFTER_SEC, KR_NOT_FOUND } from 'lib/constants';
+import siteUrl from 'routes/url';
 
 export default function NotFound({ backSec = 5 }: { backSec?: number }) {
   const [seconds, setSeconds] = useState(backSec);
@@ -18,8 +18,8 @@ export default function NotFound({ backSec = 5 }: { backSec?: number }) {
   }, [navigate, seconds]);
 
   return (
-    <div className="flex flex-col-gap2 flex-center mt-20 font-bold text-xl">
-      <img src={NotFoundImg} alt="Not found page" className="w-9/12" />
+    <div className="max-w-[390px] mx-auto flex flex-col-gap2 flex-center mt-20 p-5 font-bold text-xl">
+      <img src={NotFoundImg} alt="Not found page" className="max-w-full" />
       <p>{KR_NOT_FOUND}</p>
       <p>{`${seconds}${KR_MOVE_PAGE_AFTER_SEC}`}</p>
     </div>
