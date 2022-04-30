@@ -15,7 +15,7 @@ export default function TextArea({
   onChange,
   className,
   maxLength,
-  delay = 300,
+  delay = 400,
   placeholder = KR_CONTENT_HOLDER,
 }: TextAreaProps) {
   const [term, setTerm] = useState('');

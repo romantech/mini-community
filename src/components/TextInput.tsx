@@ -14,7 +14,7 @@ interface TextInputProps {
 export default function TextInput({
   onChange,
   className,
-  delay = 300,
+  delay = 400,
   maxLength = 50, // 제목은 국문 기준 50자를 넘기지 않는게 좋음
   placeholder = KR_TITLE_HOLDER,
 }: TextInputProps) {

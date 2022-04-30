@@ -1,8 +1,10 @@
 import React from 'react';
 import { ReactComponent as UploadIcon } from 'assets/icons/upload.svg';
+import { ReactComponent as CloseIcon } from 'assets/icons/close.svg';
 import { getRandomKey } from 'lib/utils';
 import classnames from 'classnames';
 import Image from './Image';
+import Button from './Button';
 
 interface UploaderProps {
   acceptType: string;
@@ -19,7 +21,7 @@ export default function Uploader({
   uploadHandler,
   preview = false,
   classNames,
-  uploadedFiles,
+  uploadedFiles = [],
   uploadedNum = 0,
   maxFile = 5,
 }: UploaderProps) {
@@ -42,9 +44,16 @@ export default function Uploader({
 
     Promise.all([...files].map(readAsDataURL))
       .then(urls => {
-        uploadHandler(urls); // urls : FileReader 를 통해 DataURL 로 읽은 결과(DataURL)
+        uploadHandler([...uploadedFiles, ...urls]); // urls : FileReader 를 통해 DataURL 로 읽은 결과(DataURL)
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  const deleteHandler = (removeIdx: number) => {
+    const filter = uploadedFiles.filter((_, i) => i !== removeIdx);
+    uploadHandler(filter);
   };
 
   const isShowUploader = uploadedNum < maxFile;
@@ -52,7 +61,7 @@ export default function Uploader({
   return (
     <section className={classnames('flex gap-2', classNames)}>
       {isShowUploader && (
-        <div className="image-box hover:bg-gray-200">
+        <div className="image-box hover:bg-gray-200 transition">
           <label
             htmlFor="fileUpload"
             className="w-full h-full flex-center cursor-pointer"
@@ -71,8 +80,16 @@ export default function Uploader({
       )}
       {preview &&
         uploadedFiles?.map((object, i) => (
-          <div className="image-box" key={getRandomKey(i)}>
-            <Image src={object} alt="uploaded" />
+          <div className="image-box relative" key={getRandomKey(i)}>
+            <Image src={object} alt="uploaded" rounded />
+            <Button
+              onClick={() => deleteHandler(i)}
+              width="24px"
+              height="24px"
+              className="absolute right-1 top-1 rounded bg-black/50 hover:bg-black/70"
+            >
+              <CloseIcon className="fill-white" width={12} height={12} />
+            </Button>
           </div>
         ))}
     </section>

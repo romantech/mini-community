@@ -54,9 +54,10 @@ export default function List() {
       </section>
       <Button
         text={KR_NEWPOST_EMJ}
-        rounded
         onClick={composeBtnHandler}
         className="fixed bottom-4 right-4"
+        rounded
+        shadow
       />
     </>
   );

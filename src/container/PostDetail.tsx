@@ -48,11 +48,7 @@ export default function PostDetail() {
           </section>
           <section className="flex-col-gap2">
             {imageList?.map((url, i) => (
-              <Image
-                key={getRandomKey(i)}
-                src={url}
-                className="aspect-content" // 커스텀 클래스
-              />
+              <Image key={getRandomKey(i)} src={url} />
             ))}
           </section>
           <InteractiveStat

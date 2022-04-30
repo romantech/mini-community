@@ -79,12 +79,8 @@ export default function Compose() {
   );
 
   const uploadImageHandler = useCallback(
-    (newFiles: string[]) => {
-      const oldFiles = uploadedImages ?? [];
-      const imageUrl = [...oldFiles, ...newFiles];
-      dispatch(setNewPost({ imageUrl }));
-    },
-    [dispatch, uploadedImages],
+    (imageUrl: string[]) => dispatch(setNewPost({ imageUrl })),
+    [dispatch],
   );
 
   useEffect(() => {
@@ -95,7 +91,7 @@ export default function Compose() {
   const defaultValues = currentCategoryId < 888 ? currentCategoryId : undefined;
 
   return (
-    <div className="divide-y border-b text-sm leading-6">
+    <div className="divide-y border-b text-sm leading-6 bg-white">
       <header className="h-14 flex justify-between items-center p-2">
         <BackButton className="p-4" confirmMsg={KR_COMPOSE_LEAVE_MSG} />
         <h2 className="font-bold">{KR_NEWPOST}</h2>
@@ -105,6 +101,7 @@ export default function Compose() {
           height="36px"
           disabled={!canSubmit}
           onClick={completeHandler}
+          rounded
         />
       </header>
       <div className="h-11 flex items-center p-5">
@@ -118,7 +115,7 @@ export default function Compose() {
       <div className="flex items-center h-11 px-5">
         <TextInput onChange={titleHandler} maxLength={100} />
       </div>
-      <div className="flex items-center h-52 mb-9">
+      <div className="flex items-center h-52 mb-3">
         <TextArea className="p-5" onChange={contentHandler} />
       </div>
       <div className="p-5 overflow-x-auto border-t-white">

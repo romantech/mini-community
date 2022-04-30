@@ -2,33 +2,35 @@ import React from 'react';
 import classnames from 'classnames';
 
 interface ButtonProps {
-  text: string;
+  children?: React.ReactElement;
+  text?: string;
   className?: string;
-  onClick?: VoidHandler;
-  disabled?: boolean;
   width?: string;
   height?: string;
   shadow?: boolean;
   rounded?: boolean;
+  disabled?: boolean;
+  onClick?: VoidHandler;
 }
 
 export default function Button({
-  text = '확인',
+  children,
+  text,
   className,
-  onClick = () => {},
-  disabled = false,
   width = '100px',
   height = '52px',
-  shadow = true,
-  rounded = true,
+  shadow = false,
+  rounded = false,
+  disabled = false,
+  onClick = () => {},
 }: ButtonProps) {
   const classes = classnames(
     'bg-primary01 text-white flex-center font-bold outline-none transition',
-    className,
     { 'rounded-lg': rounded },
     { 'shadow-2xl': shadow },
     { 'bg-gray-300': disabled },
-    { 'hover:bg-primary01-hover': !disabled },
+    { 'hover:bg-opacity-90': !disabled },
+    className,
   );
   return (
     <button
@@ -38,7 +40,7 @@ export default function Button({
       className={classes}
       style={{ width, height }}
     >
-      {text}
+      {children || text}
     </button>
   );
 }
