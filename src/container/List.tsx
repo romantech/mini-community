@@ -6,7 +6,7 @@ import {
   selectLastPosition,
   selectPostsByCategory,
 } from 'modules/community/communitySelector';
-import Category from 'components/Category';
+import Category from 'components/common/Category';
 import { useAppDispatch } from 'modules/store';
 import {
   changeCategory,

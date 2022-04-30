@@ -32,7 +32,7 @@ export const selectPostsByCategory = createSelector(
 
 export const selectNonFixedCategory = createSelector(
   [selectCategories],
-  categories => categories.slice(2),
+  categories => categories.slice(2), // 전체글, 인기글 제외
 );
 
 export const selectCurrentPostIsLike = createSelector(

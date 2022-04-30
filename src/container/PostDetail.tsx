@@ -4,12 +4,12 @@ import { selectLoading, selectPost } from 'modules/community/communitySelector';
 import siteUrl from 'routes/url';
 import { getRandomKey } from 'lib/utils';
 import { KR_BACK_TO_LIST } from 'lib/constants';
-import UserInfo from 'components/UserInfo';
+import UserInfo from 'components/social/UserInfo';
 import BackButton from 'components/button/BackButton';
-import Image from 'components/Image';
-import Title from 'components/Title';
-import Content from 'components/Content';
-import InteractiveStat from 'components/InteractiveStat';
+import Image from 'components/common/Image';
+import Title from 'components/common/Title';
+import Content from 'components/common/Content';
+import InteractiveStat from 'components/social/InteractiveStat';
 import { clearSelectedPost } from 'modules/community/communitySlice';
 import { useAppDispatch } from 'modules/store';
 

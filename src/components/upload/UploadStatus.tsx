@@ -1,19 +1,20 @@
 import React from 'react';
 import { ReactComponent as PictureIcon } from 'assets/icons/picture.svg';
 import classnames from 'classnames';
+import { KR_FILE_TYPE_IMG } from 'lib/constants';
 
 interface UploadStatusProps {
   maxFilesNum: number;
   uploadedNum: number;
   className?: string;
-  fileType?: string;
+  fileType?: FileTypes;
 }
 
 export default function UploadStatus({
   maxFilesNum,
   uploadedNum,
   className,
-  fileType = '사진',
+  fileType = KR_FILE_TYPE_IMG,
 }: UploadStatusProps) {
   const uploadStatusTxt = `${fileType}(${uploadedNum}/${maxFilesNum})`;
 

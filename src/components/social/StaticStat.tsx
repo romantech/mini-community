@@ -7,7 +7,7 @@ interface StatProps {
   post: Post;
 }
 
-export default function Stat({ post }: StatProps) {
+export default function StaticStat({ post }: StatProps) {
   const renderList = [
     { icon: <EyeIcon />, count: post.viewCount, type: 'view' },
     { icon: <ThumbIcon />, count: post.likeCount, type: 'like' },

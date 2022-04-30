@@ -3,7 +3,8 @@ import { ReactComponent as UploadIcon } from 'assets/icons/upload.svg';
 import { ReactComponent as CloseIcon } from 'assets/icons/close.svg';
 import { getRandomKey } from 'lib/utils';
 import classnames from 'classnames';
-import Image from '../Image';
+import { KR_MAX_FILE_ALERT } from 'lib/constants';
+import Image from '../common/Image';
 import Button from '../button/Button';
 
 interface UploaderProps {
@@ -38,7 +39,7 @@ export default function Uploader({
     const { files } = target; // File 객체에 선택한 이미지 파일 정보가 담김
     if (!files || maxFilesNum - uploadedNum < files.length) {
       // eslint-disable-next-line no-alert
-      alert(`최대 ${maxFilesNum}개만 첨부할 수 있습니다`);
+      alert(KR_MAX_FILE_ALERT(maxFilesNum));
       return;
     }
 

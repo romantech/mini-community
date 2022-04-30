@@ -21,13 +21,13 @@ import {
 import { clearNewPost, setNewPost } from 'modules/community/communitySlice';
 import { useAppDispatch } from 'modules/store';
 import Uploader from 'components/upload/Uploader';
-import Select from 'components/Select';
-import TextInput from 'components/TextInput';
-import TextArea from 'components/TextArea';
+import Select from 'components/form/Select';
+import TextInput from 'components/form/TextInput';
+import TextArea from 'components/form/TextArea';
 import { submitNewPost } from 'modules/community/communityThunk';
 import { useNavigate } from 'react-router-dom';
 import siteUrl from 'routes/url';
-import UploadStatus from '../components/upload/UploadStatus';
+import UploadStatus from 'components/upload/UploadStatus';
 
 export default function Compose() {
   const dispatch = useAppDispatch();

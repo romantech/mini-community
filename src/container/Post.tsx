@@ -3,11 +3,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAppDispatch } from 'modules/store';
 import { setLastPosition } from 'modules/community/communitySlice';
-import Stat from 'components/Stat';
-import Image from 'components/Image';
-import Title from 'components/Title';
-import Content from 'components/Content';
-import UserInfo from 'components/UserInfo';
+import StaticStat from 'components/social/StaticStat';
+import Image from 'components/common/Image';
+import Title from 'components/common/Title';
+import Content from 'components/common/Content';
+import UserInfo from 'components/social/UserInfo';
 
 interface PostProps {
   post: Post;
@@ -39,7 +39,7 @@ export default function Post({ post, isLast }: PostProps) {
             <Image src={src} rounded className="aspect-thumb" />
           </Link>
         )}
-        <Stat post={post} />
+        <StaticStat post={post} />
       </article>
       {/* 구분선 */}
       {!isLast && <div className="w-full h-1.5 bg-gray02" />}

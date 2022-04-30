@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { KR_CONTENT_HOLDER } from 'lib/constants';
 import classnames from 'classnames';
-import useDebounce from '../hooks/useDebounce';
+import useDebounce from 'hooks/useDebounce';
 
 interface TextAreaProps {
   onChange: VoidHandler<string>;
