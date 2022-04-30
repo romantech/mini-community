@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
   getCategories,
+  getPostById,
   getPosts,
-  getPostsById,
   patchPostData,
   submitNewPost,
 } from './communityThunk';
@@ -85,10 +85,17 @@ const communitySlice = createSlice({
     [getPosts.pending.type]: state => {
       state.loading = true;
     },
-    [getPosts.fulfilled.type]: (state, { payload }) => {
+    [getPosts.fulfilled.type]: (state, { payload }: PayloadAction<Post[]>) => {
       state.loading = false;
       state.error = null;
-      state.posts = payload.reverse(); // 최신글 먼저
+
+      // ((TS2362)) the left-hand side of an arithmetic operation... 에러 때문에
+      // getDate() 메서드를 이용해 숫자로 바꿔서 연산하도록 함
+      // if (a > b) -1 이런식으로 작성하면 에러 안남
+      state.posts = payload.sort(
+        ({ writtenAt: a }, { writtenAt: b }) =>
+          new Date(b).getTime() - new Date(a).getTime(),
+      );
     },
     [getPosts.rejected.type]: (state, { error }) => {
       state.error = error;
@@ -96,16 +103,19 @@ const communitySlice = createSlice({
     },
 
     // 1개 포스트 정보 GET
-    [getPostsById.pending.type]: state => {
+    [getPostById.pending.type]: state => {
       state.loading = true;
     },
-    [getPostsById.fulfilled.type]: (state, { payload }) => {
+    [getPostById.fulfilled.type]: (
+      state,
+      { payload }: PayloadAction<Post[]>,
+    ) => {
       state.loading = false;
       state.error = null;
       const [post] = payload;
       state.selectedPost = post;
     },
-    [getPostsById.rejected.type]: (state, { error }) => {
+    [getPostById.rejected.type]: (state, { error }) => {
       state.error = error;
       state.loading = false;
     },
@@ -114,7 +124,10 @@ const communitySlice = createSlice({
     [getCategories.pending.type]: state => {
       state.loading = true;
     },
-    [getCategories.fulfilled.type]: (state, { payload }) => {
+    [getCategories.fulfilled.type]: (
+      state,
+      { payload }: PayloadAction<Category[]>,
+    ) => {
       state.loading = false;
       state.error = null;
       state.categories = [...fixedCategories, ...payload];
@@ -128,7 +141,10 @@ const communitySlice = createSlice({
     [patchPostData.pending.type]: state => {
       state.loading = true;
     },
-    [patchPostData.fulfilled.type]: (state, { payload }) => {
+    [patchPostData.fulfilled.type]: (
+      state,
+      { payload }: PayloadAction<Post>,
+    ) => {
       state.loading = false;
       state.error = null;
       state.selectedPost = payload; // 로컬&원격이랑 데이터가 다를 수도 있으므로 한 번 더 덮어쓰기

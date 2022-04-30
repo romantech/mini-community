@@ -10,8 +10,8 @@ import {
 import siteUrl from 'routes/url';
 import {
   getCategories,
+  getPostById,
   getPosts,
-  getPostsById,
 } from 'modules/community/communityThunk';
 import { useAppDispatch } from 'modules/store';
 import Loading from 'components/common/Loading';
@@ -33,7 +33,7 @@ export default function Community() {
       dispatch(getPosts()); // 전체 포스트 목록 GET
       dispatch(getCategories()); // 카테고리 목록 GET
     } else {
-      dispatch(getPostsById({ id: Number(post_id) })); // 선택한 포스트 정보 GET
+      dispatch(getPostById({ id: Number(post_id) })); // 선택한 포스트 정보 GET
     }
   }, [post_id, key]); // location.key 추가해서 라우트 변경시마다 fetch
 
