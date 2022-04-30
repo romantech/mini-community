@@ -1,6 +1,12 @@
 /* eslint-disable @typescript-eslint/naming-convention,react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
-import { Outlet, useMatch, useNavigate, useParams } from 'react-router-dom';
+import {
+  Outlet,
+  useLocation,
+  useMatch,
+  useNavigate,
+  useParams,
+} from 'react-router-dom';
 import siteUrl from 'routes/url';
 import {
   getCategories,
@@ -12,6 +18,7 @@ import { useAppDispatch } from 'modules/store';
 export default function Community() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { key } = useLocation(); // location.key : 라우트가 변경될 때마다 생성되는 고유한 식별 키
 
   const rootMatch = useMatch(siteUrl.community.root);
   const { post_id } = useParams(); // 포스트 상세보기로 진입했을 때
@@ -23,7 +30,7 @@ export default function Community() {
     } else {
       dispatch(getPostsById({ id: Number(post_id) })); // 선택한 포스트 정보 GET
     }
-  }, [post_id]);
+  }, [post_id, key]); // location.key 추가해서 라우트 변경시마다 fetch
 
   useEffect(() => {
     if (rootMatch) navigate(siteUrl.community.list);

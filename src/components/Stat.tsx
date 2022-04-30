@@ -1,7 +1,7 @@
 import React from 'react';
-import { ReactComponent as EyeIcon } from 'assets/eye.svg';
-import { ReactComponent as ThumbIcon } from 'assets/thumb-filled.svg';
-import { ReactComponent as TalkIcon } from 'assets/talk-filled.svg';
+import { ReactComponent as EyeIcon } from 'assets/icons/eye.svg';
+import { ReactComponent as ThumbIcon } from 'assets/icons/thumb-filled.svg';
+import { ReactComponent as TalkIcon } from 'assets/icons/talk-filled.svg';
 
 interface StatProps {
   post: Post;

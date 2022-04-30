@@ -42,7 +42,7 @@
   }
   .bg-arrow-down {
     /* reference : https://stackoverflow.com/questions/14218307/select-arrow-style-change*/
-    background: url('/src/assets/arrow-down.svg') no-repeat 100% 50%;
+    background: url('/src/assets/icons/arrow-down.svg') no-repeat 100% 50%;
   }
 
   .image-box {

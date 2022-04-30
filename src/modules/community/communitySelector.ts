@@ -45,15 +45,8 @@ export const selectCurrentPostIsLike = createSelector(
 export const selectNewPostCanSubmit = createSelector(
   [selectNewPost],
   newPost => {
-    const checkItems: Partial<keyof NewPost>[] = [
-      'categoryId', // categoryId 있으면 categoryName categoryCode 있는셈
-      'title',
-      'content',
-    ];
-    if (newPost && checkItems.every(key => key in newPost)) {
-      return checkItems.slice(1).every(key => newPost[key]);
-    }
-    return false;
+    const checkItems: Partial<keyof NewPost>[] = ['title', 'content'];
+    return checkItems.every(key => newPost[key]);
   },
 );
 

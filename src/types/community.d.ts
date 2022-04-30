@@ -32,7 +32,7 @@ interface Post extends Omit<Category, 'categoryCode'> {
   imageUrl: string | null;
   writtenAt: string;
   writerNickName: string;
-  writerProfileUrl: string;
+  writerProfileUrl: string | null;
 }
 
 interface PostDetail extends Post {

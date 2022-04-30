@@ -6,9 +6,9 @@ import {
   addLikedPost,
   removeLikedPost,
 } from 'modules/community/communitySlice';
-import { ReactComponent as ThumbIcon } from 'assets/thumb.svg';
-import { ReactComponent as ThumbFilledIcon } from 'assets/thumb-filled.svg';
-import { ReactComponent as TalkIcon } from 'assets/talk.svg';
+import { ReactComponent as ThumbIcon } from 'assets/icons/thumb.svg';
+import { ReactComponent as ThumbFilledIcon } from 'assets/icons/thumb-filled.svg';
+import { ReactComponent as TalkIcon } from 'assets/icons/talk.svg';
 import { selectCurrentPostIsLike } from 'modules/community/communitySelector';
 import { patchPostData } from 'modules/community/communityThunk';
 

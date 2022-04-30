@@ -1,7 +1,8 @@
 import { ColorEntries, colorsByFileName } from './constants';
 
-export const getRandomKey = () => {
-  return Math.random().toString(36).slice(2, 12);
+export const getRandomKey = (id?: string | number) => {
+  const randomNum = Math.random().toString(36).slice(2, 12);
+  return id ? `${id}-${randomNum}` : randomNum;
 };
 
 export const getRandomColor = () => {
@@ -13,7 +14,7 @@ export const getRandomColor = () => {
 export const getProfileColor = (url: string) => {
   const colorKeys = Object.entries(colorsByFileName) as ColorEntries;
   const matched = colorKeys.reduce((result, [name, color]) => {
-    if (!result && url.includes(name.toLowerCase())) return color;
+    if (!result && url?.includes(name.toLowerCase())) return color;
     return result;
   }, '');
   return matched || getRandomColor();

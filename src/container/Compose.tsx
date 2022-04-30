@@ -1,35 +1,57 @@
+/* eslint-disable no-alert */
 import React from 'react';
-import { KR_COMPLETE, KR_COMPOSE_LEAVE_MSG, KR_NEWPOST } from 'lib/constants';
+import {
+  KR_COMPLETE,
+  KR_COMPLETE_COMPOSE,
+  KR_COMPOSE_LEAVE_MSG,
+  KR_NEWPOST,
+  KR_RETRY_LATER,
+} from 'lib/constants';
 import BackButton from 'components/BackButton';
 import Button from 'components/Button';
 import { useSelector } from 'react-redux';
 import {
   selectCurrentCategoryId,
+  selectNewPost,
   selectNewPostCanSubmit,
   selectNewPostImages,
   selectNonFixedCategory,
   selectUploadedNum,
 } from 'modules/community/communitySelector';
-import { setNewPost } from 'modules/community/communitySlice';
+import { clearNewPost, setNewPost } from 'modules/community/communitySlice';
 import { useAppDispatch } from 'modules/store';
 import Uploader from 'components/Uploader';
 import Select from 'components/Select';
 import TextInput from 'components/TextInput';
 import TextArea from 'components/TextArea';
+import { submitNewPost } from 'modules/community/communityThunk';
+import siteUrl from 'routes/url';
+import { useNavigate } from 'react-router-dom';
 
 export default function Compose() {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const categories = useSelector(selectNonFixedCategory); // 전체글&인기글 제외
   const currentCategoryId = useSelector(selectCurrentCategoryId);
   const uploadedImages = useSelector(selectNewPostImages);
   const uploadedNum = useSelector(selectUploadedNum);
-  // const composedPost = useSelector(selectNewPost);
+  const composedPost = useSelector(selectNewPost);
   const canSubmit = useSelector(selectNewPostCanSubmit);
 
-  const completeHandler = () => {
-    dispatch(setNewPost({ writtenAt: new Date().toISOString() }));
-    // if (composedPost) dispatch(submitNewPost(composedPost));
+  const completeHandler = async () => {
+    try {
+      // createAsyncThunk 는 래핑된 프로미스를 반환함
+      // async / await 를 쓰고 싶다면, unwrap() 메서드로 원본 프로미스에 접근하면 됨
+      // reference : https://github.com/reduxjs/redux-toolkit/issues/1890#issuecomment-1004741945
+      await dispatch(submitNewPost(composedPost)).unwrap();
+      dispatch(clearNewPost());
+      navigate(siteUrl.community.list, { replace: true });
+      alert(KR_COMPLETE_COMPOSE);
+    } catch (e) {
+      console.log(e);
+      alert(KR_RETRY_LATER);
+    }
   };
   const categoryHandler = (category: Category) => {
     dispatch(setNewPost(category));

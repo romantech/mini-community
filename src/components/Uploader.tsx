@@ -1,5 +1,7 @@
 import React from 'react';
-import { ReactComponent as UploadIcon } from 'assets/upload.svg';
+import { ReactComponent as UploadIcon } from 'assets/icons/upload.svg';
+import { getRandomKey } from 'lib/utils';
+import classnames from 'classnames';
 import Image from './Image';
 
 interface UploaderProps {
@@ -51,27 +53,31 @@ export default function Uploader({
       .catch(err => console.log(err));
   };
 
+  const isShowUploader = uploadedNum < maxFile;
+
   return (
-    <section className="flex gap-2">
-      <div className="image-box hover:bg-gray-200">
-        <label
-          htmlFor="fileUpload"
-          className="w-full h-full flex-center cursor-pointer"
-        >
-          <input
-            hidden
-            type="file"
-            id="fileUpload"
-            accept={acceptType}
-            multiple={maxFile > 1}
-            onChange={onChangeHandler}
-          />
-          <UploadIcon className="fill-gray-400" width={30} height={30} />
-        </label>
-      </div>
+    <section className={classnames('flex gap-2', classNames)}>
+      {isShowUploader && (
+        <div className="image-box hover:bg-gray-200">
+          <label
+            htmlFor="fileUpload"
+            className="w-full h-full flex-center cursor-pointer"
+          >
+            <input
+              hidden
+              type="file"
+              id="fileUpload"
+              accept={acceptType}
+              multiple={maxFile > 1}
+              onChange={onChangeHandler}
+            />
+            <UploadIcon className="fill-gray-400" width={30} height={30} />
+          </label>
+        </div>
+      )}
       {preview &&
         uploadedFiles?.map(({ object, id }) => (
-          <div className="image-box" key={`upload-${id}`}>
+          <div className="image-box" key={getRandomKey(id)}>
             <Image src={object} alt="uploaded" />
           </div>
         ))}

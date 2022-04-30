@@ -55,10 +55,19 @@ const communitySlice = createSlice({
       if (state.selectedPost) state.selectedPost.likeCount -= 1;
     },
     setNewPost: (state, { payload }: PayloadAction<Partial<NewPost>>) => {
-      state.newPost = { ...state.newPost, ...payload };
+      if ('title' in payload) {
+        state.newPost.title = payload.title;
+      } else if ('content' in payload) {
+        state.newPost.content = payload.content;
+      } else if ('images' in payload) {
+        state.newPost.images = payload.images;
+      }
     },
     clearSelectedPost: state => {
       state.selectedPost = null;
+    },
+    clearNewPost: state => {
+      state.newPost = initialState.newPost;
     },
   },
   // extraReducer 는 액션을 자동으로 생성하지 않음
@@ -125,11 +134,9 @@ const communitySlice = createSlice({
     [submitNewPost.pending.type]: state => {
       state.loading = true;
     },
-    [submitNewPost.fulfilled.type]: (state, { payload }) => {
+    [submitNewPost.fulfilled.type]: state => {
       state.loading = false;
       state.error = null;
-      state.newPost = {};
-      console.log(payload);
     },
     [submitNewPost.rejected.type]: (state, { error }) => {
       state.error = error;
@@ -145,5 +152,6 @@ export const {
   removeLikedPost,
   setNewPost,
   clearSelectedPost,
+  clearNewPost,
 } = communitySlice.actions;
 export default communitySlice.reducer;
