@@ -14,6 +14,9 @@ import {
   getPostsById,
 } from 'modules/community/communityThunk';
 import { useAppDispatch } from 'modules/store';
+import Loading from 'components/common/Loading';
+import { useSelector } from 'react-redux';
+import { selectLoading } from 'modules/community/communitySelector';
 
 export default function Community() {
   const dispatch = useAppDispatch();
@@ -22,6 +25,8 @@ export default function Community() {
 
   const rootMatch = useMatch(siteUrl.community.root);
   const { post_id } = useParams(); // 포스트 상세보기로 진입했을 때
+
+  const loading = useSelector(selectLoading);
 
   useEffect(() => {
     if (!post_id) {
@@ -37,7 +42,8 @@ export default function Community() {
   }, [rootMatch]);
 
   return (
-    <div className="max-w-[390px] my-0 mx-auto">
+    <div className="max-w-[390px] my-0 mx-auto relative">
+      <Loading loading={loading} delay={300} />
       <Outlet />
     </div>
   );
