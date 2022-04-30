@@ -13,7 +13,7 @@ import { selectCurrentPostIsLike } from 'modules/community/communitySelector';
 import { patchPostData } from 'modules/community/communityThunk';
 
 interface InteractiveStatProps {
-  post: PostDetail;
+  post: Post;
   loading: boolean;
   className?: string;
 }

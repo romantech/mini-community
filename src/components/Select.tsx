@@ -20,11 +20,11 @@ export default function Select<T extends Category>({
   };
 
   useEffect(() => {
-    const idx = Number(defaultValues) - 1 || 0; // defaultValue 없으면 첫번째
-    // option dispatch
+    const idx = Number(defaultValues) - 1 || 0;
     const category = options[idx];
-    if (category) onChange(category);
-  }, [defaultValues, onChange, options]);
+    if (category) onChange(options[idx]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [defaultValues, options]);
 
   const classes = classnames(
     'appearance-none outline-none bg-arrow-down pr-4',

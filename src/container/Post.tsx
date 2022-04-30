@@ -19,6 +19,11 @@ export default function Post({ post, isLast }: PostProps) {
   const clickHandler = () => dispatch(setLastPosition(window.scrollY));
   const linkProps = { to: `../post/${post.id}`, onClick: clickHandler };
 
+  let src;
+  if (post?.imageUrl?.length) {
+    src = Array.isArray(post.imageUrl) ? post.imageUrl[0] : post.imageUrl;
+  }
+
   return (
     <>
       <article className="p-6 flex-col-gap4">
@@ -29,9 +34,9 @@ export default function Post({ post, isLast }: PostProps) {
           </Link>
           <Content text={post.content} className="line-clamp-2" />
         </section>
-        {post.imageUrl && (
+        {src && (
           <Link {...linkProps}>
-            <Image src={post.imageUrl} rounded className="aspect-thumb" />
+            <Image src={src} rounded className="aspect-thumb" />
           </Link>
         )}
         <Stat post={post} />

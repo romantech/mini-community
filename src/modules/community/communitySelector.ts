@@ -52,20 +52,10 @@ export const selectNewPostCanSubmit = createSelector(
 
 export const selectNewPostImages = createSelector(
   [selectNewPost],
-  newPost => newPost?.images,
+  newPost => newPost.imageUrl,
 );
 
 export const selectUploadedNum = createSelector(
   [selectNewPostImages],
-  images => images?.length,
-);
-
-export const selectHasPosts = createSelector(
-  [selectPosts],
-  posts => posts.length > 1,
-);
-
-export const selectHasCategories = createSelector(
-  [selectCategories],
-  categories => categories.length > 2, // 전체 / 인기글은 기본값이므로 3이상만 true
+  images => images?.length ?? 0,
 );

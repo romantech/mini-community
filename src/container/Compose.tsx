@@ -1,5 +1,5 @@
 /* eslint-disable no-alert */
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import {
   KR_COMPLETE,
   KR_COMPLETE_COMPOSE,
@@ -25,8 +25,8 @@ import Select from 'components/Select';
 import TextInput from 'components/TextInput';
 import TextArea from 'components/TextArea';
 import { submitNewPost } from 'modules/community/communityThunk';
-import siteUrl from 'routes/url';
 import { useNavigate } from 'react-router-dom';
+import siteUrl from '../routes/url';
 
 export default function Compose() {
   const dispatch = useAppDispatch();
@@ -39,36 +39,57 @@ export default function Compose() {
   const composedPost = useSelector(selectNewPost);
   const canSubmit = useSelector(selectNewPostCanSubmit);
 
-  const completeHandler = async () => {
+  const leavePage = useCallback(() => {
+    dispatch(clearNewPost());
+    navigate(siteUrl.community.list, { replace: true });
+  }, [dispatch, navigate]);
+
+  // createAsyncThunk 는 래핑된 프로미스를 반환함
+  // async / await 를 쓰고 싶다면, unwrap() 메서드로 원본 프로미스에 접근하면 됨
+  // reference : https://github.com/reduxjs/redux-toolkit/issues/1890#issuecomment-1004741945
+  const completeHandler = useCallback(async () => {
     try {
-      // createAsyncThunk 는 래핑된 프로미스를 반환함
-      // async / await 를 쓰고 싶다면, unwrap() 메서드로 원본 프로미스에 접근하면 됨
-      // reference : https://github.com/reduxjs/redux-toolkit/issues/1890#issuecomment-1004741945
       await dispatch(submitNewPost(composedPost)).unwrap();
-      dispatch(clearNewPost());
-      navigate(siteUrl.community.list, { replace: true });
       alert(KR_COMPLETE_COMPOSE);
+      leavePage();
     } catch (e) {
       console.log(e);
       alert(KR_RETRY_LATER);
     }
-  };
-  const categoryHandler = (category: Category) => {
-    dispatch(setNewPost(category));
-  };
-  const titleHandler = (title: string) => {
-    dispatch(setNewPost({ title }));
-  };
+  }, [composedPost, dispatch, leavePage]);
 
-  const contentHandler = (content: string) => {
-    dispatch(setNewPost({ content }));
-  };
+  const categoryHandler = useCallback(
+    (category: Category) => {
+      // 글쓰기 제출 엔트리엔 categoryCode 없으므로 제외
+      const excludeCategoryCode = { ...category };
+      delete excludeCategoryCode.categoryCode;
+      dispatch(setNewPost(excludeCategoryCode));
+    },
+    [dispatch],
+  );
 
-  const uploadImageHandler = (newFiles: UploadFileType[]) => {
-    const oldFiles = uploadedImages ?? [];
-    const images = [...oldFiles, ...newFiles];
-    dispatch(setNewPost({ images }));
-  };
+  const titleHandler = useCallback(
+    (title: string) => dispatch(setNewPost({ title })),
+    [dispatch],
+  );
+
+  const contentHandler = useCallback(
+    (content: string) => dispatch(setNewPost({ content })),
+    [dispatch],
+  );
+
+  const uploadImageHandler = useCallback(
+    (newFiles: string[]) => {
+      const oldFiles = uploadedImages ?? [];
+      const imageUrl = [...oldFiles, ...newFiles];
+      dispatch(setNewPost({ imageUrl }));
+    },
+    [dispatch, uploadedImages],
+  );
+
+  useEffect(() => {
+    return () => leavePage();
+  }, [leavePage]);
 
   // 888은 전체글 999는 인기글이므로 888이하면 OK
   const defaultValues = currentCategoryId < 888 ? currentCategoryId : undefined;
@@ -104,7 +125,7 @@ export default function Compose() {
         <Uploader
           acceptType="image/*"
           maxFile={6}
-          uploadedFiles={uploadedImages}
+          uploadedFiles={uploadedImages || undefined}
           uploadedNum={uploadedNum}
           uploadHandler={uploadImageHandler}
           preview

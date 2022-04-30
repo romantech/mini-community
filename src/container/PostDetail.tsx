@@ -27,6 +27,11 @@ export default function PostDetail() {
     };
   }, [dispatch]);
 
+  let imageList;
+  if (post?.imageUrl?.length) {
+    imageList = Array.isArray(post.imageUrl) ? post.imageUrl : [post.imageUrl];
+  }
+
   return (
     <>
       <header className="h-14 p-6">
@@ -41,17 +46,15 @@ export default function PostDetail() {
               <Content text={post.content} linkify size="15px" />
             </div>
           </section>
-          {Array.isArray(post.imageUrl) && (
-            <section className="flex-col-gap2">
-              {post.imageUrl.map(url => (
-                <Image
-                  key={getRandomKey()}
-                  src={url}
-                  className="aspect-content" // 커스텀 클래스
-                />
-              ))}
-            </section>
-          )}
+          <section className="flex-col-gap2">
+            {imageList?.map((url, i) => (
+              <Image
+                key={getRandomKey(i)}
+                src={url}
+                className="aspect-content" // 커스텀 클래스
+              />
+            ))}
+          </section>
           <InteractiveStat
             className="px-7 mb-3"
             post={post}

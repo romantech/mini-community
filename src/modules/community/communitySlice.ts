@@ -9,7 +9,7 @@ import {
 
 interface CommunityState {
   posts: Post[];
-  selectedPost: PostDetail | null;
+  selectedPost: Post | null;
   likedPostId: Array<Post['id']>;
   newPost: Partial<NewPost>;
   categories: Category[];
@@ -19,16 +19,30 @@ interface CommunityState {
   error: Error | null;
 }
 
-const initialCategories: Category[] = [
+export const fixedCategories: Category[] = [
   { categoryId: 888, categoryCode: 'ALL', categoryName: '전체' },
   { categoryId: 999, categoryCode: 'POPULAR', categoryName: '⭐ 인기글' },
 ];
+
+const initialNewPost: Partial<NewPost> = {
+  categoryId: 1,
+  categoryName: '대선청원',
+  title: '',
+  content: '',
+  viewCount: 0,
+  likeCount: 0,
+  commentCount: 0,
+  imageUrl: null,
+  writtenAt: '',
+  writerNickName: '카우보이',
+  writerProfileUrl: '',
+};
 
 const initialState: CommunityState = {
   posts: [],
   likedPostId: [],
   selectedPost: null,
-  newPost: {},
+  newPost: initialNewPost,
   categories: [],
   currentCategoryId: 888, // 전체글 (초기값)
   lastPosition: null,
@@ -55,13 +69,7 @@ const communitySlice = createSlice({
       if (state.selectedPost) state.selectedPost.likeCount -= 1;
     },
     setNewPost: (state, { payload }: PayloadAction<Partial<NewPost>>) => {
-      if ('title' in payload) {
-        state.newPost.title = payload.title;
-      } else if ('content' in payload) {
-        state.newPost.content = payload.content;
-      } else if ('images' in payload) {
-        state.newPost.images = payload.images;
-      }
+      state.newPost = { ...state.newPost, ...payload };
     },
     clearSelectedPost: state => {
       state.selectedPost = null;
@@ -80,7 +88,7 @@ const communitySlice = createSlice({
     [getPosts.fulfilled.type]: (state, { payload }) => {
       state.loading = false;
       state.error = null;
-      state.posts = payload;
+      state.posts = payload.reverse(); // 최신글 먼저
     },
     [getPosts.rejected.type]: (state, { error }) => {
       state.error = error;
@@ -109,7 +117,7 @@ const communitySlice = createSlice({
     [getCategories.fulfilled.type]: (state, { payload }) => {
       state.loading = false;
       state.error = null;
-      state.categories = [...initialCategories, ...payload];
+      state.categories = [...fixedCategories, ...payload];
     },
     [getCategories.rejected.type]: (state, { error }) => {
       state.error = error;

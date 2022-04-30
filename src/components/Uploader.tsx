@@ -6,12 +6,12 @@ import Image from './Image';
 
 interface UploaderProps {
   acceptType: string;
-  uploadHandler: VoidHandler<UploadFileType[]>;
+  uploadHandler: VoidHandler<string[]>;
   preview: boolean;
   classNames?: string;
+  uploadedFiles?: string[];
   uploadedNum?: number;
-  uploadedFiles?: UploadFileType[];
-  maxFile: number;
+  maxFile?: number;
 }
 
 export default function Uploader({
@@ -19,8 +19,8 @@ export default function Uploader({
   uploadHandler,
   preview = false,
   classNames,
+  uploadedFiles,
   uploadedNum = 0,
-  uploadedFiles = [],
   maxFile = 5,
 }: UploaderProps) {
   const readAsDataURL = (file: File): Promise<string> => {
@@ -42,13 +42,7 @@ export default function Uploader({
 
     Promise.all([...files].map(readAsDataURL))
       .then(urls => {
-        // FileReader 를 통해 DataURL 로 읽은 결과(DataURL) 업데이트
-        const newFiles: UploadFileType[] = urls.map((object, i) => ({
-          id: uploadedNum + (i || 1),
-          object,
-        }));
-
-        uploadHandler(newFiles);
+        uploadHandler(urls); // urls : FileReader 를 통해 DataURL 로 읽은 결과(DataURL)
       })
       .catch(err => console.log(err));
   };
@@ -76,8 +70,8 @@ export default function Uploader({
         </div>
       )}
       {preview &&
-        uploadedFiles?.map(({ object, id }) => (
-          <div className="image-box" key={getRandomKey(id)}>
+        uploadedFiles?.map((object, i) => (
+          <div className="image-box" key={getRandomKey(i)}>
             <Image src={object} alt="uploaded" />
           </div>
         ))}

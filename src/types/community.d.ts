@@ -1,3 +1,4 @@
+type CategoryId = 888 | 999 | 1 | 2 | 3 | 4 | 5; // 888 전체, 999 인기글
 type CategoryCode =
   | 'ALL'
   | 'POPULAR'
@@ -14,11 +15,10 @@ type CategoryName =
   | '질문/답변'
   | '뉴스'
   | '노하우';
-type CategoryId = 1 | 2 | 3 | 4 | 5 | 888 | 999; // 888 전체, 999 인기글
 
 interface Category {
   categoryId: CategoryId; // categoryPk -> categoryId 로 변경
-  categoryCode: CategoryCode;
+  categoryCode?: CategoryCode; // 글 작성 후 제출할 땐 categoryCode 포함 안됐으므로
   categoryName: CategoryName;
 }
 
@@ -29,24 +29,13 @@ interface Post extends Omit<Category, 'categoryCode'> {
   viewCount: number;
   likeCount: number;
   commentCount: number;
-  imageUrl: string | null;
+  imageUrl: string | string[] | null;
   writtenAt: string;
   writerNickName: string;
   writerProfileUrl: string | null;
 }
 
-interface PostDetail extends Post {
-  imageUrl: Array<string>;
-}
-
-interface UploadFileType {
-  id: number;
-  object: string;
-}
-
-interface NewPost extends Category {
-  title: string;
-  content: string;
-  writtenAt: string; // 작성 완료 버튼을 누르는 시점
-  images: Array<UploadFileType>;
+interface NewPost extends Post {
+  // writtenAt 속성은 완료 버튼 누르는 시점
+  imageUrl: string[] | null;
 }
