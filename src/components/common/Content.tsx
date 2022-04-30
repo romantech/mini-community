@@ -15,7 +15,7 @@ export default function Content({
   size = '14px',
   linkify = false,
 }: ContentProps) {
-  const classes = classnames(`text-gray05`, className);
+  const classes = classnames(`text-gray05 whitespace-pre-line`, className);
 
   return (
     <p className={classes} style={{ fontSize: size }}>
