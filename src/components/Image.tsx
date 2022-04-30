@@ -14,7 +14,7 @@ export default function Image({
   alt = 'post',
   rounded = false,
 }: ContentImageProps) {
-  const classes = classnames(`w-full bg-gray-200`, className, {
+  const classes = classnames(`w-full h-full bg-gray-200`, className, {
     'rounded overflow-hidden': rounded,
   });
 

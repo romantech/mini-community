@@ -4,13 +4,14 @@ import {
   getPosts,
   getPostsById,
   patchPostData,
+  submitNewPost,
 } from './communityThunk';
 
 interface CommunityState {
   posts: Post[];
   selectedPost: PostDetail | null;
   likedPostId: Array<Post['id']>;
-  newPost: Partial<NewPost> | null;
+  newPost: Partial<NewPost>;
   categories: Category[];
   currentCategoryId: CategoryId;
   lastPosition: number | null; // 리스트에서 포스트를 클릭했을 때의 스크롤
@@ -27,7 +28,7 @@ const initialState: CommunityState = {
   posts: [],
   likedPostId: [],
   selectedPost: null,
-  newPost: null,
+  newPost: {},
   categories: [],
   currentCategoryId: 888, // 전체글 (초기값)
   lastPosition: null,
@@ -116,6 +117,21 @@ const communitySlice = createSlice({
       state.selectedPost = payload; // 로컬&원격이랑 데이터가 다를 수도 있으므로 한 번 더 덮어쓰기
     },
     [patchPostData.rejected.type]: (state, { error }) => {
+      state.error = error;
+      state.loading = false;
+    },
+
+    // 작성한 포스트 제출
+    [submitNewPost.pending.type]: state => {
+      state.loading = true;
+    },
+    [submitNewPost.fulfilled.type]: (state, { payload }) => {
+      state.loading = false;
+      state.error = null;
+      state.newPost = {};
+      console.log(payload);
+    },
+    [submitNewPost.rejected.type]: (state, { error }) => {
       state.error = error;
       state.loading = false;
     },

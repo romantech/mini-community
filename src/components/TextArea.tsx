@@ -7,6 +7,7 @@ interface TextAreaProps {
   onChange: VoidHandler<string>;
   className?: string;
   placeholder?: string;
+  delay?: number;
   maxLength?: number;
 }
 
@@ -14,10 +15,11 @@ export default function TextArea({
   onChange,
   className,
   maxLength,
+  delay = 300,
   placeholder = KR_CONTENT_HOLDER,
 }: TextAreaProps) {
   const [term, setTerm] = useState('');
-  const [debouncedTerm] = useDebounce({ term, delay: 300 });
+  const [debouncedTerm] = useDebounce({ term, delay });
 
   useEffect(() => {
     onChange(debouncedTerm);

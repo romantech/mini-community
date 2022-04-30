@@ -1,16 +1,17 @@
 import { RootState } from 'modules/store';
 import { createSelector } from '@reduxjs/toolkit';
 
+export const selectCategories = (state: RootState) =>
+  state.community.categories;
+export const selectCurrentCategoryId = (state: RootState) =>
+  state.community.currentCategoryId;
+
 export const selectPosts = (state: RootState) => state.community.posts;
 export const selectPost = (state: RootState) => state.community.selectedPost;
 export const selectLikedPosts = (state: RootState) =>
   state.community.likedPostId;
 export const selectNewPost = (state: RootState) => state.community.newPost;
 
-export const selectCategories = (state: RootState) =>
-  state.community.categories;
-export const selectCurrentCategoryId = (state: RootState) =>
-  state.community.currentCategoryId;
 export const selectLoading = (state: RootState) => state.community.loading;
 export const selectLastPosition = (state: RootState) =>
   state.community.lastPosition;
@@ -54,6 +55,16 @@ export const selectNewPostCanSubmit = createSelector(
     }
     return false;
   },
+);
+
+export const selectNewPostImages = createSelector(
+  [selectNewPost],
+  newPost => newPost?.images,
+);
+
+export const selectUploadedNum = createSelector(
+  [selectNewPostImages],
+  images => images?.length,
 );
 
 export const selectHasPosts = createSelector(

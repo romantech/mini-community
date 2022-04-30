@@ -38,4 +38,10 @@ export const patchPostData = createAsyncThunk(
   },
 );
 
-export const newPost = createAsyncThunk('community/newPost', async () => {});
+export const submitNewPost = createAsyncThunk(
+  'community/submitNewPost',
+  async (payload: Partial<NewPost>) => {
+    const { data } = await axios.post(`/posts}`, { payload });
+    return data;
+  },
+);

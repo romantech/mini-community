@@ -6,6 +6,7 @@ import classnames from 'classnames';
 interface TextInputProps {
   onChange: VoidHandler<string>;
   className?: string;
+  delay?: number;
   placeholder?: string;
   maxLength?: number;
 }
@@ -13,11 +14,12 @@ interface TextInputProps {
 export default function TextInput({
   onChange,
   className,
+  delay = 300,
   maxLength = 50, // 제목은 국문 기준 50자를 넘기지 않는게 좋음
   placeholder = KR_TITLE_HOLDER,
 }: TextInputProps) {
   const [term, setTerm] = useState('');
-  const [debouncedTerm] = useDebounce({ term, delay: 300 });
+  const [debouncedTerm] = useDebounce({ term, delay });
 
   useEffect(() => {
     onChange(debouncedTerm);
