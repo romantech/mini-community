@@ -41,20 +41,8 @@ export const patchPostData = createAsyncThunk(
 export const submitNewPost = createAsyncThunk(
   'community/submitNewPost',
   async (payload: Partial<NewPost>) => {
-    const { imageUrl } = payload;
-    const formData = new FormData();
-    imageUrl?.map((f, i) => formData.append(`image-${i}`, f));
-    const addDate = {
-      ...payload,
-      writtenAt: new Date().toISOString(),
-      imageUrl: formData,
-    };
-    console.log(formData);
-    const { data } = await axios.post(`/posts`, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
+    const addDate = { ...payload, writtenAt: new Date().toISOString() };
+    const { data } = await axios.post(`/posts`, addDate);
     return data;
   },
 );

@@ -23,7 +23,13 @@ export const selectPostsByCategory = createSelector(
       case 888: // 전체글
         return posts;
       case 999: // 인기글
-        return posts.filter(({ viewCount }) => viewCount >= 100);
+        return posts
+          .filter(({ viewCount }) => viewCount >= 100)
+          .sort((a, b) => {
+            if (a.likeCount > b.likeCount) return -1; // 내림차순
+            if (a.likeCount < b.likeCount) return 1;
+            return 0;
+          });
       default:
         return posts.filter(({ categoryId }) => categoryId === currentCatId);
     }
