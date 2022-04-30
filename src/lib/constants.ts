@@ -12,6 +12,8 @@ export const KR_RETRY_LATER = '잠시 후 다시 시도해주세요';
 export const KR_CONTENT_HOLDER =
   '내용을 작성해주세요.\n\n◎ 사진 및 외부 콘텐츠 첨부시 영향력 상승!\n◎ 뉴스, 블로그 등 외부 콘텐츠는 https:// 링크를 붙여 넣으세요. 본문에 썸네일로 표시됩니다.\n◎ 광고글 금지. 서비스 이용이 제한됩니다.';
 
+export const KR_NOT_FOUND = '페이지를 찾을 수 없어요';
+export const KR_MOVE_PAGE_AFTER_SEC = '초 후 리스트로 이동합니다';
 export const KR_MAX_FILE_ALERT = (max: number) =>
   `최대 ${max}개만 첨부할 수 있습니다`;
 

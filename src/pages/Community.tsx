@@ -42,6 +42,7 @@ export default function Community() {
   }, [rootMatch]);
 
   return (
+    // 아이폰12 Pro 기준 width
     <div className="max-w-[390px] my-0 mx-auto relative">
       <Loading loading={loading} delay={300} />
       <Outlet />

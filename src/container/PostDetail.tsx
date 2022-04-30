@@ -12,6 +12,7 @@ import Content from 'components/common/Content';
 import InteractiveStat from 'components/social/InteractiveStat';
 import { clearSelectedPost } from 'modules/community/communitySlice';
 import { useAppDispatch } from 'modules/store';
+import NotFound from 'components/common/NotFound';
 
 export default function PostDetail() {
   const dispatch = useAppDispatch();
@@ -37,7 +38,7 @@ export default function PostDetail() {
       <header className="h-14 p-6">
         <BackButton text={KR_BACK_TO_LIST} to={siteUrl.community.list} />
       </header>
-      {post && (
+      {post ? (
         <article className="flex-col-gap4">
           <section className="flex-col-gap4 px-7 pt-3 leading-6">
             <UserInfo post={post} />
@@ -57,6 +58,8 @@ export default function PostDetail() {
             loading={loading}
           />
         </article>
+      ) : (
+        !loading && <NotFound />
       )}
     </>
   );
