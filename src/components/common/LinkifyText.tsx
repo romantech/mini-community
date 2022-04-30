@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { getRandomKey } from 'lib/utils';
 
 export default function LinkifyText({ text }: { text: string }) {
@@ -11,15 +10,15 @@ export default function LinkifyText({ text }: { text: string }) {
         index % 2 === 0 ? (
           part
         ) : (
-          <Link
+          <a
             key={getRandomKey()}
-            to={part}
+            href={part}
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-500 hover:text-blue-400"
           >
             {part}
-          </Link>
+          </a>
         ),
       )}
     </>
