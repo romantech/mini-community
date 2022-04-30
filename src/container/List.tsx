@@ -13,7 +13,7 @@ import {
   setLastPosition,
 } from 'modules/community/communitySlice';
 import { KR_COMMUNITY, KR_NEWPOST_EMJ } from 'lib/constants';
-import Button from 'components/Button';
+import Button from 'components/button/Button';
 import { useNavigate } from 'react-router-dom';
 import siteUrl from 'routes/url';
 import Post from './Post';
@@ -24,7 +24,6 @@ export default function List() {
 
   const posts = useSelector(selectPostsByCategory);
   const lastPosition = useSelector(selectLastPosition);
-
   const categories = useSelector(selectCategories);
   const currentId = useSelector(selectCurrentCategoryId);
 

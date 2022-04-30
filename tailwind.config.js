@@ -12,6 +12,7 @@ module.exports = {
         gray05: '#7A7A7A',
         black: '#222222',
         primary01: '#2C7FFF',
+        primary02: '#DBE9FF',
         'primary01-hover': '#418bff',
       },
       fontFamily: {

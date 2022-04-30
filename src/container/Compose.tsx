@@ -7,8 +7,8 @@ import {
   KR_NEWPOST,
   KR_RETRY_LATER,
 } from 'lib/constants';
-import BackButton from 'components/BackButton';
-import Button from 'components/Button';
+import BackButton from 'components/button/BackButton';
+import Button from 'components/button/Button';
 import { useSelector } from 'react-redux';
 import {
   selectCurrentCategoryId,
@@ -20,13 +20,14 @@ import {
 } from 'modules/community/communitySelector';
 import { clearNewPost, setNewPost } from 'modules/community/communitySlice';
 import { useAppDispatch } from 'modules/store';
-import Uploader from 'components/Uploader';
+import Uploader from 'components/upload/Uploader';
 import Select from 'components/Select';
 import TextInput from 'components/TextInput';
 import TextArea from 'components/TextArea';
 import { submitNewPost } from 'modules/community/communityThunk';
 import { useNavigate } from 'react-router-dom';
-import siteUrl from '../routes/url';
+import siteUrl from 'routes/url';
+import UploadStatus from '../components/upload/UploadStatus';
 
 export default function Compose() {
   const dispatch = useAppDispatch();
@@ -47,7 +48,7 @@ export default function Compose() {
   // createAsyncThunk 는 래핑된 프로미스를 반환함
   // async / await 를 쓰고 싶다면, unwrap() 메서드로 원본 프로미스에 접근하면 됨
   // reference : https://github.com/reduxjs/redux-toolkit/issues/1890#issuecomment-1004741945
-  const completeHandler = useCallback(async () => {
+  const submitHandler = useCallback(async () => {
     try {
       await dispatch(submitNewPost(composedPost)).unwrap();
       alert(KR_COMPLETE_COMPOSE);
@@ -89,6 +90,7 @@ export default function Compose() {
 
   // 888은 전체글 999는 인기글이므로 888이하면 OK
   const defaultValues = currentCategoryId < 888 ? currentCategoryId : undefined;
+  const maxFilesNum = 6;
 
   return (
     <div className="divide-y border-b text-sm leading-6 bg-white">
@@ -100,7 +102,7 @@ export default function Compose() {
           width="64px"
           height="36px"
           disabled={!canSubmit}
-          onClick={completeHandler}
+          onClick={submitHandler}
           rounded
         />
       </header>
@@ -121,11 +123,16 @@ export default function Compose() {
       <div className="p-5 overflow-x-auto border-t-white">
         <Uploader
           acceptType="image/*"
-          maxFile={6}
+          maxFilesNum={maxFilesNum}
           uploadedFiles={uploadedImages || undefined}
           uploadedNum={uploadedNum}
           uploadHandler={uploadImageHandler}
           preview
+        />
+        <UploadStatus
+          maxFilesNum={maxFilesNum}
+          uploadedNum={uploadedNum}
+          className="mt-4"
         />
       </div>
     </div>

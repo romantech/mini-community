@@ -3,27 +3,27 @@ import { ReactComponent as UploadIcon } from 'assets/icons/upload.svg';
 import { ReactComponent as CloseIcon } from 'assets/icons/close.svg';
 import { getRandomKey } from 'lib/utils';
 import classnames from 'classnames';
-import Image from './Image';
-import Button from './Button';
+import Image from '../Image';
+import Button from '../button/Button';
 
 interface UploaderProps {
-  acceptType: string;
   uploadHandler: VoidHandler<string[]>;
-  preview: boolean;
   classNames?: string;
+  acceptType?: string;
+  preview?: boolean;
   uploadedFiles?: string[];
   uploadedNum?: number;
-  maxFile?: number;
+  maxFilesNum?: number;
 }
 
 export default function Uploader({
-  acceptType,
   uploadHandler,
-  preview = false,
   classNames,
+  acceptType,
+  preview = false,
   uploadedFiles = [],
   uploadedNum = 0,
-  maxFile = 5,
+  maxFilesNum = 5,
 }: UploaderProps) {
   const readAsDataURL = (file: File): Promise<string> => {
     return new Promise((resolve, reject) => {
@@ -36,9 +36,9 @@ export default function Uploader({
 
   const onChangeHandler = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = target; // File 객체에 선택한 이미지 파일 정보가 담김
-    if (!files || maxFile - uploadedNum < files.length) {
+    if (!files || maxFilesNum - uploadedNum < files.length) {
       // eslint-disable-next-line no-alert
-      alert(`최대 ${maxFile}개만 첨부할 수 있습니다`);
+      alert(`최대 ${maxFilesNum}개만 첨부할 수 있습니다`);
       return;
     }
 
@@ -56,11 +56,11 @@ export default function Uploader({
     uploadHandler(filter);
   };
 
-  const isShowUploader = uploadedNum < maxFile;
+  const isShow = uploadedNum < maxFilesNum;
 
   return (
-    <section className={classnames('flex gap-2', classNames)}>
-      {isShowUploader && (
+    <section className={classnames('flex gap-4', classNames)}>
+      {isShow && (
         <div className="image-box hover:bg-gray-200 transition">
           <label
             htmlFor="fileUpload"
@@ -71,7 +71,7 @@ export default function Uploader({
               type="file"
               id="fileUpload"
               accept={acceptType}
-              multiple={maxFile > 1}
+              multiple={maxFilesNum > 1}
               onChange={onChangeHandler}
             />
             <UploadIcon className="fill-gray-400" width={30} height={30} />

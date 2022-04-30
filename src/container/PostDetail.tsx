@@ -5,7 +5,7 @@ import siteUrl from 'routes/url';
 import { getRandomKey } from 'lib/utils';
 import { KR_BACK_TO_LIST } from 'lib/constants';
 import UserInfo from 'components/UserInfo';
-import BackButton from 'components/BackButton';
+import BackButton from 'components/button/BackButton';
 import Image from 'components/Image';
 import Title from 'components/Title';
 import Content from 'components/Content';
