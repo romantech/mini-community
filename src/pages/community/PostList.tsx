@@ -15,7 +15,7 @@ import {
 import { KR_COMMUNITY, KR_NEWPOST_EMJ } from 'lib/constants';
 import Button from 'components/common/Button';
 import { useNavigate } from 'react-router-dom';
-import siteUrl from 'routes/url';
+import siteUrl from 'routes/siteUrl';
 import Post from 'components/community/Post';
 
 export default function PostList() {

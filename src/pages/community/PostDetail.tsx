@@ -4,7 +4,7 @@ import {
   selectLoading,
   selectPost,
 } from 'modules/community/community.selector';
-import siteUrl from 'routes/url';
+import siteUrl from 'routes/siteUrl';
 import { getRandomKey } from 'lib/utils';
 import { KR_BACK_TO_LIST } from 'lib/constants';
 import UserInfo from 'components/community/UserInfo';

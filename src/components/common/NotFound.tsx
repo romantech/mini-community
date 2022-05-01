@@ -4,7 +4,7 @@ import NotFoundImg from 'assets/404.png';
 import { KR_MOVE_PAGE_AFTER_SEC, KR_NOT_FOUND } from 'lib/constants';
 import Image from 'components/common/Image';
 import classnames from 'classnames';
-import siteUrl from '../../routes/url';
+import siteUrl from '../../routes/siteUrl';
 
 interface NotFoundProps {
   backSec?: number;

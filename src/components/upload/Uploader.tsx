@@ -20,7 +20,7 @@ interface UploaderProps {
   uploadedFiles?: string[];
   uploadedNum?: number;
   maxFileSize?: number;
-  maxFilesNum?: number;
+  maxFileNum?: number;
 }
 
 export default function Uploader({
@@ -31,7 +31,7 @@ export default function Uploader({
   uploadedFiles = [],
   uploadedNum = 0,
   maxFileSize = 1e7, // 1e7 = 10MB (1e6 = 10^6 = 1MB)
-  maxFilesNum = 5,
+  maxFileNum = 5,
 }: UploaderProps) {
   const readAsDataURL = (file: File): Promise<string> => {
     return new Promise((resolve, reject) => {
@@ -44,8 +44,8 @@ export default function Uploader({
 
   const validCheck = (files: FileList) => {
     const valid = { errorMsg: '', isValid: true };
-    if (maxFilesNum - uploadedNum < files.length) {
-      valid.errorMsg = KR_MAX_FILE_ALERT(maxFilesNum);
+    if (maxFileNum - uploadedNum < files.length) {
+      valid.errorMsg = KR_MAX_FILE_ALERT(maxFileNum);
     } else if (![...files].every(f => f.size <= maxFileSize)) {
       valid.errorMsg = KR_MAX_MB_SIZE_ALERT(maxFileSize / 1e6);
     }
@@ -77,7 +77,7 @@ export default function Uploader({
     }
   };
 
-  const isShow = uploadedNum < maxFilesNum;
+  const isShow = uploadedNum < maxFileNum;
 
   return (
     <section className={classnames('flex gap-4', classNames)}>
@@ -92,7 +92,7 @@ export default function Uploader({
               type="file"
               id="fileUpload"
               accept={acceptType}
-              multiple={maxFilesNum > 1}
+              multiple={maxFileNum > 1}
               onChange={onChangeHandler}
             />
             <UploadIcon className="fill-gray-400" width={30} height={30} />

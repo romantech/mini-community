@@ -26,7 +26,7 @@ import TextInput from 'components/form/TextInput';
 import TextArea from 'components/form/TextArea';
 import { submitNewPost } from 'modules/community/community.thunk';
 import { useNavigate } from 'react-router-dom';
-import siteUrl from 'routes/url';
+import siteUrl from 'routes/siteUrl';
 import UploadStatus from 'components/upload/UploadStatus';
 
 export default function Compose() {
@@ -90,7 +90,7 @@ export default function Compose() {
 
   // 888은 전체글 999는 인기글이므로 888이하면 OK
   const defaultValues = currentCategoryId < 888 ? currentCategoryId : undefined;
-  const maxFilesNum = 6;
+  const maxFileNum = 6;
 
   return (
     <div className="divide-y border-b text-sm leading-6 bg-white">
@@ -121,10 +121,10 @@ export default function Compose() {
         <TextArea className="p-5" onChange={contentHandler} />
       </div>
       <div className="p-5 border-t-white">
-        <div className="overflow-x-auto no-scrollbar">
+        <div className="overflow-x-auto mobile:no-scrollbar sm:py-2">
           <Uploader
             acceptType="image/*"
-            maxFilesNum={maxFilesNum}
+            maxFileNum={maxFileNum}
             uploadedFiles={uploadedImages || undefined}
             uploadedNum={uploadedNum}
             uploadHandler={uploadImageHandler}
@@ -132,7 +132,7 @@ export default function Compose() {
           />
         </div>
         <UploadStatus
-          maxFilesNum={maxFilesNum}
+          maxFileNum={maxFileNum}
           uploadedNum={uploadedNum}
           className="mt-4"
         />

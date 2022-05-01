@@ -4,19 +4,19 @@ import classnames from 'classnames';
 import { KR_FILE_TYPE_IMG } from 'lib/constants';
 
 interface UploadStatusProps {
-  maxFilesNum: number;
+  maxFileNum: number;
   uploadedNum: number;
   className?: string;
-  fileType?: FileTypes;
+  fileTypeString?: FileTypeString;
 }
 
 export default function UploadStatus({
-  maxFilesNum,
+  maxFileNum,
   uploadedNum,
   className,
-  fileType = KR_FILE_TYPE_IMG,
+  fileTypeString = KR_FILE_TYPE_IMG,
 }: UploadStatusProps) {
-  const uploadStatusTxt = `${fileType}(${uploadedNum}/${maxFilesNum})`;
+  const uploadStatusTxt = `${fileTypeString}(${uploadedNum}/${maxFileNum})`;
 
   const classes = classnames(
     'flex-center gap-0.5 bg-primary02 text-primary01 rounded-md w-[89px] h-8',

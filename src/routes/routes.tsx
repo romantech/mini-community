@@ -5,7 +5,7 @@ import PostList from 'pages/community/PostList';
 import Compose from 'pages/community/Compose';
 import PostDetail from 'pages/community/PostDetail';
 import NotFound from 'components/common/NotFound';
-import siteUrl from './url';
+import siteUrl from './siteUrl';
 
 const routes = [
   {
