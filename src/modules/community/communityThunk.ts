@@ -34,7 +34,6 @@ export const patchPostData = createAsyncThunk(
     likeCount: Post['likeCount'];
   }) => {
     const { data } = await axios.patch<Post>(`/posts/${id}`, { likeCount });
-    console.log(data);
     return data;
   },
 );
@@ -44,7 +43,6 @@ export const submitNewPost = createAsyncThunk(
   async (payload: Partial<NewPost>) => {
     const addDate = { ...payload, writtenAt: new Date().toISOString() };
     const { data } = await axios.post<Post>(`/posts`, addDate);
-    console.log(data);
     return data;
   },
 );

@@ -1,9 +1,9 @@
 import {
   ColorEntries,
   colorsByFileName,
-  KR_A_MOMENT_AGO,
   KR_HOUR_AGO,
   KR_MINUTE_AGO,
+  KR_MOMENT_AGO,
 } from './constants';
 
 export const getRandomKey = (id?: string | number) => {
@@ -46,7 +46,7 @@ export const getElapsedTime = (date: string) => {
 export const getRenderDate = (date: string) => {
   const { elapsedSec, elapsedMin, elapsedHour } = getElapsedTime(date);
 
-  if (elapsedSec <= 59) return KR_A_MOMENT_AGO;
+  if (elapsedSec <= 59) return KR_MOMENT_AGO;
   if (elapsedMin <= 59) return `${Math.floor(elapsedMin)}${KR_MINUTE_AGO}`;
   if (elapsedHour <= 23) return `${Math.floor(elapsedHour)}${KR_HOUR_AGO}`;
 

@@ -3,7 +3,7 @@ import React, { useCallback, useEffect } from 'react';
 import {
   KR_COMPLETE,
   KR_COMPLETE_COMPOSE,
-  KR_COMPOSE_LEAVE_MSG,
+  KR_CONFIRM_LEAVE_MSG,
   KR_NEWPOST,
   KR_RETRY_LATER,
 } from 'lib/constants';
@@ -95,7 +95,7 @@ export default function Compose() {
   return (
     <div className="divide-y border-b text-sm leading-6 bg-white">
       <header className="h-14 flex justify-between items-center p-2">
-        <BackButton className="p-4" confirmMsg={KR_COMPOSE_LEAVE_MSG} />
+        <BackButton className="p-4" confirmMsg={KR_CONFIRM_LEAVE_MSG} />
         <h2 className="font-bold">{KR_NEWPOST}</h2>
         <Button
           text={KR_COMPLETE}

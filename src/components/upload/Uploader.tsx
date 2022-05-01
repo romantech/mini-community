@@ -4,7 +4,11 @@ import { ReactComponent as UploadIcon } from 'assets/icons/upload.svg';
 import { ReactComponent as CloseIcon } from 'assets/icons/close.svg';
 import { getRandomKey } from 'lib/utils';
 import classnames from 'classnames';
-import { KR_MAX_FILE_ALERT, KR_MAX_FILE_SIZE_ALERT } from 'lib/constants';
+import {
+  KR_CONFIRM_DELETE,
+  KR_MAX_FILE_ALERT,
+  KR_MAX_MB_SIZE_ALERT,
+} from 'lib/constants';
 import Image from '../common/Image';
 import Button from '../button/Button';
 
@@ -26,7 +30,7 @@ export default function Uploader({
   preview = false,
   uploadedFiles = [],
   uploadedNum = 0,
-  maxFileSize = 5e6, // 기본 5mb (1e6 = 10^6)
+  maxFileSize = 1e7, // 기본 10MB (1e6 = 10^6; 1MB)
   maxFilesNum = 5,
 }: UploaderProps) {
   const readAsDataURL = (file: File): Promise<string> => {
@@ -43,7 +47,7 @@ export default function Uploader({
     if (maxFilesNum - uploadedNum < files.length) {
       valid.errorMsg = KR_MAX_FILE_ALERT(maxFilesNum);
     } else if (![...files].every(f => f.size <= maxFileSize)) {
-      valid.errorMsg = KR_MAX_FILE_SIZE_ALERT(maxFileSize / 1e6);
+      valid.errorMsg = KR_MAX_MB_SIZE_ALERT(maxFileSize / 1e6);
     }
 
     if (valid.errorMsg) valid.isValid = false;
@@ -67,8 +71,10 @@ export default function Uploader({
   };
 
   const deleteHandler = (removeIdx: number) => {
-    const filter = uploadedFiles.filter((_, i) => i !== removeIdx);
-    uploadHandler(filter);
+    if (window.confirm(KR_CONFIRM_DELETE)) {
+      const filter = uploadedFiles.filter((_, i) => i !== removeIdx);
+      uploadHandler(filter);
+    }
   };
 
   const isShow = uploadedNum < maxFilesNum;

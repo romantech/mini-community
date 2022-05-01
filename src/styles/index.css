@@ -9,6 +9,7 @@
     @apply font-sans;
   }
 
+  /* 마우스 같은 정밀 포인터(any-pointer: fine)에만 적용되는 스타일 */
   @media screen and (any-pointer: fine) {
     /* width */
     ::-webkit-scrollbar {
