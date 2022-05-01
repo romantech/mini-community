@@ -1,9 +1,10 @@
+/* eslint-disable no-alert,consistent-return */
 import React from 'react';
 import { ReactComponent as UploadIcon } from 'assets/icons/upload.svg';
 import { ReactComponent as CloseIcon } from 'assets/icons/close.svg';
 import { getRandomKey } from 'lib/utils';
 import classnames from 'classnames';
-import { KR_MAX_FILE_ALERT } from 'lib/constants';
+import { KR_MAX_FILE_ALERT, KR_MAX_FILE_SIZE_ALERT } from 'lib/constants';
 import Image from '../common/Image';
 import Button from '../button/Button';
 
@@ -14,6 +15,7 @@ interface UploaderProps {
   preview?: boolean;
   uploadedFiles?: string[];
   uploadedNum?: number;
+  maxFileSize?: number;
   maxFilesNum?: number;
 }
 
@@ -24,6 +26,7 @@ export default function Uploader({
   preview = false,
   uploadedFiles = [],
   uploadedNum = 0,
+  maxFileSize = 5e6, // 기본 5mb (1e6 = 10^6)
   maxFilesNum = 5,
 }: UploaderProps) {
   const readAsDataURL = (file: File): Promise<string> => {
@@ -35,13 +38,24 @@ export default function Uploader({
     });
   };
 
+  const validCheck = (files: FileList) => {
+    const valid = { errorMsg: '', isValid: true };
+    if (maxFilesNum - uploadedNum < files.length) {
+      valid.errorMsg = KR_MAX_FILE_ALERT(maxFilesNum);
+    } else if (![...files].every(f => f.size <= maxFileSize)) {
+      valid.errorMsg = KR_MAX_FILE_SIZE_ALERT(maxFileSize / 1e6);
+    }
+
+    if (valid.errorMsg) valid.isValid = false;
+    return valid;
+  };
+
   const onChangeHandler = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = target; // File 객체에 선택한 이미지 파일 정보가 담김
-    if (!files || maxFilesNum - uploadedNum < files.length) {
-      // eslint-disable-next-line no-alert
-      alert(KR_MAX_FILE_ALERT(maxFilesNum));
-      return;
-    }
+    if (!files) return;
+
+    const { isValid, errorMsg } = validCheck(files);
+    if (!isValid) return alert(errorMsg);
 
     Promise.all([...files].map(readAsDataURL))
       .then(urls => {

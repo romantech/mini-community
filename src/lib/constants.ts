@@ -16,6 +16,8 @@ export const KR_NOT_FOUND = '페이지를 찾을 수 없어요';
 export const KR_MOVE_PAGE_AFTER_SEC = '초 후 리스트로 이동합니다';
 export const KR_MAX_FILE_ALERT = (max: number) =>
   `최대 ${max}개만 첨부할 수 있습니다`;
+export const KR_MAX_FILE_SIZE_ALERT = (max: number) =>
+  `파일당 최대 ${max}MB 까지만 업로드할 수 있습니다`;
 
 export const KR_A_MOMENT_AGO = '방금 전';
 export const KR_MINUTE_AGO = '분 전';
