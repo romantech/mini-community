@@ -24,6 +24,7 @@ module.exports = {
         // 기본 테마의 fontFamily.sans 속성 변경(regular 굵기). font-sans 클래스로 사용
         sans: ['Noto Sans KR', ...fontFamily.sans],
         // fontFamily.heading 속성 추가(bold 굵기). font-heading 클래스로 사용
+        // Noto Sans 는 Bold 서체에 대한 font-family 이름이 없으므로 주석 처리(font-weight 로 조절)
         // heading: ['Noto Sans KR', ...fontFamily.sans],
       },
       aspectRatio: {

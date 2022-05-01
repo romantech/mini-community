@@ -1,9 +1,9 @@
 import {
   ColorEntries,
-  colorsByFileName,
   KR_HOUR_AGO,
   KR_MINUTE_AGO,
   KR_MOMENT_AGO,
+  profileBgColors,
 } from './constants';
 
 export const getRandomKey = (id?: string | number) => {
@@ -12,13 +12,13 @@ export const getRandomKey = (id?: string | number) => {
 };
 
 export const getRandomColor = () => {
-  const colors = Object.values(colorsByFileName);
+  const colors = Object.values(profileBgColors);
   const randomNum = Math.floor(Math.random() * colors.length); // length "미만" 랜덤 숫자
   return colors[randomNum];
 };
 
 export const getProfileColor = (url: string) => {
-  const colorKeys = Object.entries(colorsByFileName) as ColorEntries;
+  const colorKeys = Object.entries(profileBgColors) as ColorEntries;
   const matched = colorKeys.reduce((result, [name, color]) => {
     if (!result && url?.includes(name.toLowerCase())) return color;
     return result;
