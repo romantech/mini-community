@@ -27,11 +27,8 @@ export const KR_HOUR_AGO = '시간 전';
 
 export const KR_FILE_TYPE_IMG = '사진';
 
-export type ColorKey = Keyof<typeof profileBgColors>;
-export type ColorValue = ValueOf<typeof profileBgColors>;
-export type ColorEntries = Array<[ColorKey, ColorValue]>;
 // noinspection SpellCheckingInspection
-export const profileBgColors = {
+export const bgColors = {
   fox: '#FFC7CC',
   chick: '#FFD784',
   ailien: '#B2E9E3',

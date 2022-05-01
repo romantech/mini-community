@@ -4,6 +4,7 @@ type VoidHandler<T = void> = (...args: T[]) => void;
 
 type ValueOf<T> = T[keyof T];
 type Keyof<T> = keyof T;
+type Entries<T> = { [K in keyof T]: [K, T[K]] }[keyof T][];
 
 type AspectRatio = 'auto' | 'square' | 'video' | 'thumb' | 'content';
 type FileTypeString = '사진' | '비디오' | '오디오';

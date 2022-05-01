@@ -26,10 +26,12 @@ export default function Button({
 }: ButtonProps) {
   const classes = classnames(
     'bg-primary01 text-white flex-center font-bold outline-none transition',
-    { 'rounded-lg': rounded },
-    { 'shadow-2xl': shadow },
-    { 'bg-gray-300': disabled },
-    { 'hover:bg-opacity-90': !disabled },
+    {
+      'rounded-lg': rounded,
+      'shadow-2xl': shadow,
+      'bg-gray-300': disabled,
+      'hover:bg-opacity-90': !disabled,
+    },
     className,
   );
   return (
