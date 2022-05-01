@@ -7,8 +7,8 @@ import {
   KR_NEWPOST,
   KR_RETRY_LATER,
 } from 'lib/constants';
-import BackButton from 'components/button/BackButton';
-import Button from 'components/button/Button';
+import Back from 'components/common/Back';
+import Button from 'components/common/Button';
 import { useSelector } from 'react-redux';
 import {
   selectCurrentCategoryId,
@@ -17,14 +17,14 @@ import {
   selectNewPostImages,
   selectNonFixedCategory,
   selectUploadedNum,
-} from 'modules/community/communitySelector';
-import { clearNewPost, setNewPost } from 'modules/community/communitySlice';
+} from 'modules/community/community.selector';
+import { clearNewPost, setNewPost } from 'modules/community/community.slice';
 import { useAppDispatch } from 'modules/store';
 import Uploader from 'components/upload/Uploader';
 import Select from 'components/form/Select';
 import TextInput from 'components/form/TextInput';
 import TextArea from 'components/form/TextArea';
-import { submitNewPost } from 'modules/community/communityThunk';
+import { submitNewPost } from 'modules/community/community.thunk';
 import { useNavigate } from 'react-router-dom';
 import siteUrl from 'routes/url';
 import UploadStatus from 'components/upload/UploadStatus';
@@ -95,7 +95,7 @@ export default function Compose() {
   return (
     <div className="divide-y border-b text-sm leading-6 bg-white">
       <header className="h-14 flex justify-between items-center p-2">
-        <BackButton className="p-4" confirmMsg={KR_CONFIRM_LEAVE_MSG} />
+        <Back className="p-4" confirmMsg={KR_CONFIRM_LEAVE_MSG} />
         <h2 className="font-bold">{KR_NEWPOST}</h2>
         <Button
           text={KR_COMPLETE}

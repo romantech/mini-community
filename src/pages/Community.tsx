@@ -6,11 +6,11 @@ import {
   getCategories,
   getPostById,
   getPosts,
-} from 'modules/community/communityThunk';
+} from 'modules/community/community.thunk';
 import { useAppDispatch } from 'modules/store';
 import Loading from 'components/common/Loading';
 import { useSelector } from 'react-redux';
-import { selectLoading } from 'modules/community/communitySelector';
+import { selectLoading } from 'modules/community/community.selector';
 
 export default function Community() {
   const dispatch = useAppDispatch();

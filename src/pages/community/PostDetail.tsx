@@ -1,16 +1,19 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { selectLoading, selectPost } from 'modules/community/communitySelector';
+import {
+  selectLoading,
+  selectPost,
+} from 'modules/community/community.selector';
 import siteUrl from 'routes/url';
 import { getRandomKey } from 'lib/utils';
 import { KR_BACK_TO_LIST } from 'lib/constants';
-import UserInfo from 'components/social/UserInfo';
-import BackButton from 'components/button/BackButton';
+import UserInfo from 'components/community/UserInfo';
+import Back from 'components/common/Back';
 import Image from 'components/common/Image';
 import Title from 'components/common/Title';
 import Content from 'components/common/Content';
-import InteractiveStat from 'components/social/InteractiveStat';
-import { clearSelectedPost } from 'modules/community/communitySlice';
+import InteractiveStat from 'components/community/InteractiveStat';
+import { clearSelectedPost } from 'modules/community/community.slice';
 import { useAppDispatch } from 'modules/store';
 import NotFound from 'components/common/NotFound';
 
@@ -36,7 +39,7 @@ export default function PostDetail() {
   return (
     <>
       <header className="h-14 p-6">
-        <BackButton text={KR_BACK_TO_LIST} to={siteUrl.community.list} />
+        <Back text={KR_BACK_TO_LIST} to={siteUrl.community.list} />
       </header>
       {post ? (
         <article className="flex-col-gap4">

@@ -5,7 +5,7 @@ import {
   getPosts,
   patchPostData,
   submitNewPost,
-} from './communityThunk';
+} from './community.thunk';
 
 interface CommunityState {
   posts: Post[];

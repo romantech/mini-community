@@ -5,12 +5,12 @@ import { useAppDispatch } from 'modules/store';
 import {
   addLikedPost,
   removeLikedPost,
-} from 'modules/community/communitySlice';
+} from 'modules/community/community.slice';
 import { ReactComponent as ThumbIcon } from 'assets/icons/thumb.svg';
 import { ReactComponent as ThumbFilledIcon } from 'assets/icons/thumb-filled.svg';
 import { ReactComponent as TalkIcon } from 'assets/icons/talk.svg';
-import { selectCurrentPostIsLike } from 'modules/community/communitySelector';
-import { patchPostData } from 'modules/community/communityThunk';
+import { selectCurrentPostIsLike } from 'modules/community/community.selector';
+import { patchPostData } from 'modules/community/community.thunk';
 
 interface InteractiveStatProps {
   post: Post;

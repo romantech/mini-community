@@ -5,20 +5,20 @@ import {
   selectCurrentCategoryId,
   selectLastPosition,
   selectPostsByCategory,
-} from 'modules/community/communitySelector';
-import Category from 'components/common/Category';
+} from 'modules/community/community.selector';
+import Category from 'components/community/Category';
 import { useAppDispatch } from 'modules/store';
 import {
   changeCategory,
   setLastPosition,
-} from 'modules/community/communitySlice';
+} from 'modules/community/community.slice';
 import { KR_COMMUNITY, KR_NEWPOST_EMJ } from 'lib/constants';
-import Button from 'components/button/Button';
+import Button from 'components/common/Button';
 import { useNavigate } from 'react-router-dom';
 import siteUrl from 'routes/url';
-import Post from './Post';
+import Post from 'components/community/Post';
 
-export default function List() {
+export default function PostList() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 

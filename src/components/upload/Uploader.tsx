@@ -10,7 +10,7 @@ import {
   KR_MAX_MB_SIZE_ALERT,
 } from 'lib/constants';
 import Image from '../common/Image';
-import Button from '../button/Button';
+import Button from '../common/Button';
 
 interface UploaderProps {
   uploadHandler: VoidHandler<string[]>;
@@ -30,7 +30,7 @@ export default function Uploader({
   preview = false,
   uploadedFiles = [],
   uploadedNum = 0,
-  maxFileSize = 1e7, // 기본 10MB (1e6 = 10^6; 1MB)
+  maxFileSize = 1e7, // 1e7 = 10MB (1e6 = 10^6 = 1MB)
   maxFilesNum = 5,
 }: UploaderProps) {
   const readAsDataURL = (file: File): Promise<string> => {

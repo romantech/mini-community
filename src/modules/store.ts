@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
-import communityReducer from './community/communitySlice';
+import communityReducer from './community/community.slice';
 
 export const store = configureStore({
   reducer: { community: communityReducer },

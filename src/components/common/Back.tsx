@@ -11,7 +11,7 @@ interface BackButtonProps {
   to?: any;
 }
 
-export default function BackButton({
+export default function Back({
   text,
   className,
   confirmMsg,

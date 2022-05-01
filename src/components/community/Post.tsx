@@ -2,12 +2,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAppDispatch } from 'modules/store';
-import { setLastPosition } from 'modules/community/communitySlice';
-import StaticStat from 'components/social/StaticStat';
+import { setLastPosition } from 'modules/community/community.slice';
+import StaticStat from 'components/community/StaticStat';
 import Image from 'components/common/Image';
 import Title from 'components/common/Title';
 import Content from 'components/common/Content';
-import UserInfo from 'components/social/UserInfo';
+import UserInfo from 'components/community/UserInfo';
 
 interface PostProps {
   post: Post;
