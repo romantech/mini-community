@@ -120,15 +120,17 @@ export default function Compose() {
       <div className="flex items-center h-52 mb-3">
         <TextArea className="p-5" onChange={contentHandler} />
       </div>
-      <div className="p-5 overflow-x-auto border-t-white">
-        <Uploader
-          acceptType="image/*"
-          maxFilesNum={maxFilesNum}
-          uploadedFiles={uploadedImages || undefined}
-          uploadedNum={uploadedNum}
-          uploadHandler={uploadImageHandler}
-          preview
-        />
+      <div className="p-5 border-t-white">
+        <div className="overflow-x-auto no-scrollbar">
+          <Uploader
+            acceptType="image/*"
+            maxFilesNum={maxFilesNum}
+            uploadedFiles={uploadedImages || undefined}
+            uploadedNum={uploadedNum}
+            uploadHandler={uploadImageHandler}
+            preview
+          />
+        </div>
         <UploadStatus
           maxFilesNum={maxFilesNum}
           uploadedNum={uploadedNum}

@@ -13,7 +13,7 @@ export default function Category({
   onClick,
 }: CategoryProps) {
   return (
-    <section className="flex gap-1 flex-nowrap overflow-x-auto px-5 py-4 font-medium text-sm text-gray05">
+    <section className="flex gap-1 flex-nowrap overflow-x-auto no-scrollbar px-5 py-4 font-medium text-sm text-gray05">
       {categories.map(({ categoryId: id, categoryName }) => (
         <button
           key={id}
