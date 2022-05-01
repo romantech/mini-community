@@ -59,7 +59,7 @@ export default function PostDetail() {
           />
         </article>
       ) : (
-        !loading && <NotFound />
+        !loading && <NotFound className="-mt-14" />
       )}
     </>
   );

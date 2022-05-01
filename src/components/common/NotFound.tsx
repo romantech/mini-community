@@ -2,9 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NotFoundImg from 'assets/404.png';
 import { KR_MOVE_PAGE_AFTER_SEC, KR_NOT_FOUND } from 'lib/constants';
-import siteUrl from 'routes/url';
+import Image from 'components/common/Image';
+import classnames from 'classnames';
+import siteUrl from '../../routes/url';
 
-export default function NotFound({ backSec = 5 }: { backSec?: number }) {
+interface NotFoundProps {
+  backSec?: number;
+  className?: string;
+}
+
+export default function NotFound({ className, backSec = 5 }: NotFoundProps) {
   const [seconds, setSeconds] = useState(backSec);
   const navigate = useNavigate();
 
@@ -17,11 +24,22 @@ export default function NotFound({ backSec = 5 }: { backSec?: number }) {
     if (seconds === 0) navigate(siteUrl.community.list);
   }, [navigate, seconds]);
 
+  const classes = classnames(
+    'max-w-[390px] min-h-screen mx-auto flex-col-gap2 items-center justify-center p-5 font-bold text-center text-xl text-gray-600',
+    className,
+  );
+
   return (
-    <div className="max-w-[390px] mx-auto flex flex-col-gap2 flex-center mt-20 p-5 font-bold text-xl">
-      <img src={NotFoundImg} alt="Not found page" className="max-w-full" />
-      <p>{KR_NOT_FOUND}</p>
-      <p>{`${seconds}${KR_MOVE_PAGE_AFTER_SEC}`}</p>
+    <div className={classes}>
+      <Image
+        src={NotFoundImg}
+        alt="Not found page"
+        className="bg-transparent w-[300px] h-[300px]"
+      />
+      <section>
+        <p>{KR_NOT_FOUND}</p>
+        <p>{`${seconds}${KR_MOVE_PAGE_AFTER_SEC}`}</p>
+      </section>
     </div>
   );
 }

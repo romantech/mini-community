@@ -147,7 +147,7 @@ const communitySlice = createSlice({
     ) => {
       state.loading = false;
       state.error = null;
-      state.selectedPost = payload; // 로컬&원격이랑 데이터가 다를 수도 있으므로 한 번 더 덮어쓰기
+      state.selectedPost = payload; // 로컬&원격이랑 데이터가 다를 수도 있으므로 한번 더 덮어씀
     },
     [patchPostData.rejected.type]: (state, { error }) => {
       state.error = error;
