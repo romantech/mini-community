@@ -18,7 +18,7 @@ type CategoryName =
 
 interface Category {
   categoryId: CategoryId; // categoryPk -> categoryId 로 변경
-  categoryCode?: CategoryCode; // 글 작성 후 제출할 땐 categoryCode 포함 안됐으므로
+  categoryCode: CategoryCode;
   categoryName: CategoryName;
 }
 

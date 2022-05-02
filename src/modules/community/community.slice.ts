@@ -24,7 +24,7 @@ export const fixedCategories: Category[] = [
   { categoryId: 999, categoryCode: 'POPULAR', categoryName: '⭐ 인기글' },
 ];
 
-const initialNewPost: Partial<NewPost> = {
+const initialNewPost: CommunityState['newPost'] = {
   categoryId: 1,
   categoryName: '대선청원',
   title: '',

@@ -60,7 +60,7 @@ export default function Compose() {
   }, [composedPost, dispatch, leavePage]);
 
   const categoryHandler = useCallback(
-    (category: Category) => {
+    (category: Partial<Category>) => {
       // 글쓰기 제출 엔트리엔 categoryCode 없으므로 제외
       const excludeCategoryCode = { ...category };
       delete excludeCategoryCode.categoryCode;
