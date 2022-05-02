@@ -4,14 +4,14 @@ import {
   getPostById,
   getPosts,
   patchPostData,
-  submitNewPost,
+  submitDraft,
 } from './community.thunk';
 
 interface CommunityState {
   posts: Post[];
   selectedPost: Post | null;
   likedPostId: Array<Post['id']>;
-  newPost: Partial<NewPost>;
+  draft: Draft;
   categories: Category[];
   currentCategoryId: CategoryId;
   lastPosition: number | null; // 리스트에서 포스트를 클릭했을 때의 스크롤
@@ -24,7 +24,7 @@ export const fixedCategories: Category[] = [
   { categoryId: 999, categoryCode: 'POPULAR', categoryName: '⭐ 인기글' },
 ];
 
-const initialNewPost: CommunityState['newPost'] = {
+const initialDraft: Draft = {
   categoryId: 1,
   categoryName: '대선청원',
   title: '',
@@ -42,7 +42,7 @@ const initialState: CommunityState = {
   posts: [],
   likedPostId: [],
   selectedPost: null,
-  newPost: initialNewPost,
+  draft: initialDraft,
   categories: [],
   currentCategoryId: 888, // 전체글 (초기값)
   lastPosition: null,
@@ -68,14 +68,14 @@ const communitySlice = createSlice({
       state.likedPostId = state.likedPostId.filter(id => id !== payload);
       if (state.selectedPost) state.selectedPost.likeCount -= 1;
     },
-    setNewPost: (state, { payload }: PayloadAction<Partial<NewPost>>) => {
-      state.newPost = { ...state.newPost, ...payload };
+    modifyDraft: (state, { payload }: PayloadAction<Draft>) => {
+      state.draft = { ...state.draft, ...payload };
     },
     clearSelectedPost: state => {
       state.selectedPost = null;
     },
-    clearNewPost: state => {
-      state.newPost = initialState.newPost;
+    clearDraft: state => {
+      state.draft = initialState.draft;
     },
   },
   // extraReducer 는 액션을 자동으로 생성하지 않음
@@ -155,14 +155,14 @@ const communitySlice = createSlice({
     },
 
     // 작성한 포스트 제출
-    [submitNewPost.pending.type]: state => {
+    [submitDraft.pending.type]: state => {
       state.loading = true;
     },
-    [submitNewPost.fulfilled.type]: state => {
+    [submitDraft.fulfilled.type]: state => {
       state.loading = false;
       state.error = null;
     },
-    [submitNewPost.rejected.type]: (state, { error }) => {
+    [submitDraft.rejected.type]: (state, { error }) => {
       state.error = error;
       state.loading = false;
     },
@@ -174,8 +174,8 @@ export const {
   setLastPosition,
   addLikedPost,
   removeLikedPost,
-  setNewPost,
+  modifyDraft,
   clearSelectedPost,
-  clearNewPost,
+  clearDraft,
 } = communitySlice.actions;
 export default communitySlice.reducer;

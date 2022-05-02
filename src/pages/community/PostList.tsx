@@ -12,7 +12,7 @@ import {
   changeCategory,
   setLastPosition,
 } from 'modules/community/community.slice';
-import { KR_COMMUNITY, KR_NEWPOST_EMJ } from 'lib/constants';
+import { KR_COMMUNITY, KR_COMPOSE_WITH_EMOJI } from 'lib/constants';
 import Button from 'components/common/Button';
 import { useNavigate } from 'react-router-dom';
 import siteUrl from 'routes/siteUrl';
@@ -52,7 +52,7 @@ export default function PostList() {
         ))}
       </section>
       <Button
-        text={KR_NEWPOST_EMJ}
+        text={KR_COMPOSE_WITH_EMOJI}
         onClick={composeBtnHandler}
         className="fixed bottom-4 right-4"
         rounded

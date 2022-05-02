@@ -39,3 +39,5 @@ interface NewPost extends Post {
   // writtenAt 속성은 완료 버튼 누르는 시점
   imageUrl: string[] | null;
 }
+
+type Draft = Partial<NewPost>;

@@ -38,9 +38,9 @@ export const patchPostData = createAsyncThunk(
   },
 );
 
-export const submitNewPost = createAsyncThunk(
-  'community/submitNewPost',
-  async (payload: Partial<NewPost>) => {
+export const submitDraft = createAsyncThunk(
+  'community/submitDraft',
+  async (payload: Draft) => {
     const addDate = { ...payload, writtenAt: new Date().toISOString() };
     const { data } = await axios.post<Post>(`/posts`, addDate);
     return data;

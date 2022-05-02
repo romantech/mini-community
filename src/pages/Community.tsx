@@ -20,7 +20,7 @@ export default function Community() {
 
   const rootMatch = useMatch(siteUrl.community.root);
   const listMatch = useMatch(siteUrl.community.list);
-  const newPostMatch = useMatch(siteUrl.community.post.new);
+  const composeMatch = useMatch(siteUrl.community.post.new);
 
   const loading = useSelector(selectLoading);
 
@@ -34,12 +34,12 @@ export default function Community() {
     if (listMatch) {
       dispatch(getPosts()); // 전체 포스트 목록 GET
       dispatch(getCategories()); // 카테고리 목록 GET
-    } else if (newPostMatch) {
+    } else if (composeMatch) {
       dispatch(getCategories());
     } else if (post_id) {
       dispatch(getPostById({ id: Number(post_id) })); // 선택한 포스트 정보 GET
     }
-  }, [dispatch, listMatch, newPostMatch, post_id]);
+  }, [dispatch, listMatch, composeMatch, post_id]);
 
   useEffect(() => {
     fetchByRoute();

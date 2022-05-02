@@ -1,23 +1,20 @@
-import { RootState } from 'modules/store';
+import { RootState as T } from 'modules/store';
 import { createSelector } from '@reduxjs/toolkit';
 
-export const selectCategories = (state: RootState) =>
-  state.community.categories;
-export const selectCurrentCategoryId = (state: RootState) =>
-  state.community.currentCategoryId;
+export const selectCategories = ({ community }: T) => community.categories;
+export const selectCurrentCategoryId = ({ community }: T) =>
+  community.currentCategoryId;
 
-export const selectPosts = (state: RootState) => state.community.posts;
-export const selectPost = (state: RootState) => state.community.selectedPost;
-export const selectLikedPosts = (state: RootState) =>
-  state.community.likedPostId;
-export const selectNewPost = (state: RootState) => state.community.newPost;
+export const selectPostList = ({ community }: T) => community.posts;
+export const selectPost = ({ community }: T) => community.selectedPost;
+export const selectLikedPosts = ({ community }: T) => community.likedPostId;
+export const selectDraft = ({ community }: T) => community.draft;
 
-export const selectLoading = (state: RootState) => state.community.loading;
-export const selectLastPosition = (state: RootState) =>
-  state.community.lastPosition;
+export const selectLoading = ({ community }: T) => community.loading;
+export const selectLastPosition = ({ community }: T) => community.lastPosition;
 
 export const selectPostsByCategory = createSelector(
-  [selectPosts, selectCurrentCategoryId],
+  [selectPostList, selectCurrentCategoryId],
   (posts, currentCatId) => {
     switch (currentCatId) {
       case 888: // 전체글
@@ -44,20 +41,20 @@ export const selectCurrentPostIsLike = createSelector(
   },
 );
 
-export const selectNewPostCanSubmit = createSelector(
-  [selectNewPost],
-  newPost => {
-    const checkItems: Partial<keyof NewPost>[] = ['title', 'content'];
-    return checkItems.every(key => newPost[key]);
-  },
-);
+export const selectDraftCanSubmit = createSelector([selectDraft], draft => {
+  const checkItems: Extract<keyof Draft, 'title' | 'content'>[] = [
+    'title',
+    'content',
+  ];
+  return checkItems.every(key => draft[key]);
+});
 
-export const selectNewPostImages = createSelector(
-  [selectNewPost],
-  newPost => newPost.imageUrl,
+export const selectDraftUploadedImg = createSelector(
+  [selectDraft],
+  draft => draft.imageUrl,
 );
 
 export const selectUploadedNum = createSelector(
-  [selectNewPostImages],
+  [selectDraftUploadedImg],
   images => images?.length ?? 0,
 );

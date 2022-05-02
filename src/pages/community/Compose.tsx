@@ -3,8 +3,8 @@ import React, { useCallback, useEffect } from 'react';
 import {
   KR_COMPLETE,
   KR_COMPLETE_COMPOSE,
+  KR_COMPOSE,
   KR_CONFIRM_LEAVE_MSG,
-  KR_NEWPOST,
   KR_RETRY_LATER,
 } from 'lib/constants';
 import Back from 'components/common/Back';
@@ -12,22 +12,22 @@ import Button from 'components/common/Button';
 import { useSelector } from 'react-redux';
 import {
   selectCurrentCategoryId,
-  selectNewPost,
-  selectNewPostCanSubmit,
-  selectNewPostImages,
+  selectDraft,
+  selectDraftCanSubmit,
+  selectDraftUploadedImg,
   selectNonFixedCategory,
   selectUploadedNum,
 } from 'modules/community/community.selector';
-import { clearNewPost, setNewPost } from 'modules/community/community.slice';
 import { useAppDispatch } from 'modules/store';
 import Uploader from 'components/upload/Uploader';
 import Select from 'components/form/Select';
 import TextInput from 'components/form/TextInput';
 import TextArea from 'components/form/TextArea';
-import { submitNewPost } from 'modules/community/community.thunk';
+import { submitDraft } from 'modules/community/community.thunk';
 import { useNavigate } from 'react-router-dom';
 import siteUrl from 'routes/siteUrl';
 import UploadStatus from 'components/upload/UploadStatus';
+import { clearDraft, modifyDraft } from 'modules/community/community.slice';
 
 export default function Compose() {
   const dispatch = useAppDispatch();
@@ -35,52 +35,55 @@ export default function Compose() {
 
   const categories = useSelector(selectNonFixedCategory); // 전체글&인기글 제외
   const currentCategoryId = useSelector(selectCurrentCategoryId);
-  const uploadedImages = useSelector(selectNewPostImages);
+  const uploadedImg = useSelector(selectDraftUploadedImg);
   const uploadedNum = useSelector(selectUploadedNum);
-  const composedPost = useSelector(selectNewPost);
-  const canSubmit = useSelector(selectNewPostCanSubmit);
+  const draftPost = useSelector(selectDraft);
+  const canSubmit = useSelector(selectDraftCanSubmit);
 
-  const leavePage = useCallback(() => {
-    dispatch(clearNewPost());
-    navigate(siteUrl.community.list, { replace: true });
-  }, [dispatch, navigate]);
+  const leavePage = useCallback(
+    (clear = true) => {
+      if (clear) dispatch(clearDraft());
+      navigate(siteUrl.community.list, { replace: true });
+    },
+    [dispatch, navigate],
+  );
 
   // createAsyncThunk 는 래핑된 프로미스를 반환함
   // async / await 를 쓰고 싶다면, unwrap() 메서드로 원본 프로미스에 접근하면 됨
   // reference : https://github.com/reduxjs/redux-toolkit/issues/1890#issuecomment-1004741945
   const submitHandler = useCallback(async () => {
     try {
-      await dispatch(submitNewPost(composedPost)).unwrap();
+      await dispatch(submitDraft(draftPost)).unwrap();
       alert(KR_COMPLETE_COMPOSE);
-      leavePage();
+      leavePage(false);
     } catch (e) {
       console.log(e);
       alert(KR_RETRY_LATER);
     }
-  }, [composedPost, dispatch, leavePage]);
+  }, [draftPost, dispatch, leavePage]);
 
   const categoryHandler = useCallback(
     (category: Partial<Category>) => {
       // 글쓰기 제출 엔트리엔 categoryCode 없으므로 제외
       const excludeCategoryCode = { ...category };
       delete excludeCategoryCode.categoryCode;
-      dispatch(setNewPost(excludeCategoryCode));
+      dispatch(modifyDraft(excludeCategoryCode));
     },
     [dispatch],
   );
 
   const titleHandler = useCallback(
-    (title: string) => dispatch(setNewPost({ title })),
+    (title: string) => dispatch(modifyDraft({ title })),
     [dispatch],
   );
 
   const contentHandler = useCallback(
-    (content: string) => dispatch(setNewPost({ content })),
+    (content: string) => dispatch(modifyDraft({ content })),
     [dispatch],
   );
 
-  const uploadImageHandler = useCallback(
-    (imageUrl: string[]) => dispatch(setNewPost({ imageUrl })),
+  const uploadHandler = useCallback(
+    (imageUrl: string[]) => dispatch(modifyDraft({ imageUrl })),
     [dispatch],
   );
 
@@ -96,7 +99,7 @@ export default function Compose() {
     <div className="divide-y border-b text-sm leading-6 bg-white">
       <header className="h-14 flex justify-between items-center p-2">
         <Back className="p-4" confirmMsg={KR_CONFIRM_LEAVE_MSG} />
-        <h2 className="font-bold">{KR_NEWPOST}</h2>
+        <h2 className="font-bold">{KR_COMPOSE}</h2>
         <Button
           text={KR_COMPLETE}
           width="64px"
@@ -125,9 +128,9 @@ export default function Compose() {
           <Uploader
             acceptType="image/*"
             maxFileNum={maxFileNum}
-            uploadedFiles={uploadedImages || undefined}
+            uploadedFiles={uploadedImg || undefined}
             uploadedNum={uploadedNum}
-            uploadHandler={uploadImageHandler}
+            uploadHandler={uploadHandler}
             preview
           />
         </div>

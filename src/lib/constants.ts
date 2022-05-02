@@ -5,8 +5,8 @@ export const KR_CONFIRM_DELETE = '삭제하시겠습니까?';
 export const KR_COMPLETE_COMPOSE = '글쓰기를 완료했습니다';
 
 export const KR_COMMUNITY = '커뮤니티';
-export const KR_NEWPOST_EMJ = '글쓰기 ✍️';
-export const KR_NEWPOST = '글쓰기';
+export const KR_COMPOSE_WITH_EMOJI = '글쓰기 ✍️';
+export const KR_COMPOSE = '글쓰기';
 export const KR_COMPLETE = '완료';
 export const KR_BACK_TO_LIST = '글 목록으로';
 export const KR_TITLE_HOLDER = '제목을 작성해주세요';
