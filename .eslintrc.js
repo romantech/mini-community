@@ -25,14 +25,10 @@ module.exports = {
     sourceType: 'module', // import 사용 허용
     project: './tsconfig.json', // 하위 폴더에도 적용하려면 ** 형식으로 입력
     tsconfigRootDir: __dirname, // 다른 자식 폴더에서 ts 파일 읽지 못하는 문제 해결
-    ecmaFeatures: {
-      jsx: true, // JSX 파싱 허용
-    },
+    ecmaFeatures: { jsx: true }, // JSX 파싱 허용
   },
   settings: {
-    react: {
-      version: 'detect',
-    },
+    react: { version: 'detect' },
   },
   ignorePatterns: [],
   rules: {

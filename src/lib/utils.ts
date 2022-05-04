@@ -19,7 +19,8 @@ export const getRandomColor = () => {
 export const getProfileColor = (url: string) => {
   const colorKeys = Object.entries(bgColors) as Entries<typeof bgColors>;
   const matched = colorKeys.reduce((result, [name, color]) => {
-    if (!result && url?.includes(name.toLowerCase())) return color;
+    const regex = new RegExp(`${name}`, 'i');
+    if (!result && url.match(regex)) return color;
     return result;
   }, '');
   return matched || getRandomColor();
