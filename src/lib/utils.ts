@@ -45,9 +45,9 @@ export const getElapsedTime = (date: string) => {
 export const getRenderDate = (date: string) => {
   const { elapsedSec, elapsedMin, elapsedHour } = getElapsedTime(date);
 
-  if (elapsedSec <= 59) return KR_MOMENT_AGO;
-  if (elapsedMin <= 59) return `${Math.floor(elapsedMin)}${KR_MINUTE_AGO}`;
-  if (elapsedHour <= 23) return `${Math.floor(elapsedHour)}${KR_HOUR_AGO}`;
+  if (elapsedSec < 60) return KR_MOMENT_AGO;
+  if (elapsedMin < 60) return `${Math.floor(elapsedMin)}${KR_MINUTE_AGO}`;
+  if (elapsedHour < 24) return `${Math.floor(elapsedHour)}${KR_HOUR_AGO}`;
 
   return getFormatDate(date);
 };

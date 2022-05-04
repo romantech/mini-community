@@ -7,7 +7,7 @@ import PostDetail from 'pages/community/PostDetail';
 import NotFound from 'components/common/NotFound';
 import siteUrl from './siteUrl';
 
-const routes = [
+const routes = (/* 필요시 Props 추가 */) => [
   {
     path: siteUrl.root,
     element: <Navigate to={siteUrl.community.list} />,
