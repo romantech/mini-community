@@ -52,3 +52,11 @@ export const getRenderDate = (date: string) => {
 
   return getFormatDate(date);
 };
+
+type OrderPostLatest = (...args: Post[]) => number;
+export const orderByLatest: OrderPostLatest = (
+  { writtenAt: a },
+  { writtenAt: b },
+) => {
+  return new Date(b).getTime() - new Date(a).getTime();
+};

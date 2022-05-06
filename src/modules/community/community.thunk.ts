@@ -3,10 +3,13 @@ import axios from 'axios';
 
 axios.defaults.baseURL = 'http://localhost:4000';
 
-export const getPosts = createAsyncThunk('community/getPosts', async () => {
-  const { data } = await axios.get<Post[]>('/posts');
-  return data;
-});
+export const getPosts = createAsyncThunk(
+  'community/getPosts',
+  async (page: number) => {
+    const { data } = await axios.get<Post[]>(`/posts?_page=${page}`);
+    return data;
+  },
+);
 
 export const getPostById = createAsyncThunk(
   'community/getPostById',

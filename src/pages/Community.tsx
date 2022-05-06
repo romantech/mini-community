@@ -10,7 +10,12 @@ import {
 import { useAppDispatch } from 'modules/store';
 import Loading from 'components/common/Loading';
 import { useSelector } from 'react-redux';
-import { selectLoading } from 'modules/community/community.selector';
+import {
+  selectHasMore,
+  selectHasPosts,
+  selectLoading,
+  selectPageNum,
+} from 'modules/community/community.selector';
 
 export default function Community() {
   const dispatch = useAppDispatch();
@@ -23,6 +28,11 @@ export default function Community() {
   const composeMatch = useMatch(siteUrl.community.post.new);
 
   const loading = useSelector(selectLoading);
+  const hasPosts = useSelector(selectHasPosts);
+  const hasMore = useSelector(selectHasMore);
+  const pageNum = useSelector(selectPageNum);
+
+  const initialPageNum = 1;
 
   /*
    * location.key 는 라우트가 변경될 때마다 생성되는 고유한 식별 키 ex) { key } = useLocation()
@@ -31,15 +41,23 @@ export default function Community() {
    * */
 
   const fetchByRoute = useCallback(() => {
-    if (listMatch) {
-      dispatch(getPosts()); // 전체 포스트 목록 GET
+    if (listMatch && !hasPosts) {
+      dispatch(getPosts(initialPageNum)); // 전체 포스트 목록 GET
       dispatch(getCategories()); // 카테고리 목록 GET
     } else if (composeMatch) {
       dispatch(getCategories());
     } else if (post_id) {
       dispatch(getPostById({ id: Number(post_id) })); // 선택한 포스트 정보 GET
     }
-  }, [dispatch, listMatch, composeMatch, post_id]);
+  }, [dispatch, listMatch, composeMatch, post_id, hasPosts]);
+
+  const fetchPostsByPageNum = useCallback(() => {
+    if (pageNum !== initialPageNum && hasMore) dispatch(getPosts(pageNum));
+  }, [dispatch, pageNum, hasMore]);
+
+  useEffect(() => {
+    fetchPostsByPageNum();
+  }, [fetchPostsByPageNum]);
 
   useEffect(() => {
     fetchByRoute();

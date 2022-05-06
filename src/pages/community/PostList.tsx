@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import {
   selectCategories,
   selectCurrentCategoryId,
+  selectHasMore,
   selectLastPosition,
   selectPostsByCategory,
 } from 'modules/community/community.selector';
@@ -11,12 +12,14 @@ import { useAppDispatch } from 'modules/store';
 import {
   changeCategory,
   setLastPosition,
+  setNextPage,
 } from 'modules/community/community.slice';
 import { KR_COMMUNITY, KR_COMPOSE_WITH_EMOJI } from 'lib/constants';
 import Button from 'components/common/Button';
 import { useNavigate } from 'react-router-dom';
 import siteUrl from 'routes/siteUrl';
 import Post from 'components/community/Post';
+import useIntersectionObserver from 'hooks/useIntersectionObserver';
 
 export default function PostList() {
   const navigate = useNavigate();
@@ -25,10 +28,19 @@ export default function PostList() {
   const posts = useSelector(selectPostsByCategory);
   const lastPosition = useSelector(selectLastPosition);
   const categories = useSelector(selectCategories);
-  const currentId = useSelector(selectCurrentCategoryId);
+  const categoryId = useSelector(selectCurrentCategoryId);
+  const hasMore = useSelector(selectHasMore);
+
+  const loaderRef = useIntersectionObserver<HTMLDivElement>({
+    callback: () => {
+      if (posts.length % 10 === 0 && hasMore) dispatch(setNextPage());
+    },
+    unObserve: true,
+  });
 
   useEffect(() => {
     if (lastPosition) window.scrollTo(0, lastPosition);
+    else window.history.scrollRestoration = 'manual'; // 새로고침 시 이전 스크롤 복구 안함
   }, [lastPosition]);
 
   const composeBtnHandler = () => {
@@ -43,12 +55,17 @@ export default function PostList() {
       </header>
       <Category
         categories={categories}
-        currentId={currentId}
+        currentId={categoryId}
         onClick={id => dispatch(changeCategory(id))}
       />
       <section>
         {posts.map((post, i) => (
-          <Post key={post.id} post={post} isLast={posts.length - 1 === i} />
+          <div key={post.id}>
+            <Post post={post} isLast={posts.length - 1 === i} />
+            {posts.length - 1 === i && (
+              <div className="w-full h-0.5 invisible" ref={loaderRef} />
+            )}
+          </div>
         ))}
       </section>
       <Button

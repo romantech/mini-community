@@ -22,6 +22,7 @@ export default function PostDetail() {
 
   const post = useSelector(selectPost);
   const loading = useSelector(selectLoading);
+  const showNotFound = !loading && post;
 
   useEffect(() => {
     return () => {
@@ -62,7 +63,7 @@ export default function PostDetail() {
           />
         </article>
       ) : (
-        !loading && <NotFound className="-mt-14" />
+        showNotFound && <NotFound className="-mt-14" />
       )}
     </>
   );

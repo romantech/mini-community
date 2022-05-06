@@ -11,6 +11,8 @@ interface CommunityState {
   posts: Post[];
   selectedPost: Post | null;
   likedPostId: Array<Post['id']>;
+  pageNum: number;
+  hasMore: boolean;
   draft: Draft;
   categories: Category[];
   currentCategoryId: CategoryId;
@@ -40,8 +42,10 @@ const initialDraft: Draft = {
 
 const initialState: CommunityState = {
   posts: [],
-  likedPostId: [],
   selectedPost: null,
+  likedPostId: [],
+  pageNum: 1,
+  hasMore: true,
   draft: initialDraft,
   categories: [],
   currentCategoryId: 888, // 전체글 (초기값)
@@ -59,6 +63,9 @@ const communitySlice = createSlice({
     },
     setLastPosition: (state, { payload }: PayloadAction<number>) => {
       state.lastPosition = payload;
+    },
+    setNextPage: state => {
+      state.pageNum += 1;
     },
     addLikedPost: (state, { payload }: PayloadAction<Post['id']>) => {
       state.likedPostId.push(payload);
@@ -92,10 +99,15 @@ const communitySlice = createSlice({
       // (TS2362) the left-hand side of an arithmetic operation... 에러 때문에
       // getTime() 메서드를 이용해 숫자로 바꾼 후 연산하도록 함(getDate, getTime 등 모두 가능)
       // 참고로 if (a > b) -1 이런식으로 작성하면 에러 안남(간결하게 쓰기 위해 위 방법 사용함)
-      state.posts = payload.sort(
-        ({ writtenAt: a }, { writtenAt: b }) =>
-          new Date(b).getTime() - new Date(a).getTime(),
-      );
+      if (!payload.length) {
+        state.hasMore = false;
+        state.pageNum -= 1;
+      } else {
+        const deDuplicates = payload.filter(post => {
+          return state.posts.every(p => p.id !== post.id);
+        });
+        state.posts = [...state.posts, ...deDuplicates];
+      }
     },
     [getPosts.rejected.type]: (state, { error }) => {
       state.error = error;
@@ -148,6 +160,8 @@ const communitySlice = createSlice({
       state.loading = false;
       state.error = null;
       state.selectedPost = payload; // 로컬&원격이랑 데이터가 다를 수도 있으므로 한번 더 덮어씀
+      const idx = state.posts.findIndex(post => post.id === payload.id);
+      state.posts[idx] = payload;
     },
     [patchPostData.rejected.type]: (state, { error }) => {
       state.error = error;
@@ -158,9 +172,10 @@ const communitySlice = createSlice({
     [submitDraft.pending.type]: state => {
       state.loading = true;
     },
-    [submitDraft.fulfilled.type]: state => {
+    [submitDraft.fulfilled.type]: (state, { payload }: PayloadAction<Post>) => {
       state.loading = false;
       state.error = null;
+      state.posts = [payload, ...state.posts];
     },
     [submitDraft.rejected.type]: (state, { error }) => {
       state.error = error;
@@ -172,6 +187,7 @@ const communitySlice = createSlice({
 export const {
   changeCategory,
   setLastPosition,
+  setNextPage,
   addLikedPost,
   removeLikedPost,
   modifyDraft,

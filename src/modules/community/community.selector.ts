@@ -1,5 +1,6 @@
 import { RootState as T } from 'modules/store';
 import { createSelector } from '@reduxjs/toolkit';
+import { orderByLatest } from '../../lib/utils';
 
 export const selectCategories = ({ community }: T) => community.categories;
 export const selectCurrentCategoryId = ({ community }: T) =>
@@ -12,6 +13,9 @@ export const selectDraft = ({ community }: T) => community.draft;
 
 export const selectLoading = ({ community }: T) => community.loading;
 export const selectLastPosition = ({ community }: T) => community.lastPosition;
+
+export const selectPageNum = ({ community }: T) => community.pageNum;
+export const selectHasMore = ({ community }: T) => community.hasMore;
 
 export const selectPostsByCategory = createSelector(
   [selectPostList, selectCurrentCategoryId],
@@ -58,3 +62,12 @@ export const selectUploadedNum = createSelector(
   [selectDraftUploadedImg],
   images => images?.length ?? 0,
 );
+
+export const selectHasPosts = createSelector(
+  [selectPostList],
+  posts => posts.length > 0,
+);
+
+export const selectPostsByLatest = createSelector([selectPostList], posts => {
+  return [...posts].sort(orderByLatest);
+});
