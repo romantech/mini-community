@@ -6,7 +6,7 @@ import {
 } from './constants';
 
 export const getRandomKey = (id?: string | number) => {
-  const randomNum = Math.random().toString(36).slice(2, 12);
+  const randomNum = Math.random().toString(36).slice(2);
   return id ? `${id}-${randomNum}` : randomNum;
 };
 
@@ -58,5 +58,8 @@ export const orderByLatest: OrderPostLatest = (
   { writtenAt: a },
   { writtenAt: b },
 ) => {
+  // (TS2362) the left-hand side of an arithmetic operation... 에러 때문에
+  // getTime() 메서드를 이용해 숫자로 바꾼 후 연산하도록 함(getDate, getTime 등 모두 가능)
+  // 참고로 if (a > b) -1 이런식으로 작성하면 에러 안남(간결하게 쓰기 위해 위 방법 사용함)
   return new Date(b).getTime() - new Date(a).getTime();
 };

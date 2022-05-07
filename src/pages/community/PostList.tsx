@@ -35,6 +35,7 @@ export default function PostList() {
     callback: () => {
       if (posts.length % 10 === 0 && hasMore) dispatch(setNextPage());
     },
+    options: { rootMargin: '200px' },
     unObserve: true,
   });
 
@@ -63,7 +64,7 @@ export default function PostList() {
           <div key={post.id}>
             <Post post={post} isLast={posts.length - 1 === i} />
             {posts.length - 1 === i && (
-              <div className="w-full h-0.5 invisible" ref={loaderRef} />
+              <div className="w-full h-px" ref={loaderRef} />
             )}
           </div>
         ))}

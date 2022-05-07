@@ -1,12 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:4000';
+axios.defaults.baseURL = 'https://8af1-211-179-53-28.ngrok.io';
 
 export const getPosts = createAsyncThunk(
   'community/getPosts',
   async (page: number) => {
-    const { data } = await axios.get<Post[]>(`/posts?_page=${page}`);
+    const { data } = await axios.get<Post[]>(`/posts?_page=${page}&_limit=20`);
     return data;
   },
 );

@@ -3,7 +3,14 @@
   <head>
     <meta charset="utf-8" />
     <link href="%PUBLIC_URL%/favicon.png" rel="icon" />
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <!-- 모바일에서 입력창 자동 확대 방지
+      maximum-scale : 최대 확대 배율
+      user-scalable : 사용자가 화면을 확대/축소 할 수 있는지 여부
+     -->
+    <meta
+      content="width=device-width, initial-scale=1 user-scalable=no, maximum-scale=1"
+      name="viewport"
+    />
     <meta content="#000000" name="theme-color" />
     <meta content="어쩌다 커뮤니티" name="description" />
     <!--
