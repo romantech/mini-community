@@ -37,7 +37,7 @@ export default function Compose() {
   const currentCategoryId = useSelector(selectCurrentCategoryId);
   const uploadedImg = useSelector(selectDraftUploadedImg);
   const uploadedNum = useSelector(selectUploadedNum);
-  const draftPost = useSelector(selectDraft);
+  const draft = useSelector(selectDraft);
   const canSubmit = useSelector(selectDraftCanSubmit);
 
   const leavePage = useCallback(
@@ -53,14 +53,14 @@ export default function Compose() {
   // reference : https://github.com/reduxjs/redux-toolkit/issues/1890#issuecomment-1004741945
   const submitHandler = useCallback(async () => {
     try {
-      await dispatch(submitDraft(draftPost)).unwrap();
+      await dispatch(submitDraft(draft)).unwrap();
       alert(KR_COMPLETE_COMPOSE);
       leavePage(false);
     } catch (e) {
       console.log(e);
       alert(KR_RETRY_LATER);
     }
-  }, [draftPost, dispatch, leavePage]);
+  }, [draft, dispatch, leavePage]);
 
   const categoryHandler = useCallback(
     (category: Partial<Category>) => {

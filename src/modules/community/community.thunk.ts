@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://8af1-211-179-53-28.ngrok.io';
+axios.defaults.baseURL = process.env.REACT_APP_HOST;
 
 export const getPosts = createAsyncThunk(
   'community/getPosts',
