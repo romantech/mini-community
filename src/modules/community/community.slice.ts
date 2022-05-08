@@ -156,9 +156,8 @@ const communitySlice = createSlice({
     ) => {
       state.loading = false;
       state.error = null;
-      state.selectedPost = payload; // 로컬&원격이랑 데이터가 다를 수도 있으므로 한번 더 덮어씀
       const idx = state.posts.findIndex(post => post.id === payload.id);
-      state.posts[idx] = payload;
+      if (idx !== -1) state.posts[idx] = payload;
     },
     [patchPostData.rejected.type]: (state, { error }) => {
       state.error = error;

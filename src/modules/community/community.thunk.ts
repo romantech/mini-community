@@ -31,8 +31,8 @@ export const getCategories = createAsyncThunk(
 
 export const patchPostData = createAsyncThunk(
   'community/patchPostData',
-  async ({ id, likeCount }: Record<'id' | 'likeCount', number>) => {
-    const { data } = await axios.patch<Post>(`/posts/${id}`, { likeCount });
+  async ({ id, ...payload }: Partial<Post>) => {
+    const { data } = await axios.patch<Post>(`/posts/${id}`, { ...payload });
     return data;
   },
 );

@@ -13,9 +13,10 @@ import Image from 'components/common/Image';
 import Title from 'components/common/Title';
 import Content from 'components/common/Content';
 import InteractiveStat from 'components/community/InteractiveStat';
-import { clearSelectedPost } from 'modules/community/community.slice';
 import { useAppDispatch } from 'modules/store';
 import NotFound from 'components/common/NotFound';
+import { patchPostData } from 'modules/community/community.thunk';
+import { clearSelectedPost } from 'modules/community/community.slice';
 
 export default function PostDetail() {
   const dispatch = useAppDispatch();
@@ -23,6 +24,12 @@ export default function PostDetail() {
   const post = useSelector(selectPost);
   const loading = useSelector(selectLoading);
   const showNotFound = !loading && post;
+
+  useEffect(() => {
+    if (post) {
+      dispatch(patchPostData({ id: post.id, viewCount: post.viewCount + 1 }));
+    }
+  }, [dispatch, post]);
 
   useEffect(() => {
     return () => {
