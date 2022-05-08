@@ -40,14 +40,6 @@ export default function Compose() {
   const draft = useSelector(selectDraft);
   const canSubmit = useSelector(selectDraftCanSubmit);
 
-  const leavePage = useCallback(
-    (clear = true) => {
-      if (clear) dispatch(clearDraft());
-      navigate(siteUrl.community.list, { replace: true });
-    },
-    [dispatch, navigate],
-  );
-
   // createAsyncThunk 는 래핑된 프로미스를 반환함
   // async / await 를 쓰고 싶다면, unwrap() 메서드로 원본 프로미스에 접근하면 됨
   // reference : https://github.com/reduxjs/redux-toolkit/issues/1890#issuecomment-1004741945
@@ -55,12 +47,12 @@ export default function Compose() {
     try {
       await dispatch(submitDraft(draft)).unwrap();
       alert(KR_COMPLETE_COMPOSE);
-      leavePage(false);
+      navigate(siteUrl.community.list, { replace: true });
     } catch (e) {
       console.log(e);
       alert(KR_RETRY_LATER);
     }
-  }, [draft, dispatch, leavePage]);
+  }, [dispatch, draft, navigate]);
 
   const categoryHandler = useCallback(
     (category: Partial<Category>) => {
@@ -88,8 +80,10 @@ export default function Compose() {
   );
 
   useEffect(() => {
-    return () => leavePage();
-  }, [leavePage]);
+    return () => {
+      dispatch(clearDraft());
+    };
+  }, [dispatch]);
 
   // 888은 전체글 999는 인기글이므로 888이하면 OK
   const defaultValues = currentCategoryId < 888 ? currentCategoryId : undefined;

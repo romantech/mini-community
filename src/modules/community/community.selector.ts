@@ -15,7 +15,7 @@ export const selectLoading = ({ community }: T) => community.loading;
 export const selectLastPosition = ({ community }: T) => community.lastPosition;
 
 export const selectPageNum = ({ community }: T) => community.page;
-export const selectHasMore = ({ community }: T) => community.morePage;
+export const selectMorePage = ({ community }: T) => community.morePage;
 
 export const selectPostsByCategory = createSelector(
   [selectPostList, selectCurrentCategoryId],
@@ -61,11 +61,6 @@ export const selectDraftUploadedImg = createSelector(
 export const selectUploadedNum = createSelector(
   [selectDraftUploadedImg],
   images => images?.length ?? 0,
-);
-
-export const selectHasPosts = createSelector(
-  [selectPostList],
-  posts => posts.length > 0,
 );
 
 export const selectPostsByLatest = createSelector([selectPostList], posts => {

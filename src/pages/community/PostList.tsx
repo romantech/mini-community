@@ -3,8 +3,9 @@ import { useSelector } from 'react-redux';
 import {
   selectCategories,
   selectCurrentCategoryId,
-  selectHasMore,
   selectLastPosition,
+  selectLoading,
+  selectMorePage,
   selectPostsByCategory,
 } from 'modules/community/community.selector';
 import Category from 'components/community/Category';
@@ -29,12 +30,11 @@ export default function PostList() {
   const lastPosition = useSelector(selectLastPosition);
   const categories = useSelector(selectCategories);
   const categoryId = useSelector(selectCurrentCategoryId);
-  const hasMore = useSelector(selectHasMore);
+  const morePage = useSelector(selectMorePage);
+  const loading = useSelector(selectLoading);
 
   const loaderRef = useIntersectionObserver<HTMLDivElement>({
-    callback: () => {
-      if (posts.length % 10 === 0 && hasMore) dispatch(setNextPage());
-    },
+    callback: () => morePage && dispatch(setNextPage()),
     options: { rootMargin: '200px' },
     unObserve: true,
   });
@@ -63,7 +63,7 @@ export default function PostList() {
         {posts.map((post, i) => (
           <div key={post.id}>
             <Post post={post} isLast={posts.length - 1 === i} />
-            {posts.length - 1 === i && (
+            {!loading && posts.length - 1 === i && (
               <div className="w-full h-px" ref={loaderRef} />
             )}
           </div>

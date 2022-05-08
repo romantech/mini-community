@@ -96,8 +96,8 @@ const communitySlice = createSlice({
       state.loading = false;
       state.error = null;
 
-      if (!payload.length) {
-        state.morePage = false;
+      if (payload.length < 10) {
+        state.morePage = false; // 한 페이지당 10개씩 불러오므로 10개 미만이면 더이상 포스트 없음
         state.page -= 1;
       } else {
         const deDuplicates = payload.filter(post => {

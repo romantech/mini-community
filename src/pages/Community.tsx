@@ -11,13 +11,10 @@ import { useAppDispatch } from 'modules/store';
 import Loading from 'components/common/Loading';
 import { useSelector } from 'react-redux';
 import {
-  selectHasMore,
-  selectHasPosts,
   selectLoading,
+  selectMorePage,
   selectPageNum,
 } from 'modules/community/community.selector';
-
-const initialPage = 1;
 
 export default function Community() {
   const dispatch = useAppDispatch();
@@ -30,8 +27,7 @@ export default function Community() {
   const composeMatch = useMatch(siteUrl.community.post.new);
 
   const loading = useSelector(selectLoading);
-  const hasPosts = useSelector(selectHasPosts);
-  const morePage = useSelector(selectHasMore);
+  const morePage = useSelector(selectMorePage);
   const page = useSelector(selectPageNum);
 
   /*
@@ -41,18 +37,18 @@ export default function Community() {
    * */
 
   const fetchByRoute = useCallback(() => {
-    if (listMatch && !hasPosts) {
-      dispatch(getPosts({ page: initialPage })); // 전체 포스트 목록 GET
+    if (listMatch && page === 1) {
+      dispatch(getPosts({ page })); // 첫번째 페이지 포스트 목록 GET
       dispatch(getCategories()); // 카테고리 목록 GET
     } else if (composeMatch) {
       dispatch(getCategories());
     } else if (post_id) {
       dispatch(getPostById({ id: Number(post_id) })); // 선택한 포스트 정보 GET
     }
-  }, [dispatch, listMatch, composeMatch, post_id, hasPosts]);
+  }, [dispatch, listMatch, composeMatch, post_id, page]);
 
   const fetchPostsByPage = useCallback(() => {
-    if (page !== initialPage && morePage) dispatch(getPosts({ page }));
+    if (page !== 1 && morePage) dispatch(getPosts({ page })); // 2번째 페이지~
   }, [dispatch, page, morePage]);
 
   useEffect(() => {
