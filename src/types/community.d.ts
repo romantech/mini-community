@@ -30,7 +30,7 @@ interface Post extends Omit<Category, 'categoryCode'> {
   likeCount: number;
   commentCount: number;
   imageUrl: string | string[] | null;
-  writtenAt: string;
+  writtenAt: TDateISO;
   writerNickName: string;
   writerProfileUrl: string | null;
 }
@@ -38,6 +38,7 @@ interface Post extends Omit<Category, 'categoryCode'> {
 interface NewPost extends Post {
   // writtenAt 속성은 완료 버튼 누르는 시점
   imageUrl: string[] | null;
+  writtenAt: TDateISO | null;
 }
 
 type Draft = Partial<NewPost>;

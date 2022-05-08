@@ -16,7 +16,7 @@ export const getRandomColor = () => {
   return colors[randomNum];
 };
 
-export const getProfileColor = (url: string) => {
+export const getProfileBgColor = (url: string) => {
   const colorKeys = Object.entries(bgColors) as Entries<typeof bgColors>;
   const matched = colorKeys.reduce((result, [name, color]) => {
     const regex = new RegExp(`${name}`, 'i');
@@ -26,12 +26,7 @@ export const getProfileColor = (url: string) => {
   return matched || getRandomColor();
 };
 
-export const getFormatDate = (date: string) => {
-  const [yyyy, mm, dd] = date.split('T')[0].split('-');
-  return `${yyyy.slice(0, 2)}-${mm}-${dd}`;
-};
-
-export const getElapsedTime = (date: string) => {
+export const getElapsedTime = (date: TDateISO) => {
   const now = new Date().getTime();
   const commentDate = new Date(date).getTime();
   const elapsedMSec = now - commentDate;
@@ -43,14 +38,14 @@ export const getElapsedTime = (date: string) => {
   return { elapsedMSec, elapsedSec, elapsedMin, elapsedHour };
 };
 
-export const getRenderDate = (date: string) => {
+export const getRenderDate = (date: TDateISO) => {
   const { elapsedSec, elapsedMin, elapsedHour } = getElapsedTime(date);
 
   if (elapsedSec < 60) return KR_MOMENT_AGO;
   if (elapsedMin < 60) return `${Math.floor(elapsedMin)}${KR_MINUTE_AGO}`;
   if (elapsedHour < 24) return `${Math.floor(elapsedHour)}${KR_HOUR_AGO}`;
 
-  return getFormatDate(date);
+  return date.slice(2, 10); // YY-MM-DD
 };
 
 type OrderPostLatest = (...args: Post[]) => number;

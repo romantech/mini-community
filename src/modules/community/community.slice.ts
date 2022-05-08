@@ -11,8 +11,8 @@ interface CommunityState {
   posts: Post[];
   selectedPost: Post | null;
   likedPostId: Array<Post['id']>;
-  pageNum: number;
-  hasMore: boolean;
+  page: number;
+  morePage: boolean;
   draft: Draft;
   categories: Category[];
   currentCategoryId: CategoryId;
@@ -35,7 +35,7 @@ const initialDraft: Draft = {
   likeCount: 0,
   commentCount: 0,
   imageUrl: null,
-  writtenAt: '',
+  writtenAt: null,
   writerNickName: '카우보이',
   writerProfileUrl: '',
 };
@@ -44,8 +44,8 @@ const initialState: CommunityState = {
   posts: [],
   selectedPost: null,
   likedPostId: [],
-  pageNum: 1,
-  hasMore: true,
+  page: 1,
+  morePage: true,
   draft: initialDraft,
   categories: [],
   currentCategoryId: 888, // 전체글 (초기값)
@@ -65,7 +65,7 @@ const communitySlice = createSlice({
       state.lastPosition = payload;
     },
     setNextPage: state => {
-      state.pageNum += 1;
+      state.page += 1;
     },
     addLikedPost: (state, { payload }: PayloadAction<Post['id']>) => {
       state.likedPostId.push(payload);
@@ -97,8 +97,8 @@ const communitySlice = createSlice({
       state.error = null;
 
       if (!payload.length) {
-        state.hasMore = false;
-        state.pageNum -= 1;
+        state.morePage = false;
+        state.page -= 1;
       } else {
         const deDuplicates = payload.filter(post => {
           return state.posts.every(p => p.id !== post.id);

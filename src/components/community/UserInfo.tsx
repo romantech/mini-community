@@ -1,18 +1,18 @@
 import React from 'react';
-import { getProfileColor, getRenderDate } from 'lib/utils';
+import { getProfileBgColor, getRenderDate } from 'lib/utils';
 import { MIDDLE_DOT } from 'lib/constants';
 import classnames from 'classnames';
 import CowImage from 'assets/cow.png';
 
-interface PostInfoProps {
+interface UserInfoProps {
   post: Post;
   className?: string;
 }
 
-export default function UserInfo({ post, className }: PostInfoProps) {
+export default function UserInfo({ post, className }: UserInfoProps) {
   const { writerNickName, writerProfileUrl, writtenAt, categoryName } = post;
   const formatDate = getRenderDate(writtenAt);
-  const profileBgColor = getProfileColor(post.writerProfileUrl || 'fox');
+  const profileBgColor = getProfileBgColor(post.writerProfileUrl || 'fox');
 
   return (
     <section className={classnames('flex gap-2', className)}>

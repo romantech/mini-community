@@ -9,7 +9,7 @@ import {
 import { ReactComponent as ThumbIcon } from 'assets/icons/thumb.svg';
 import { ReactComponent as ThumbFilledIcon } from 'assets/icons/thumb-filled.svg';
 import { ReactComponent as TalkIcon } from 'assets/icons/talk.svg';
-import { selectCurrentPostIsLike } from 'modules/community/community.selector';
+import { selectCurrentPostWasLiked } from 'modules/community/community.selector';
 import { patchPostData } from 'modules/community/community.thunk';
 
 interface InteractiveStatProps {
@@ -24,7 +24,7 @@ export default function InteractiveStat({
   className,
 }: InteractiveStatProps) {
   const dispatch = useAppDispatch();
-  const isLike = useSelector(selectCurrentPostIsLike);
+  const isLike = useSelector(selectCurrentPostWasLiked);
 
   const renderList = [
     {

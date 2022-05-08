@@ -17,6 +17,8 @@ import {
   selectPageNum,
 } from 'modules/community/community.selector';
 
+const initialPage = 1;
+
 export default function Community() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -29,10 +31,8 @@ export default function Community() {
 
   const loading = useSelector(selectLoading);
   const hasPosts = useSelector(selectHasPosts);
-  const hasMore = useSelector(selectHasMore);
-  const pageNum = useSelector(selectPageNum);
-
-  const initialPageNum = 1;
+  const morePage = useSelector(selectHasMore);
+  const page = useSelector(selectPageNum);
 
   /*
    * location.key 는 라우트가 변경될 때마다 생성되는 고유한 식별 키 ex) { key } = useLocation()
@@ -42,7 +42,7 @@ export default function Community() {
 
   const fetchByRoute = useCallback(() => {
     if (listMatch && !hasPosts) {
-      dispatch(getPosts(initialPageNum)); // 전체 포스트 목록 GET
+      dispatch(getPosts({ page: initialPage })); // 전체 포스트 목록 GET
       dispatch(getCategories()); // 카테고리 목록 GET
     } else if (composeMatch) {
       dispatch(getCategories());
@@ -51,13 +51,13 @@ export default function Community() {
     }
   }, [dispatch, listMatch, composeMatch, post_id, hasPosts]);
 
-  const fetchPostsByPageNum = useCallback(() => {
-    if (pageNum !== initialPageNum && hasMore) dispatch(getPosts(pageNum));
-  }, [dispatch, pageNum, hasMore]);
+  const fetchPostsByPage = useCallback(() => {
+    if (page !== initialPage && morePage) dispatch(getPosts({ page }));
+  }, [dispatch, page, morePage]);
 
   useEffect(() => {
-    fetchPostsByPageNum();
-  }, [fetchPostsByPageNum]);
+    fetchPostsByPage();
+  }, [fetchPostsByPage]);
 
   useEffect(() => {
     fetchByRoute();

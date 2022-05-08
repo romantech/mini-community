@@ -1,6 +1,6 @@
 import { RootState as T } from 'modules/store';
 import { createSelector } from '@reduxjs/toolkit';
-import { orderByLatest } from '../../lib/utils';
+import { orderByLatest } from 'lib/utils';
 
 export const selectCategories = ({ community }: T) => community.categories;
 export const selectCurrentCategoryId = ({ community }: T) =>
@@ -14,8 +14,8 @@ export const selectDraft = ({ community }: T) => community.draft;
 export const selectLoading = ({ community }: T) => community.loading;
 export const selectLastPosition = ({ community }: T) => community.lastPosition;
 
-export const selectPageNum = ({ community }: T) => community.pageNum;
-export const selectHasMore = ({ community }: T) => community.hasMore;
+export const selectPageNum = ({ community }: T) => community.page;
+export const selectHasMore = ({ community }: T) => community.morePage;
 
 export const selectPostsByCategory = createSelector(
   [selectPostList, selectCurrentCategoryId],
@@ -38,7 +38,7 @@ export const selectNonFixedCategory = createSelector(
   categories => categories.slice(2), // 전체글, 인기글 제외
 );
 
-export const selectCurrentPostIsLike = createSelector(
+export const selectCurrentPostWasLiked = createSelector(
   [selectPost, selectLikedPosts],
   (post, likedPosts) => {
     return !post ? false : likedPosts.includes(post.id);
