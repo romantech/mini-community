@@ -17,13 +17,16 @@ import { useAppDispatch } from 'modules/store';
 import NotFound from 'components/common/NotFound';
 import { patchPostData } from 'modules/community/community.thunk';
 import { clearSelectedPost } from 'modules/community/community.slice';
+import useMounted from 'hooks/useMounted';
 
 export default function PostDetail() {
   const dispatch = useAppDispatch();
 
   const post = useSelector(selectPost);
   const loading = useSelector(selectLoading);
-  const showNotFound = !loading && post;
+
+  const mounted = useMounted();
+  const showNotFound = !loading && mounted;
 
   useEffect(() => {
     if (post) {
