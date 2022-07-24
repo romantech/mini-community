@@ -33,4 +33,5 @@ export const bgColors = {
   chick: '#FFD784',
   alien: '#B2E9E3',
   devil: '#E1BCEA',
+  pig: '#FFDEDE',
 } as const;

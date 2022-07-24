@@ -11,7 +11,7 @@ interface UserInfoProps {
 export default function UserInfo({ post, className }: UserInfoProps) {
   const { writerNickName, writerProfileUrl, writtenAt, categoryName } = post;
   const formatDate = getRenderDate(writtenAt);
-  const profileBgColor = getProfileBgColor(post.writerProfileUrl || 'fox');
+  const profileBgColor = getProfileBgColor(post.writerProfileUrl || 'pig');
 
   return (
     <section className={classnames('flex gap-2', className)}>
@@ -21,7 +21,7 @@ export default function UserInfo({ post, className }: UserInfoProps) {
       >
         <img
           className="w-6"
-          src={writerProfileUrl || '/images/profile/cow.png'}
+          src={writerProfileUrl || '/images/profile/pig.png'}
           alt="user profile"
         />
       </div>

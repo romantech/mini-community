@@ -36,7 +36,7 @@ const initialDraft: Draft = {
   commentCount: 0,
   imageUrl: null,
   writtenAt: null,
-  writerNickName: '카우보이',
+  writerNickName: '피그마',
   writerProfileUrl: '',
 };
 
