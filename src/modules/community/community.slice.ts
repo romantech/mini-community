@@ -28,7 +28,7 @@ export const fixedCategories: Category[] = [
 
 const initialDraft: Draft = {
   categoryId: 1,
-  categoryName: '대선청원',
+  categoryName: '테크',
   title: '',
   content: '',
   viewCount: 0,

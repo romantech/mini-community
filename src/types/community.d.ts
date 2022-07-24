@@ -2,7 +2,7 @@ type CategoryId = 888 | 999 | 1 | 2 | 3 | 4 | 5; // 888 전체, 999 인기글
 type CategoryCode =
   | 'ALL'
   | 'POPULAR'
-  | 'PETITION'
+  | 'TECH'
   | 'FREE'
   | 'QNA'
   | 'NEWS'
@@ -10,7 +10,7 @@ type CategoryCode =
 type CategoryName =
   | '전체'
   | '⭐ 인기글'
-  | '대선청원'
+  | '테크'
   | '자유글'
   | '질문/답변'
   | '뉴스'
