@@ -2,7 +2,6 @@ import React from 'react';
 import { getProfileBgColor, getRenderDate } from 'lib/utils';
 import { MIDDLE_DOT } from 'lib/constants';
 import classnames from 'classnames';
-import CowImage from 'assets/cow.png';
 
 interface UserInfoProps {
   post: Post;
@@ -22,7 +21,7 @@ export default function UserInfo({ post, className }: UserInfoProps) {
       >
         <img
           className="w-6"
-          src={writerProfileUrl || CowImage}
+          src={writerProfileUrl || '/images/profile/cow.png'}
           alt="user profile"
         />
       </div>

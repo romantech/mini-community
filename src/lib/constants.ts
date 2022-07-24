@@ -31,6 +31,6 @@ export const KR_FILE_TYPE_IMG = '사진';
 export const bgColors = {
   fox: '#FFC7CC',
   chick: '#FFD784',
-  ailien: '#B2E9E3',
+  alien: '#B2E9E3',
   devil: '#E1BCEA',
 } as const;

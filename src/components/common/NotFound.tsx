@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import NotFoundImg from 'assets/404.png';
 import { KR_MOVE_PAGE_AFTER_SEC, KR_NOT_FOUND } from 'lib/constants';
 import Image from 'components/common/Image';
 import classnames from 'classnames';
@@ -32,7 +31,7 @@ export default function NotFound({ className, backSec = 5 }: NotFoundProps) {
   return (
     <div className={classes}>
       <Image
-        src={NotFoundImg}
+        src="/images/404.png"
         alt="Not found page"
         className="bg-transparent w-[300px] h-[300px]"
       />
