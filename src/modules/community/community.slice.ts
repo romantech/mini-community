@@ -96,15 +96,13 @@ const communitySlice = createSlice({
       state.loading = false;
       state.error = null;
 
-      if (payload.length < 10) {
-        state.morePage = false; // 한 페이지당 10개씩 불러오므로 10개 미만이면 더이상 포스트 없음
-        state.page -= 1;
-      } else {
-        const deDuplicates = payload.filter(post => {
-          return state.posts.every(p => p.id !== post.id);
-        });
-        state.posts = [...state.posts, ...deDuplicates];
-      }
+      // 한 페이지당 7개씩 불러오므로 응답 데이터가 7개 미만이면 더이상 포스트 없음
+      if (payload.length < 7) state.morePage = false;
+
+      const deDuplicates = payload?.filter(post => {
+        return state.posts.every(p => p.id !== post.id);
+      });
+      state.posts = [...state.posts, ...deDuplicates];
     },
     [getPosts.rejected.type]: (state, { error }) => {
       state.error = error;

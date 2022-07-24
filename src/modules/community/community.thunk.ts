@@ -5,7 +5,7 @@ axios.defaults.baseURL = process.env.REACT_APP_HOST;
 
 export const getPosts = createAsyncThunk(
   'community/getPosts',
-  async ({ page, limit = 10 }: { page: number; limit?: number }) => {
+  async ({ page, limit = 7 }: { page: number; limit?: number }) => {
     const { data } = await axios.get<Post[]>(
       `/posts?_page=${page}&_limit=${limit}`,
     );

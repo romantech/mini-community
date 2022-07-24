@@ -60,10 +60,10 @@ export default function PostList() {
         onClick={id => dispatch(changeCategory(id))}
       />
       <section>
-        {posts.map((post, i) => (
+        {posts.map((post, i, { length }) => (
           <div key={post.id}>
             <Post post={post} isLast={posts.length - 1 === i} />
-            {!loading && posts.length - 1 === i && (
+            {!loading && length - 1 === i && (
               <div className="w-full h-px" ref={loaderRef} />
             )}
           </div>
