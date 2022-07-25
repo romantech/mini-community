@@ -5,7 +5,6 @@ import {
   selectPost,
 } from 'modules/community/community.selector';
 import siteUrl from 'routes/siteUrl';
-import { getRandomKey } from 'lib/utils';
 import { KR_BACK_TO_LIST } from 'lib/constants';
 import UserInfo from 'components/community/UserInfo';
 import Back from 'components/common/Back';
@@ -62,8 +61,8 @@ export default function PostDetail() {
             </div>
           </section>
           <section className="flex-col-gap2">
-            {imageList?.map((url, i) => (
-              <Image key={getRandomKey(i)} src={url} />
+            {imageList?.map(url => (
+              <Image key={url} src={url} />
             ))}
           </section>
           <InteractiveStat

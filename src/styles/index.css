@@ -7,6 +7,9 @@
 @layer base {
   body {
     @apply font-sans;
+    /* 아이폰에서 버튼/앵커 터치했을 때 탭 하이라이트 현상 방지
+       via https://css-tricks.com/custom-tailwind-css/#aa-webkit-tap-highlight-color */
+    -webkit-tap-highlight-color: transparent;
   }
 
   /* 마우스 같은 정밀 포인터(any-pointer: fine)에만 적용되는 스타일 */
@@ -18,15 +21,15 @@
     }
     /* Track */
     ::-webkit-scrollbar-track {
-      background: rgba(232, 232, 232, 0.76);
+      background: #f3f3f3;
     }
     /* Handle */
     ::-webkit-scrollbar-thumb {
-      background: #d3d3d3;
+      background: rgb(215, 215, 215);
     }
     /* Handle on hover */
     ::-webkit-scrollbar-thumb:hover {
-      background: #bdbdbd;
+      background: rgb(197, 197, 197);
     }
   }
 }

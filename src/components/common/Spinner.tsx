@@ -13,9 +13,9 @@ export default function Spinner({
   const classes = classnames('w-10 h-10 text-gray-100 animate-spin', className);
 
   return (
-    <div className="grid place-content-center p-10">
+    <div role="status">
       <svg
-        role="status"
+        aria-hidden="true"
         className={classes}
         viewBox="0 0 100 101"
         fill={color}
@@ -30,6 +30,7 @@ export default function Spinner({
           fill="currentFill"
         />
       </svg>
+      <span className="sr-only">Loading...</span>
     </div>
   );
 }

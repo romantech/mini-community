@@ -145,8 +145,8 @@ const communitySlice = createSlice({
     },
 
     // 포스트 인터렉션 데이터 업데이트 PATCH
-    [patchPostData.pending.type]: state => {
-      state.loading = true;
+    [patchPostData.pending.type]: (/* state */) => {
+      // state.loading = true; // 좋아요 및 조회수 데이터 변경시엔 로딩 스피너 안보이도록 설정
     },
     [patchPostData.fulfilled.type]: (
       state,

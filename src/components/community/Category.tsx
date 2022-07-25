@@ -18,10 +18,10 @@ export default function Category({
         <button
           key={id}
           className={classnames(
-            'flex-center h-9 min-w-fit border border-gray02 rounded-[20px] py-3 px-4 transition outline-none',
+            'flex-center h-9 min-w-fit border border-gray02 rounded-3xl py-3 px-4 transition-all duration-500 outline-none',
             {
-              'hover:bg-gray-100': id !== currentId,
-              'bg-primary01 text-white border-transparent': id === currentId,
+              'sm:hover:bg-gray-100': id !== currentId,
+              'bg-primary01 text-white border-primary01': id === currentId,
             },
           )}
           type="button"

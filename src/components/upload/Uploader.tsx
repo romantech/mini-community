@@ -2,7 +2,6 @@
 import React from 'react';
 import { ReactComponent as UploadIcon } from 'assets/icons/upload.svg';
 import { ReactComponent as CloseIcon } from 'assets/icons/close.svg';
-import { getRandomKey } from 'lib/utils';
 import classnames from 'classnames';
 import {
   KR_CONFIRM_DELETE,
@@ -101,7 +100,10 @@ export default function Uploader({
       )}
       {preview &&
         uploadedFiles?.map((object, i) => (
-          <div className="image-box relative" key={getRandomKey(i)}>
+          <div
+            className="image-box relative"
+            key={object.split(',')[1].slice(0, 15)}
+          >
             <Image src={object} alt="uploaded" rounded />
             <Button
               onClick={() => deleteHandler(i)}

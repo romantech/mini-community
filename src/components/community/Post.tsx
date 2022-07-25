@@ -42,7 +42,7 @@ export default function Post({ post, isLast }: PostProps) {
         <StaticStat post={post} />
       </article>
       {/* 구분선 */}
-      {!isLast && <div className="w-full h-1.5 bg-gray02" />}
+      {!isLast && <div className="w-full h-1.5 bg-gray02/50" />}
     </>
   );
 }

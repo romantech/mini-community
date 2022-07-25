@@ -19,7 +19,7 @@ function Loading({ loading, delay = 0 }: LoadingProps) {
     <div
       className={
         delayLoading
-          ? 'fixed inset-0 w-full h-full bg-black/20 z-50 flex-center'
+          ? 'fixed inset-0 min-w-full min-h-full z-50 flex-center backdrop-blur-sm'
           : 'hidden'
       }
     >
