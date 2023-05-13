@@ -4,11 +4,9 @@ import 'styles/index.css';
 import { BrowserRouter } from 'react-router-dom';
 import { store } from 'modules/store';
 import { Provider } from 'react-redux';
-import { inject } from '@vercel/analytics';
+import { Analytics } from '@vercel/analytics/react';
 import App from './pages/App';
 import reportWebVitals from './reportWebVitals';
-
-inject();
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -25,6 +23,7 @@ root.render(
       <BrowserRouter>
         <App />
       </BrowserRouter>
+      <Analytics />
     </Provider>
   </React.StrictMode>,
 );
