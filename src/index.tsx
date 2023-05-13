@@ -4,8 +4,11 @@ import 'styles/index.css';
 import { BrowserRouter } from 'react-router-dom';
 import { store } from 'modules/store';
 import { Provider } from 'react-redux';
+import { inject } from '@vercel/analytics';
 import App from './pages/App';
 import reportWebVitals from './reportWebVitals';
+
+inject();
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
