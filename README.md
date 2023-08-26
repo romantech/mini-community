@@ -1,4 +1,4 @@
-# 모바일 미니 커뮤니티
+# 모바일 커뮤니티 미니 프로젝트
 
 ![screenshot](https://user-images.githubusercontent.com/8604840/167301166-d16351bb-b6fa-492f-a1c5-c53f1f8927fa.png)
 > _글 조회/작성, 조회수 카운트, 좋아요 인터렉션이 가능한 모바일 미니 커뮤니티입니다_
