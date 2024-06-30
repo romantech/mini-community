@@ -33,6 +33,4 @@ module.exports = {
       },
     },
   },
-  // https://github.com/tailwindlabs/tailwindcss-line-clamp
-  plugins: [require('@tailwindcss/line-clamp')],
 };

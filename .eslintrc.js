@@ -46,5 +46,9 @@ module.exports = {
       'error',
       { props: true, ignorePropertyModificationsFor: ['state'] },
     ], // for Redux RTK(https://redux-toolkit.js.org/usage/immer-reducers#linting-state-mutations)
+    'jsx-a11y/label-has-associated-control': [
+      2,
+      { labelAttributes: ['htmlFor'] },
+    ],
   },
 };
