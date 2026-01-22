@@ -1,4 +1,4 @@
-/* eslint-disable no-alert,consistent-return */
+/* eslint-disable no-alert,consistent-return,no-console */
 import React from 'react';
 import { ReactComponent as UploadIcon } from 'assets/icons/upload.svg';
 import { ReactComponent as CloseIcon } from 'assets/icons/close.svg';
