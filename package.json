@@ -12,7 +12,7 @@
     "@types/react": "^18.3.27",
     "@types/react-dom": "^18.3.7",
     "@vercel/analytics": "^1.6.1",
-    "axios": "^1.13.2",
+    "axios": "^1.13.5",
     "classnames": "^2.5.1",
     "json-server": "^0.17.4",
     "react": "^18.3.1",
