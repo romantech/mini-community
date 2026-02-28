@@ -37,7 +37,7 @@ function setEnv(mode: string) {
   if (!process.env.NODE_ENV) {
     Object.assign(process.env, { NODE_ENV: mode });
   }
-  const { homepage } = JSON.parse(readFileSync('package.json', 'utf-8'));
+  const { homepage } = JSON.parse(readFileSync('package.json', 'utf8'));
   const publicUrl = homepage
     ? `${
         homepage.startsWith('http') || homepage.startsWith('/')

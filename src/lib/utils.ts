@@ -26,9 +26,20 @@ export const getProfileBgColor = (url: string) => {
   return matched || getRandomColor();
 };
 
-export const getElapsedTime = (date: TDateISO) => {
-  const now = new Date().getTime();
-  const commentDate = new Date(date).getTime();
+export const getElapsedTime = (date?: TDateISO | null) => {
+  const now = Date.now();
+  const commentDate = date ? new Date(date).getTime() : NaN;
+
+  // date가 없거나(undef/null) 파싱 불가하면 안전하게 0으로 처리
+  if (!date || Number.isNaN(commentDate)) {
+    return {
+      elapsedMSec: 0,
+      elapsedSec: 0,
+      elapsedMin: 0,
+      elapsedHour: 0,
+    };
+  }
+
   const elapsedMSec = now - commentDate;
 
   const elapsedSec = elapsedMSec / 1000; // "초" 단위 경과 시간
@@ -38,7 +49,9 @@ export const getElapsedTime = (date: TDateISO) => {
   return { elapsedMSec, elapsedSec, elapsedMin, elapsedHour };
 };
 
-export const getRenderDate = (date: TDateISO) => {
+export const getRenderDate = (date?: TDateISO | null) => {
+  if (!date) return ''; // 작성일이 없으면 빈 문자열(= UI에서 날짜 숨김)
+
   const { elapsedSec, elapsedMin, elapsedHour } = getElapsedTime(date);
 
   if (elapsedSec < 60) return KR_MOMENT_AGO;

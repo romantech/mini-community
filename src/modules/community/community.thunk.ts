@@ -18,7 +18,7 @@ export const getPosts = createAsyncThunk(
 export const getPostById = createAsyncThunk(
   'community/getPostById',
   async ({ id }: Record<'id', number>) => {
-    const { data } = await axios.get<Post>(`/posts?id=${id}`);
+    const { data } = await axios.get<Post[]>(`/posts?id=${id}`);
     return data;
   },
 );

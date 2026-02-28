@@ -1,8 +1,9 @@
 import React from 'react';
 import { getRandomKey } from 'lib/utils';
 
-export default function LinkifyText({ text }: { text: string }) {
+export default function LinkifyText({ text }: { text?: string | null }) {
   const regex = /(https?:\/\/\S+)/g; // http 및 https 만 구분 가능
+  if (!text) return null;
 
   return (
     <>
