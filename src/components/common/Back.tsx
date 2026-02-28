@@ -25,7 +25,7 @@ export default function Back({
 
   const clickHandler = () => {
     let res = true;
-    // eslint-disable-next-line no-alert
+
     if (confirmMsg) res = window.confirm(confirmMsg);
     if (res) navigate(to);
   };

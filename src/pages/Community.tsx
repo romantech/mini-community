@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 import React, { useCallback, useEffect } from 'react';
 import { Outlet, useMatch, useNavigate, useParams } from 'react-router-dom';
 import siteUrl from 'routes/siteUrl';
