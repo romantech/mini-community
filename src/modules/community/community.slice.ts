@@ -120,7 +120,6 @@ const communitySlice = createSlice({
       .addCase(
         getPostById.fulfilled,
         (state, { payload }: PayloadAction<Post[]>) => {
-          console.log(payload);
           state.loading = false;
           state.error = null;
           state.selectedPost = payload.at(0) ?? null;
