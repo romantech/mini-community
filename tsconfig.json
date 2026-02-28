@@ -17,6 +17,6 @@
     "jsx": "react-jsx",
     "baseUrl": "src"
   },
-  "include": ["*.config.js", "src", ".eslintrc.js"],
+  "include": ["*.config.js", "src"],
   "exclude": ["node_modules", "dist"]
 }
