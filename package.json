@@ -2,24 +2,6 @@
   "name": "mini-community",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "@reduxjs/toolkit": "^2.11.2",
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
-    "@types/react": "^18.3.28",
-    "@types/react-dom": "^18.3.7",
-    "@vercel/analytics": "^1.6.1",
-    "axios": "^1.13.6",
-    "classnames": "^2.5.1",
-    "json-server": "^0.17.4",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4",
-    "react-redux": "^9.2.0",
-    "react-router-dom": "^6.30.3",
-    "typescript": "^5.9.3"
-  },
   "scripts": {
     "dev": "vite",
     "start": "vite",
@@ -40,6 +22,16 @@
       "last 1 safari version"
     ]
   },
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.11.2",
+    "@vercel/analytics": "^1.6.1",
+    "axios": "^1.13.6",
+    "classnames": "^2.5.1",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-redux": "^9.2.0",
+    "react-router-dom": "^6.30.3"
+  },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.4",
     "@eslint/js": "^9.39.3",
@@ -49,6 +41,12 @@
     "@typescript-eslint/eslint-plugin": "^8.56.1",
     "@typescript-eslint/parser": "^8.56.1",
     "@vitejs/plugin-react": "^4.7.0",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.2",
+    "@types/react": "^18.3.28",
+    "@types/react-dom": "^18.3.7",
     "autoprefixer": "^10.4.27",
     "eslint": "^9.39.3",
     "eslint-config-prettier": "^10.1.8",
@@ -65,6 +63,8 @@
     "tailwindcss": "^3.4.19",
     "vite": "^7.3.1",
     "vite-tsconfig-paths": "^4.3.2",
-    "vitest": "^3.2.4"
+    "vitest": "^3.2.4",
+    "typescript": "^5.9.3",
+    "json-server": "^0.17.4"
   }
 }
