@@ -119,10 +119,10 @@ const communitySlice = createSlice({
       })
       .addCase(
         getPostById.fulfilled,
-        (state, { payload }: PayloadAction<Post>) => {
+        (state, { payload }: PayloadAction<Post[]>) => {
           state.loading = false;
           state.error = null;
-          state.selectedPost = payload;
+          state.selectedPost = payload.at(0) ?? null;
         },
       )
       .addCase(getPostById.rejected, (state, { error }) => {
