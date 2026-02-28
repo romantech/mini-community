@@ -4,7 +4,7 @@ import communityReducer from './community/community.slice';
 
 export const store = configureStore({
   reducer: { community: communityReducer },
-  devTools: process.env.NODE_ENV !== 'production',
+  devTools: import.meta.env.DEV,
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
