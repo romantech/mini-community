@@ -1,4 +1,3 @@
-/* eslint-disable no-alert,no-console */
 import React, { useCallback, useEffect } from 'react';
 import {
   KR_COMPLETE,

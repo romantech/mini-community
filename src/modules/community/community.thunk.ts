@@ -1,7 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-axios.defaults.baseURL = process.env.REACT_APP_HOST;
+const baseURL = import.meta.env.VITE_HOST;
+if (baseURL) axios.defaults.baseURL = baseURL;
+else console.error('[env] VITE_HOST is missing');
 
 export const getPosts = createAsyncThunk(
   'community/getPosts',
