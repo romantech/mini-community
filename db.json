@@ -33,8 +33,8 @@
       "id": 1,
       "title": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
       "content": "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed blandit libero volutpat sed. Rhoncus urna neque viverra justo nec ultrices dui sapien.",
-      "viewCount": 124,
-      "likeCount": 33,
+      "viewCount": 128,
+      "likeCount": 35,
       "commentCount": 5,
       "imageUrl": "/images/placeholder.png",
       "writtenAt": "2022-04-18T17:29:19",
@@ -250,6 +250,20 @@
       "writtenAt": "2022-04-18T17:29:19",
       "writerNickName": "칸디천사",
       "writerProfileUrl": "/images/profile/fox.png"
+    },
+    {
+      "categoryId": 1,
+      "categoryName": "테크",
+      "title": "addsf",
+      "content": "asfasdf",
+      "viewCount": 1,
+      "likeCount": 0,
+      "commentCount": 0,
+      "imageUrl": null,
+      "writtenAt": "2026-02-28T09:04:37.535Z",
+      "writerNickName": "피그마",
+      "writerProfileUrl": "",
+      "id": 17
     }
   ]
 }
