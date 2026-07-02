@@ -5,18 +5,19 @@ import {
   defineConfig,
   loadEnv,
   Plugin,
-  transformWithEsbuild,
+  transformWithOxc,
 } from 'vite';
 import react from '@vitejs/plugin-react';
-import tsconfigPaths from 'vite-tsconfig-paths';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   setEnv(mode);
   return {
+    resolve: {
+      tsconfigPaths: true,
+    },
     plugins: [
       react(),
-      tsconfigPaths(),
       envPlugin(),
       devServerPlugin(),
       sourcemapPlugin(),
@@ -192,8 +193,8 @@ function svgrPlugin(): Plugin {
           },
         });
 
-        const res = await transformWithEsbuild(componentCode, id, {
-          loader: 'jsx',
+        const res = await transformWithOxc(componentCode, id, {
+          lang: 'jsx',
         });
 
         return {

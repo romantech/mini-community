@@ -10,13 +10,13 @@
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
     "baseUrl": "src"
   },
-  "include": ["*.config.js", "src"],
+  "include": ["*.config.js", "*.config.ts", "src"],
   "exclude": ["node_modules", "dist"]
 }
