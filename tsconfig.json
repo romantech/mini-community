@@ -17,6 +17,6 @@
     "jsx": "react-jsx",
     "baseUrl": "src"
   },
-  "include": ["*.config.js", "*.config.ts", "src"],
+  "include": ["*.config.js", "*.config.ts", "*.config.mts", "src"],
   "exclude": ["node_modules", "dist"]
 }

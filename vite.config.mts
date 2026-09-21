@@ -4,7 +4,7 @@ import {
   createFilter,
   defineConfig,
   loadEnv,
-  Plugin,
+  type Plugin,
   transformWithOxc,
 } from 'vite';
 import react from '@vitejs/plugin-react';
